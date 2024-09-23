@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualiCore - RNC</title>
+    <link rel="stylesheet" href="css/abrirRnc.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="css/js/img/abrirRnc.js" defer></script>
+    <script src="css/js/img/mainPage.js" defer></script>
+    
+</head>
+<body>
+    <aside>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                
+                <h2>QualiCore</h2>
+                <span>A qualidade à um click</span>
+            </div>
+            <div class="conteudoSideBar">
+                <button type="button" id="dash"><i class="bi bi-house-door"></i>Dashboard</button>
+                <button type="button"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
+                <button type="button" id="rncBtn"><i class="bi bi-exclamation-triangle"></i>RNC</button>
+                <button type="button"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
+                <button type="button"><i class="bi bi-clock"></i>Monitoramento</button>
+            </div>
+        </div>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                <h5>QualiCore - Governo do Estado de Sergipe</h5>
+                <h6>2024 Fundação de Saúde Parreiras Horta</h6>
+            </div>
+            <div class="conteudoSideBar">
+                <h5>FSPH - Sergipe</h5>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <section class="secaoPrincipal">
+            <div class="containerBusca">
+                <input type="text" id="busca" class="campoBusca" placeholder="Procurar">
+                <i class="bi bi-search iconeBusca"></i>
+            </div>
+            <div class="botoesAcao">
+                <button type="button" class="botaoIcone"><i class="bi bi-bell"></i></button>
+                <button type="button" class="botaoIcone"><i class="bi bi-envelope"></i></button>
+                <button type="button" class="botaoConfiguracao"><i class="bi bi-gear"></i></button>
+            </div>
+            <hr/>
+            <div class="infoUsuario">
+                <span>Olá, Gustavo</span>
+                <div class="avatarUsuario" id="botaoPerfil">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="dropdownPerfil" id="menuPerfil">
+                    <a class="itemDropdown" id="meuPerfilBtn">
+                        <i class="bi bi-person-circle"></i>
+                        Meu Perfil
+                    </a>
+                    <a href="#" class="itemDropdown">
+                        <i class="bi bi-bell"></i>
+                        Notificações
+                    </a>
+                    <div class="separadorDropdown"></div>
+                    <a href="index.html" class="itemDropdown">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </section>
+        <nav class="navPrincipal">
+            <form class="aberturaRnc" id="rncForm">
+                <fieldset>
+                    <legend>REGISTRO DE NÃO CONFORMIDADE</legend>
+
+                    <div class="aberturaRncGrupo"></div>
+                        <label for="origem">Origem</label>
+                        <input type="radio" name="origem" id="origem"> Oportunidade de Melhoria
+                        <input type="radio" name="origem" id="origem"> Processo / Insumo
+                        <input type="radio" name="origem" id="origem"> Auditoria Interna
+                        <input type="radio" name="origem" id="origem"> Auditoria Externa
+                        <input type="radio" name="origem" id="origem"> Reclamação
+                    </div>
+                    
+                    
+                    <div class="aberturaRncGrupo">
+                        <label for="descrever">Descreva a não conformidade (Detalhar a ocorrência)</label>
+                        <textarea name="descrever" id="descrever"></textarea>
+                    </div>
+
+                    <div class="aberturaRncGrupo"></div>
+                        <label for="enquadramento">Enquadramento (Documento de referência)</label>
+                        <textarea name="enquadramento" id="enquadramento"></textarea>
+                    </div>
+                    <div class="aberturaRncGrupo"></div>
+                        <label for="anexo">Anexar a evidência da não conformidade</label>
+                        <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
+                    </div>
+                    <div class="aberturaRncGrupo"></div>
+                        <label for="acaoImediata">Ação Imediata (Ação de contenção)</label>
+                        <textarea name="acaoImediata" id="acaoImediata"></textarea>
+                    </div>
+
+                    <div class="aberturaRncGrupo"></div>
+                        <label for="setorAutuado">Área Responsável</label>
+                        <select name="setorAutuado" id="setorAutuado" class="selecionarElementos">
+                            <option value="enf">Enfermaria - Responsável Enfª Juliana</option>
+                            <option value="consultorio">Consultório - Responsável Silvia</option>
+                            <option value="lab">Laboratorio - Responsável Amanda</option>
+                            <option value="rec">Recepção - Responsável Carine</option>
+                            <option value="ti">TI - Responsável Ovidio</option>
+                        </select>
+                    </div>
+                    
+                    
+                    <button type="submit" class="submitBtn">Autuar</button>
+                </fieldset>
+            </form>
+    
+            <table id="rncTable">
+                <thead >
+                    <tr>
+                        <th>Setor</th>
+                        <th>Descrição</th>
+                        <th>Arquivos</th>
+                        <th>Data</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </nav>
+    </main>
+</body>
+</html>

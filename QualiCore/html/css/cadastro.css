@@ -1,0 +1,30 @@
+@import url('style.css');
+@import url('login.css');
+
+
+.divisaoElementos {
+    text-align: center;
+}
+.divisaoElementos span {
+    color: var(--cor-principal);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.divisaoElementos span:hover {
+    color: #000;
+}
+
+#cadastroForm {
+    margin-top: 0.8rem;
+}
+
+#cadastroForm input,
+#cadastroForm label {
+    margin-bottom: 0.2rem;
+    color: var(--cor-principal);
+}
+
+.divisaoElementos span a {
+    text-decoration: none;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualiCore - Registre-se</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+    <script src="css/js/img/cadastro.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="menuCabecalho">
+            <h1>QualiCore</h1>
+        </div>
+        <div class="menuCabecalho">
+            <img src="css/js/img/logo_1_1.webp" alt="" width="auto" height=75rem">
+        </div>
+    </header>
+    <main>
+        <form action="/" id="cadastroForm">
+            <h2>Registre-se</h2>
+            <label for="nomeCompleto">Nome Completo</label>
+            <input type="text" name="nomeCompleto" id="nomeCompleto" class="inputPadrao" placeholder="Digite seu nome completo">
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" id="cpf" class="inputPadrao" placeholder="Digite seu CPF">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input type="date" name="date" id="date" class="inputPadrao">
+            <label for="email">Email Institucional</label>
+            <input type="email" name="email" name="email" class="inputPadrao" placeholder="@fsph.com.br">
+            <label for="departamentp">Selecione seu Departamento</label>
+            <select name="departamento" id="departamento" class="selecionarElementos">
+                <option value="null">--Selecione--</option>
+                <option value="ti">Tecnologia da Informação</option>
+                <option value="rec">Recepção</option>
+                <option value="lab">Laboratório</option>
+                <option value="amb">Ambulatório</option>
+                <option value="cons">Consultório</option>
+                <option value="farm">Farmácia</option>
+                <option value="adm">Administração</option>
+                <option value="quali">Qualidade</option>
+            </select>
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" class="inputPadrao" placeholder="Digite sua senha">
+            <label for="confirmarSenha">Confirme sua senha</label>
+            <input type="password" name="confirmarSenha" id="confirmarSenha" class="inputPadrao" placeholder="Confirme sua senha">
+            <div class="divisaoElementos">
+                <button type="submit" class="submitBtn">Registrar</button>
+                <h5>Já tem uma conta? <span id="voltarLogin">Entrar</span></h5>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

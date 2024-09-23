@@ -1,0 +1,95 @@
+@import url('../css/style.css');
+
+body {
+    max-width: 1000px;
+    max-height: 750px;
+    height: 150vh;
+    width: 100vw;
+    
+}
+
+header { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-principal);
+    font-family: var(--fonte-principal);
+    color: #fff;
+    width: 99.3vw;
+    padding: 5px;
+}
+
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 99.95vw;
+    height: 86.5vh;
+    background: linear-gradient(310deg, var(--cor-principal), #000);
+}
+
+@media (min-width: 1024px) {
+    main {
+        height: 90.4vh;
+        width: 100vw;
+    }
+
+    header {
+        width: 99.47vw;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-secundaria);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 20%;
+    -webkit-box-shadow: 0px 0px 27px 8px rgba(204,204,204,1);
+    -moz-box-shadow: 0px 0px 27px 8px rgba(204,204,204,1);
+    box-shadow: 0px 0px 27px 8px rgba(204,204,204,1);   
+}
+
+form h2 {
+    color: var(--cor-principal);
+}
+
+.divisaoElementos {
+    display: flex;
+    flex-direction: column;
+}
+
+.subDivisaoElementos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.divisaoElementos label,
+.divisaoElementos input {
+    margin-bottom: 0.5rem;
+    color: var(--cor-principal);
+}
+
+.divisaoElementos button {
+    margin-top: 0.5rem;
+}
+
+.subDivisaoElementos span {
+    color: var(--cor-principal);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.subDivisaoElementos span:hover {
+    color: #000;
+}
+
+.subDivisaoElementos span a {
+    text-decoration: none;
+}

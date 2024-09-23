@@ -1,0 +1,33 @@
+@import url('style.css');
+@import url('login.css');
+
+.subDivisaoElementosSenha {
+    color: var(--cor-principal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 45%;
+    margin-left: 6rem;
+}
+
+.subDivisaoElementosSenha span {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.subDivisaoElementosSenha span:hover {
+    color: #000;
+}
+
+.subDivisaoElementosSenha hr {
+    color: var(--cor-principal);
+    height: 2vh;
+    font-weight: bold;
+}
+
+#esqueceuSenhaForm {
+    height: 50vh;
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+}

@@ -1,0 +1,662 @@
+@import url('style.css');
+
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    
+}
+
+main {
+    background-color: var(--cor-secundaria);
+    
+}
+@media (min-width: 1024px) {
+  main {
+      height: 100%;
+      width: 100vw;
+  }
+
+ 
+}
+main section {
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+main section hr {
+    height: 4vh;
+    margin-left: 0.4rem;
+    margin-right: 0.4rem;
+}
+
+.secaoPrincipal {
+    background-color: var(--cor-secundaria);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.containerBusca {
+    flex-grow: 1;
+    margin-right: 20px;
+    position: relative;
+}
+
+.campoBusca {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.campoBusca:focus {
+    outline: none;
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.iconeBusca {
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.botoesAcao {
+    display: flex;
+    gap: 10px;
+}
+
+.botaoIcone, .botaoConfiguracao {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--cor-principal);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.botaoIcone:hover, .botaoConfiguracao:hover {
+    color: var(--cor-primaria);
+    background-color: rgba(74, 144, 226, 0.1);
+}
+
+.infoUsuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    position: relative;
+}
+
+.infoUsuario span {
+    font-weight: 500;
+    color: var(--cor-principal);
+}
+
+.avatarUsuario {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--cor-principal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.dropdownPerfil {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    min-width: 200px;
+    margin-top: 5px;
+}
+
+.dropdownPerfil.ativo {
+    display: block;
+}
+
+.itemDropdown {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: var(--cor-texto);
+    transition: background-color 0.2s ease;
+}
+
+.itemDropdown:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.separadorDropdown {
+    height: 1px;
+    background-color: #ddd;
+    margin: 5px 0;
+}
+
+.divisaoTexto,
+.divisaoTexto h2,
+.divisaoTexto span {
+    padding: 0;
+    margin: 0;
+    margin-left: 0.5rem;
+    font-family: var(--fonte-principal);
+}
+
+.divisaoTexto span {
+    color: #777;
+    font-size: .85rem;
+}
+
+.navPrincipal {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: var(--sombra-padrao);
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .divisaoTexto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .tituloPagina {
+    font-size: 1.5rem;
+    color: var(--cor-principal);
+    margin: 0;
+    position: relative;
+  }
+  
+  .tituloPagina::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--cor-primaria);
+    transition: var(--transicao-padrao);
+  }
+  
+  .tituloPagina:hover::after {
+    width: 100px;
+  }
+  
+  .saudacaoUsuario {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .areaControles {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .filtroPeriodo {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: var(--sombra-padrao);
+  }
+
+  .subDivisaoFiltro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .iconeFiltro {
+    font-size: 1.5rem;
+    color: var(--cor-primaria);
+    margin-right: 10px;
+  }
+  
+  .conteudoFiltro h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cor-principal);
+  }
+  
+  .dataInicio, .dataFim {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+  
+  .filtroAdicional {
+    position: relative;
+  }
+  
+  .botaoFiltro {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transicao-padrao);
+  }
+  
+  .botaoFiltro:hover {
+    background-color: #2980b9;
+  }
+  
+  .menuFiltro {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: var(--sombra-padrao);
+    padding: 10px;
+    display: none;
+  }
+  
+  .menuFiltro label {
+    display: block;
+    margin: 5px 0;
+  }
+  
+  .acoesRapidas {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .botaoAcaoRapida {
+    background-color: transparent;
+    border: 2px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .botaoAcaoRapida:hover {
+    background-color: var(--cor-principal);
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    .areaControles {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .filtroPeriodo, .filtroAdicional, .acoesRapidas {
+      width: 100%;
+    }
+  }
+
+
+@media (max-width: 768px) {
+    .containerBusca {
+        order: -1;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .botoesAcao, .infoUsuario {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.graficoCard {
+  display: flex;
+  margin: 0;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.grafico-container {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: .5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grafico-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+canvas {
+  max-width: 100%;
+  height: 21rem !important;
+}
+
+#meuGrafico {
+  width: 580px !important;
+}
+
+#meuGraficoRosca {
+  width: 350px !important;
+}
+
+#meuGraficoLinhas {
+  width: 555px;
+}
+
+@media (max-width: 1200px) {
+  .graficoCard {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .grafico-container {
+      width: 100%;
+      max-width: 600px;
+  }
+
+  #meuGrafico, #meuGraficoRosca {
+      width: 100% !important;
+  }
+}
+
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #1a1a2e;
+  --text-color: #e0e0e0;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+  backdrop-filter: blur(5px);
+  
+}
+
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  backdrop-filter: blur(10px);
+}
+
+.conteudoModal {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 15% auto;
+  padding: 0;
+  border-radius: 20px;
+  width: 70%;
+  max-width: 100rem;
+  box-shadow: var(--box-shadow);
+  transform: translateY(-50px) scale(0.9);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  overflow: hidden;
+}
+
+.modal.show .conteudoModal {
+  transform: translateY(0) scale(1);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background: linear-gradient(135deg, var(--cor-principal), #000);
+  position: relative;
+}
+
+.modalHeader::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fecharModal {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.fecharModal:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.modalBody {
+  padding: 50px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.profileImageContainer {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: relative;
+  margin-left: 3rem;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profileImage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
+}
+
+.changePhotoBtn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  display: flex;
+  width: 8vw;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.changePhotoBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s;
+}
+
+.changePhotoBtn:hover::before {
+  left: 100%;
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  
+}
+
+.formGroup {
+  position: relative;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  margin-bottom: 1rem;
+  
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 8px;
+  display: block;
+  transition: all 0.3s ease;
+  
+}
+
+.inputPadrao {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: var(--input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  
+}
+
+.inputPadrao:disabled {
+  opacity: 0.7;
+}
+
+.inputPadrao:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+}
+
+.formGroup::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.formGroup:focus-within::after {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .conteudoModal {
+    width: 95%;
+  }
+  
+  .modalHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .profileImage {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+.profileImage {
+  animation: pulse 2s infinite;
+}
