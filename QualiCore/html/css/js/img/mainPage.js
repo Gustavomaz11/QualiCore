@@ -5,7 +5,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById("meuPerfilBtn");
     const closeBtn = document.querySelector(".fecharModal");
     const rncBtn = document.querySelector('#rncBtn');
+    const monitoramentoBtn = document.querySelector('#monitoramentoBtn')
    
+    monitoramentoBtn.addEventListener('click', () => {
+        window.location.href = 'monitoramento.html'
+    })
+
     rncBtn.addEventListener('click', () => {
         window.location.href = 'abrirRnc.html';
     });

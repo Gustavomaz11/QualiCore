@@ -375,7 +375,7 @@ main section hr {
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: .5rem;
+  padding: .25rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 1rem;
 }
@@ -391,28 +391,19 @@ canvas {
   
 }
 
-#meuGrafico {
+#meuGrafico,
+#meuGraficoBar {
   width: 580px !important;
 }
 
-#meuGraficoRosca {
+#meuGraficoRosca,
+#meuGraficoArea {
   width: 350px !important;
 }
 
-#meuGraficoLinhas {
-  width: 555px !important;
-}
-
-#meuGraficoRadar {
-  width: 23rem !important;
-}
-
-#meuGraficoArea {
-  width: 23rem !important;
-}
-
+#meuGraficoLinhas,
 #meuGraficoMisto {
-  width: 47rem !important;
+  width: 555px !important;
 }
 
 @media (max-width: 1200px) {

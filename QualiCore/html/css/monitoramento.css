@@ -1,0 +1,36 @@
+@import url('style.css');
+@import url('mainPage.css');
+@import url('abrirRnc.css');
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+/* Cores de severidade */
+.severidadeUrgente {
+    background: linear-gradient(to right, red, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff);
+    color: #000;
+}
+.severidadeAlta {
+    background: linear-gradient(to right, orange, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff);
+    color: #000;
+}
+.severidadeMedia {
+    background: linear-gradient(to right, yellow, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff);
+    color: #000;
+}
+.severidadeBaixa {
+    background: linear-gradient(to right, lightgrey, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff);
+    #000
+}
+.statusConcluido {
+    background: linear-gradient(to right, green, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff);
+    color: #000;
+}
+
