@@ -260,4 +260,212 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Gráfico de radar
+    const ctxRadar = document.getElementById('meuGraficoRadar').getContext('2d');
+    const labelsRadar = ['Qualidade', 'Segurança', 'Prazos', 'Processos', 'Treinamento'];
+    const dataRadar = [4, 3, 2, 5, 4]; // Exemplo de dados, ajuste conforme necessário
+
+    new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+            labels: labelsRadar,
+            datasets: [{
+                label: 'Não Conformidades por Categoria',
+                data: dataRadar,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+            }]
+        },
+        options: {
+            ...commonOptions,
+            elements: {
+                line: {
+                    tension: 0.3 // Tensão da linha
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    },
+                    ticks: {
+                        display: true,
+                        font: {
+                            family: "'Roboto', sans-serif",
+                            size: 12
+                        }
+                    }
+                }
+            },
+            plugins: {
+                ...commonOptions.plugins,
+                title: {
+                    display: true,
+                    text: 'Distribuição de Não Conformidades por Categoria',
+                    font: {
+                        family: "'Roboto', sans-serif",
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
+
+    const ctxArea = document.getElementById('meuGraficoArea').getContext('2d');
+    const labelsArea = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'];
+    const dataArea = [2, 4, 6, 5, 8, 10];
+
+    // Usar a função generateColors para cada parte do gráfico
+    const backgroundColors = labelsArea.map((_, index) => generateColors(index));
+
+    new Chart(ctxArea, {
+        type: 'polarArea',
+        data: {
+            labels: labelsArea,
+            datasets: [{
+                label: 'Acúmulo de Não Conformidades',
+                data: dataArea,
+                backgroundColor: backgroundColors, // Cores diferentes para cada parte
+                borderColor: 'rgba(255, 255, 255, 0.8)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Acúmulo de Não Conformidades ao Longo do Tempo',
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    ticks: {
+                        display: true
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
+
+    const ctxMisto = document.getElementById('meuGraficoMisto').getContext('2d');
+
+    const labelsMisto = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'];
+    const dataBarras = [12, 19, 3, 5, 2, 3];
+    const dataLinhasMisto = [3, 10, 5, 7, 12, 15];
+
+    new Chart(ctxMisto, {
+        type: 'bar', // Tipo base, podemos mudar no dataset
+        data: {
+            labelsMisto: labelsMisto,
+            datasets: [
+                {
+                    label: 'Não Conformidades Detectadas',
+                    data: dataBarras,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    type: 'bar' // Tipo do dataset: barra
+                },
+                {
+                    label: 'Evolução Mensal',
+                    data: dataLinhasMisto,
+                    backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    type: 'line', // Tipo do dataset: linha
+                    fill: false // Não preencher a área sob a linha
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    ticks: {
+                        font: {
+                            size: 12,
+                            family: "'Roboto', sans-serif",
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 12,
+                            family: "'Roboto', sans-serif",
+                        }
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Gráfico Misto de Não Conformidades e Evolução Mensal',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeOutQuart'
+            }
+        }
+    });
+    
+
+
 });
