@@ -9,6 +9,12 @@ body {
 
 main {
     background-color: var(--cor-secundaria);
+    width: 100% !important;
+    margin-left: 16.5rem;
+    z-index: 10;
+    
+    
+    
     
 }
 @media (min-width: 1024px) {
@@ -37,12 +43,16 @@ main section hr {
 }
 
 .secaoPrincipal {
-    background-color: var(--cor-secundaria);
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  position: fixed;
+  background-color: var(--cor-secundaria);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 85%;
+  z-index: 9;
+  
 }
 
 .containerBusca {
@@ -182,6 +192,9 @@ main section hr {
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
+    margin-top: 6rem;
+    max-height: 80vh;
+    overflow-x: auto;
   }
   
   .divisaoTexto {

@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data: {
             labels: labelsLinhas,
             datasets: [{
-                label: 'Evolução Mensal de Não Conformidades',
+                label: 'Tratamento das Não Conformidades',
                 data: dataLinhas,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...commonOptions.plugins,
                 title: {
                     display: true,
-                    text: 'Evolução Mensal de Não Conformidades',
+                    text: 'Tratamento das Não Conformidades',
                     font: {
                         family: "'Roboto', sans-serif",
                         size: 18,
@@ -261,51 +261,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Gráfico de radar
-    const ctxRadar = document.getElementById('meuGraficoRadar').getContext('2d');
-    const labelsRadar = ['Qualidade', 'Segurança', 'Prazos', 'Processos', 'Treinamento'];
-    const dataRadar = [4, 3, 2, 5, 4]; // Exemplo de dados, ajuste conforme necessário
 
-    new Chart(ctxRadar, {
-        type: 'radar',
+    const ctxBar = document.getElementById('meuGraficoBar').getContext('2d');
+
+    // Defina as categorias e dados correspondentes
+    const labelsBar = ['Processos', 'Insumos', 'Equipamentos', 'Infraestrutura', 'Recursos Humanos'];
+    const dataBar = [12, 5, 9, 1, 4]; // Dados de não conformidades
+
+    new Chart(ctxBar, {
+        type: 'bar', // Mudei para 'bar'
         data: {
-            labels: labelsRadar,
+            labels: labelsBar,
             datasets: [{
                 label: 'Não Conformidades por Categoria',
-                data: dataRadar,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                data: dataBar,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
-                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+                hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+                hoverBorderColor: 'rgba(75, 192, 192, 1)'
             }]
         },
         options: {
-            ...commonOptions,
-            elements: {
-                line: {
-                    tension: 0.3 // Tensão da linha
-                }
-            },
+            responsive: true,
             scales: {
-                r: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.1)'
-                    },
-                    ticks: {
+                x: {
+                    title: {
                         display: true,
+                        text: 'Categorias',
                         font: {
                             family: "'Roboto', sans-serif",
-                            size: 12
+                            size: 14,
+                            weight: 'bold'
                         }
                     }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Número de Não Conformidades',
+                        font: {
+                            family: "'Roboto', sans-serif",
+                            size: 14,
+                            weight: 'bold'
+                        }
+                    },
+                    beginAtZero: true
                 }
             },
             plugins: {
-                ...commonOptions.plugins,
                 title: {
                     display: true,
                     text: 'Distribuição de Não Conformidades por Categoria',
@@ -326,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
 
     const ctxArea = document.getElementById('meuGraficoArea').getContext('2d');
     const labelsArea = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'];
@@ -352,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Acúmulo de Não Conformidades ao Longo do Tempo',
+                    text: 'Índice de Eficácia das Nãos Conformidades',
                     font: {
                         size: 20,
                         weight: 'bold'

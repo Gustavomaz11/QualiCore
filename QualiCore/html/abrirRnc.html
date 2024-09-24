@@ -90,49 +90,77 @@
                         <textarea name="descrever" id="descrever"></textarea>
                     </div>
 
-                    <div class="aberturaRncGrupo"></div>
+                    <div class="aberturaRncGrupo">
                         <label for="enquadramento">Enquadramento (Documento de referência)</label>
-                        <textarea name="enquadramento" id="enquadramento"></textarea>
+                        <div class="custom-select">
+                            <input type="text" id="search" class="campoBuscaRNC" placeholder="Procurar..." onkeyup="filterOptions()">
+                            <div id="selectedOptions" class="selected-container"></div>
+                            <div id="dropdown" class="options-container">
+                                <label><input type="checkbox" value="ABNT NBR ISO 15189:2015. Laboratórios Clínicos" onchange="updateSelected(this)"> ABNT NBR ISO 15189:2015. Laboratórios Clínicos - Requisitos de qualidade e competência.</label>
+                                <label><input type="checkbox" value="ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade" onchange="updateSelected(this)"> ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade - Requisitos.</label>
+                                <label><input type="checkbox" value="ABNT NBR ISO/IEC 17025:2017" onchange="updateSelected(this)"> ABNT NBR ISO/IEC 17025:2017. Requisitos gerais para a capacitação de laboratórios de calibração e ensaio.</label>
+                                <label><input type="checkbox" value="PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017" onchange="updateSelected(this)"> PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017. Anexo IV - Do Sangue, Componentes e Derivados.</label>
+                                <label><input type="checkbox" value="RDC Nº 34:2014" onchange="updateSelected(this)"> RDC Nº 34:2014. Dispõe sobre as Boas Práticas no Ciclo do Sangue.</label>
+                                <label><input type="checkbox" value="RDC Nº 399:2020" onchange="updateSelected(this)"> RDC Nº 399:2020. Revoga a alínea "d" do inciso XXX do art. 25 da Resolução de Diretoria Colegiada.</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="aberturaRncGrupo"></div>
-                        <label for="anexo">Anexar a evidência da não conformidade</label>
-                        <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
+                    <div class="aberturaRncGrupo">
+                        <label for="anexo" class="submitBtnRNC">Anexar a evidência da não conformidade
+                            <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
+                        </label>
                     </div>
+                    
+                    <table id="anexoTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Arquivo</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Tabela Dinâmica para Anexos -->
+                        </tbody>
+                    </table>
                     <div class="aberturaRncGrupo"></div>
                         <label for="acaoImediata">Ação Imediata (Ação de contenção)</label>
                         <textarea name="acaoImediata" id="acaoImediata"></textarea>
                     </div>
 
                     <div class="aberturaRncGrupo"></div>
-                        <label for="setorAutuado">Área Responsável</label>
+                        <label for="setorAutuado">Área onde Ocorreu a Não Conformidade e Responsável</label>
                         <select name="setorAutuado" id="setorAutuado" class="selecionarElementos">
-                            <option value="enf">Enfermaria - Responsável Enfª Juliana</option>
-                            <option value="consultorio">Consultório - Responsável Silvia</option>
-                            <option value="lab">Laboratorio - Responsável Amanda</option>
-                            <option value="rec">Recepção - Responsável Carine</option>
-                            <option value="ti">TI - Responsável Ovidio</option>
+                            <option value="Enfermaria">Enfermaria - Responsável Enfª Juliana</option>
+                            <option value="Consultório">Consultório - Responsável Silvia</option>
+                            <option value="Laboratório">Laboratorio - Responsável Amanda</option>
+                            <option value="Recepção">Recepção - Responsável Carine</option>
+                            <option value="Tecnologia">TI - Responsável Ovidio</option>
                         </select>
                     </div>
                     
                     
-                    <button type="submit" class="submitBtn">Autuar</button>
+                    <button type="submit" class="submitBtn">Solicitar Autuação</button>
                 </fieldset>
             </form>
     
-            <table id="rncTable">
-                <thead >
-                    <tr>
-                        <th>Setor</th>
-                        <th>Descrição</th>
-                        <th>Arquivos</th>
-                        <th>Data</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table rows will be dynamically added here -->
-                </tbody>
-            </table>
+            <div id="rncTableContainer" style="display: none;">
+                <table id="rncTable">
+                    <thead>
+                        <tr>
+                            <th>Nº do RNC</th>
+                            <th>Enquadramento</th>
+                            <th>Setor</th>
+                            <th>Descrição</th>
+                            <th>Arquivos</th>
+                            <th>Data/Hora</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Tabela Dinamica no JS -->
+                    </tbody>
+                </table>
+            </div>
         </nav>
     </main>
 </body>

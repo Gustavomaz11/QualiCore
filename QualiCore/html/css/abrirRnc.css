@@ -2,71 +2,221 @@
 @import url('mainPage.css');
 
 .aberturaRnc {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    height: 73vh;
+    width: 1500px;
 }
 
 fieldset {
     border: none;
     padding: 0;
-    margin-bottom: 2rem;
+    margin: 0;
 }
 
 legend {
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--cor-principal);
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
+    border-bottom: 2px solid var(--cor-principal);
+    padding-bottom: 0.5rem;
+    width: 100%;
 }
 
 .aberturaRncGrupo {
     margin-bottom: 1.5rem;
 }
 
+.navPrincipal {
+    display: flex;
+    flex-direction: column;
+}
+
 label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    color: var(--cor-texto);
 }
 
-select, textarea, input[type="file"] {
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+select, .campoBuscaRNC {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--cor-borda);
+    padding: 0.50rem;
+    border: 1px solid var(--cor-principal);
     border-radius: 4px;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-select:focus, textarea:focus, input[type="file"]:focus {
-    outline: none;
-    border-color: var(--cor-principal);
+    transition: all 0.3s ease;
 }
 
 textarea {
-    height: 2rem;
-    width: 80vw;
-    resize: vertical;
-    border: 1px solid var(--cor-principal);
+    width: 100%;
     resize: none;
-    margin-bottom: .5rem;
+    border: 1px solid var(--cor-principal);
+    border-radius: 4px;
+    height: 4.5vh !important;
+}
+
+select:focus, textarea:focus, .campoBuscaRNC:focus {
+    outline: none;
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
 }
 
 .submitBtn {
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: .5rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
     width: 100%;
 }
 
 .submitBtn:hover {
-    background-color: #fff;
+    background-color: var(--cor-hover);
+}
+
+.custom-select {
+    position: relative;
+}
+
+.options-container {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid var(--cor-borda);
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 10;
+}
+
+.custom-select:hover .options-container {
+    display: block;
+}
+
+.options-container label {
+    padding: 0.5rem;
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+.options-container label:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.submitBtnRNC {
+    display: inline-block;
+    border: 2px dashed var(--cor-principal);
+    border-radius: 4px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submitBtnRNC:hover {
+    background-color: var(--cor-secundaria);
+}
+
+.inputPadrao[type="file"] {
+    display: none;
+}
+
+#anexoTable, #rncTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#anexoTable th, #anexoTable td, #rncTable th, #rncTable td {
+    border: 1px solid var(--cor-borda);
+    padding: 0.75rem;
+    text-align: left;
+}
+
+#anexoTable th, #rncTable th {
+    background-color: var(--cor-principal);
+    color: white;
+    font-weight: 500;
+}
+
+#anexoTable tr:nth-child(even), #rncTable tr:nth-child(even) {
+    background-color: var(--cor-secundaria);
+}
+
+.selected-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.selected-item {
+    background-color: var(--cor-principal);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.selected-item .remove {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .aberturaRnc {
+        padding: 1rem;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+}
+
+#rncTableContainer {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #rncTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 2rem;
-    display: none;
 }
 
 #rncTable th, #rncTable td {
@@ -77,7 +227,7 @@ textarea {
 
 #rncTable th {
     background-color: var(--cor-principal);
-    color: #fff;
+    color: white;
     font-weight: 500;
 }
 
@@ -85,7 +235,15 @@ textarea {
     background-color: var(--cor-secundaria);
 }
 
-.navPrincipal {
-    display: flex;
-    flex-direction: column;
+/* Add a transition for smooth appearance */
+#rncTableContainer {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#rncTableContainer.fade-in {
+    opacity: 1;
+}
+
+#rncTableContainer.fade-out {
+    opacity: 0;
 }

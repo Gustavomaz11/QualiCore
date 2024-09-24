@@ -71,7 +71,8 @@ body {
 
 
 aside {
-    width: 250px;
+    position: fixed;
+    width: 230px !important;
     height: 94.3vh;
     background: linear-gradient(135deg, var(--cor-principal), #000);
     color: white;
