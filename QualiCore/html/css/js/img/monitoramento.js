@@ -98,13 +98,19 @@ const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
 const saveBtn = document.getElementById("saveBtn");
 const closeBtnFooter = document.getElementById("closeBtn");
-const addAcaoBtn = document.getElementById("addAcaoBtn");
-const acoesTable = document.getElementById("acoesTable").getElementsByTagName('tbody')[0];
 const metodoOutro = document.getElementById("metodoOutro");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
-// Função para abrir o modal
-function openModal(rncData) {
+function openModal() {
+    const rncData = {
+        numero: "001",
+        dataHora: '01/08/2024 - 14:00',
+        setorAutuante: 'Tecnologia da Informação',
+        origem: 'Reclamação',
+        severidade: 'Alta',
+        status: 'Em Andamento'
+    };
+
     document.getElementById("rncNumber").textContent = rncData.numero;
     document.getElementById("rncDataHora").value = rncData.dataHora;
     document.getElementById("rncSetorAutuante").value = rncData.setorAutuante;
@@ -115,28 +121,16 @@ function openModal(rncData) {
     modal.style.display = "block";
 }
 
-// Função para fechar o modal
 function closeModal() {
     modal.style.display = "none";
 }
 
-// Eventos de clique
 closeBtn.onclick = closeModal;
 closeBtnFooter.onclick = closeModal;
 
 saveBtn.onclick = function() {
     console.log("Salvando dados...");
     closeModal();
-}
-
-addAcaoBtn.onclick = function() {
-    const newRow = acoesTable.insertRow();
-    newRow.innerHTML = `
-        <td><input type="text" class="acao-o-que"></td>
-        <td><input type="text" class="acao-quem"></td>
-        <td><input type="text" class="acao-quando"></td>
-        <td><input type="text" class="acao-onde"></td>
-    `;
 }
 
 metodoOutro.onchange = function() {
@@ -148,25 +142,3 @@ window.onclick = function(event) {
         closeModal();
     }
 }
-
-// Função para ver detalhes
-window.verDetalhes = function(rncId) {
-    const rncData = {
-        numero: rncId,
-        dataHora: '24/09/2024 - 15:45',
-        setorAutuante: 'Tecnologia da Informação',
-        origem: 'Reclamação',
-        severidade: 'Alta',
-        status: 'Em Andamento'
-    };
-    openModal(rncData);
-}
-
-// Adiciona evento de clique para todos os botões "Ver Detalhes"
-const detalheBtns = document.querySelectorAll('.submitBtn');
-detalheBtns.forEach(btn => {
-    btn.onclick = function() {
-        const rncId = this.closest('tr').querySelector('td:nth-child(2)').textContent;
-        verDetalhes(rncId);
-    }
-});

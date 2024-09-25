@@ -110,7 +110,7 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" id="detalheRnc" onclick="openModal(rncData)">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" id="detalheRnc" onclick="openModal()">Ver Detalhes</button></td>
                     </tr>
                     <tr>
                         <td><span class="bolinha severidadeAlta"></span></td>
@@ -199,94 +199,164 @@
         </nav>
         <div id="rncDetailsModal" class="modal">
             <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2>Detalhes da RNC <span id="rncNumber"></span></h2>
+                <span class="close">&times;</span>
+                <h2>Detalhes da RNC <span id="rncNumber">001</span></h2>
+                
+                <div style="display: flex;">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p>01/08 - 14:00<br>Aberto por GUSTAVO-TI</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p>10/02 - 16:00<br>Status: Deferido por NEUSA<br>Enviado p/ Juliana - Enfermaria</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p>11/02 - 08:30<br>Status: Em andamento por Juliana</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p>Aguardando atualizações</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    
+                    <div class="detalhamentoFormularioRnc">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rncDataHora">Data/Hora:</label>
+                                <input type="text" id="rncDataHora" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="rncSetorAutuante">Setor Autuante:</label>
+                                <input type="text" id="rncSetorAutuante" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rncOrigem">Origem:</label>
+                                <input type="text" id="rncOrigem" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="rncSetorAuditado">Setor para ser auditado:</label>
+                                <select id="rncSetorAuditado">
+                                    <option value="">Selecione um setor</option>
+                                    <option value="setor1">Setor 1</option>
+                                    <option value="setor2">Setor 2</option>
+                                    <option value="setor3">Setor 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rncSeveridade">Nível de Severidade:</label>
+                                <input type="text" id="rncSeveridade" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="rncStatus">Status:</label>
+                                <input type="text" id="rncStatus" readonly>
+                            </div>
+                        </div>
+                        
+                        <h3>Ação para ser tomada</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="acaoOQue">O que?</label>
+                                <input type="text" id="acaoOQue">
+                            </div>
+                            <div class="form-group">
+                                <label for="acaoQuem">Quem?</label>
+                                <input type="text" id="acaoQuem">
+                            </div>
+                            <div class="form-group">
+                                <label for="acaoQuando">Quando?</label>
+                                <input type="text" id="acaoQuando">
+                            </div>
+                            <div class="form-group">
+                                <label for="acaoOnde">Onde?</label>
+                                <input type="text" id="acaoOnde">
+                            </div>
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="acaoOnde">Como?</label>
+                                <input type="text" id="acaoComo">
+                            </div>
+                            <div class="form-group">
+                                <label for="acaoOnde">Custo?</label>
+                                <input type="text" id="acaoCusto">
+                            </div>
+                        </div>
+                        
+                        <div id="grupoDetalhamentoRnc">
+                            <div id="primeiroGrupo">
+                                <h3>Métodos de Verificação de Eficácia</h3>
+                                <div class="checkGrupo">
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="checkbox" id="metodoDocumental" name="metodoVerificacao" value="documental">
+                                        <label for="metodoDocumental">Documental</label>
+                                    </div class="checkTiposdeVerificacaoeRnc">
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="checkbox" id="metodoVisual" name="metodoVerificacao" value="visual">
+                                        <label for="metodoVisual">Visual</label>
+                                    </div>
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="checkbox" id="metodoEntrevista" name="metodoVerificacao" value="entrevista">
+                                        <label for="metodoEntrevista">Entrevista</label>
+                                    </div>
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="checkbox" id="metodoOutro" name="metodoVerificacao" value="outro">
+                                        <label for="metodoOutro">Outro</label>
+                                        <input type="text" id="metodoOutroTexto" style="display: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div id="segundoGrupo">
+                                <h3>Tipo de RNC</h3>
+                                <div class="checkGrupo">
+                            
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
+                                        <label for="tipoPreventiva">Preventiva</label>
+                                    </div>
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
+                                        <label for="tipoCorretiva">Corretiva</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div id="terceiroGrupo">
+                                <h3>Verificação de Eficácia</h3>
+                                <div class="checkGrupo"></div>
+                            
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
+                                        <label for="tipoPreventiva">Preventiva</label>
+                                    </div>
+                                    <div class="checkTiposdeVerificacaoeRnc">
+                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
+                                        <label for="tipoCorretiva">Corretiva</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="rncDataHora">Data/Hora:</label>
-                        <input type="text" id="rncDataHora" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="rncSetorAutuante">Setor Autuante:</label>
-                        <input type="text" id="rncSetorAutuante" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="rncOrigem">Origem:</label>
-                        <input type="text" id="rncOrigem" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="rncSetorAuditado">Setor para ser auditado:</label>
-                        <select id="rncSetorAuditado">
-                            <option value="">Selecione um setor</option>
-                            <option value="setor1">Setor 1</option>
-                            <option value="setor2">Setor 2</option>
-                            <option value="setor3">Setor 3</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="rncSeveridade">Nível de Severidade:</label>
-                        <input type="text" id="rncSeveridade" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="rncStatus">Status:</label>
-                        <input type="text" id="rncStatus" readonly>
-                    </div>
-                    
-                    <h3>Ação para ser tomada</h3>
-                    <table id="acoesTable">
-                        <thead>
-                            <tr>
-                                <th>O que?</th>
-                                <th>Quem</th>
-                                <th>Quando</th>
-                                <th>Onde</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="text" class="acao-o-que"></td>
-                                <td><input type="text" class="acao-quem"></td>
-                                <td><input type="text" class="acao-quando"></td>
-                                <td><input type="text" class="acao-onde"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button id="addAcaoBtn" class="btn btn-secondary">Adicionar Ação</button>
-                    
-                    <h3>Métodos de Verificação de Eficácia</h3>
-                    <div>
-                        <input type="checkbox" id="metodoDocumental" name="metodoVerificacao" value="documental">
-                        <label for="metodoDocumental">Documental</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="metodoVisual" name="metodoVerificacao" value="visual">
-                        <label for="metodoVisual">Visual</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="metodoEntrevista" name="metodoVerificacao" value="entrevista">
-                        <label for="metodoEntrevista">Entrevista</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="metodoOutro" name="metodoVerificacao" value="outro">
-                        <label for="metodoOutro">Outro</label>
-                        <input type="text" id="metodoOutroTexto" style="display: none;">
-                    </div>
-                    
-                    <h3>Tipo de RNC</h3>
-                    <div>
-                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
-                        <label for="tipoPreventiva">Preventiva</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
-                        <label for="tipoCorretiva">Corretiva</label>
-                    </div>
-                </div>
-                <div class="modal-footer" style="text-align: right; margin-top: 20px;">
+                
+                <div style="text-align: right; margin-top: 20px;">
                     <button id="saveBtn" class="btn btn-primary">Salvar</button>
-                    <button id="closeBtn" class="btn btn-secondary">Fechar</button>
+                    <button id="closeBtn" class="btn">Fechar</button>
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@ table#tabelaRNC {
 }
 
 .severidadeUrgente .bolinha { background-color: #e74c3c; }
-.severidadeAlta .bolinha { background-color: #f39c12; }
+.severidadeAlta .bolinha { background-color: orange; }
 .severidadeMedia .bolinha { background-color: #f1c40f; }
 .severidadeBaixa .bolinha { background-color: #2ecc71; }
 
@@ -118,7 +118,7 @@ table#tabelaRNC {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2500;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -129,28 +129,20 @@ table#tabelaRNC {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    /* margin: 5% auto; */
+    margin-left: 15rem;
+    margin-top: 1.5rem;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 800px;
+    max-width: 150rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modal-header {
-    background-color: #3498db;
-    color: white;
-    padding: 15px;
-    margin: -20px -20px 20px -20px;
-    border-radius: 8px 8px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .close {
-    color: white;
+    color: #aaa;
+    float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -158,49 +150,59 @@ table#tabelaRNC {
 
 .close:hover,
 .close:focus {
-    color: #bbb;
+    color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-body {
-    max-height: 60vh;
-    overflow-y: auto;
+/* Timeline styles */
+.timeline {
+    position: relative;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
-.modal-footer {
-    margin-top: 20px;
-    text-align: right;
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #007bff;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
 }
 
-.btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
 }
 
-.btn-primary {
-    background-color: #3498db;
-    color: white;
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: -8px;
+    background-color: white;
+    border: 2px solid #007bff;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
 }
 
-.btn-primary:hover {
-    background-color: #2980b9;
+.timeline-content {
+    padding: 10px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid #ddd;
 }
 
-.btn-secondary {
-    background-color: #95a5a6;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background-color: #7f8c8d;
-}
-
-/* Estilos para os campos do formulário dentro do modal */
+/* Form styles */
 .form-group {
     margin-bottom: 15px;
 }
@@ -219,24 +221,73 @@ table#tabelaRNC {
     border-radius: 4px;
 }
 
-/* Estilos para a tabela de ações */
-#acoesTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+    flex-wrap: wrap;
+    
 }
 
-#acoesTable th,
-#acoesTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.form-row .form-group {
+    flex: 1;
+    margin-right: 2.5rem;
 }
 
-#acoesTable th {
-    background-color: #f2f2f2;
+.form-row .form-group:last-child {
+    margin-right: 0;
 }
 
-#addAcaoBtn {
-    margin-top: 10px;
+/* Button styles */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.detalhamentoFormularioRnc {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.checkGrupo {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.checkTiposdeVerificacaoeRnc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+     
+}
+
+#grupoDetalhamentoRnc {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    
+}
+
+
+
+hr {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
 }
