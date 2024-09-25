@@ -1,19 +1,35 @@
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const botaoPerfil = document.getElementById('botaoPerfil');
     const menuPerfil = document.getElementById('menuPerfil');
     const modal = document.getElementById("modalPerfil");
     const btn = document.getElementById("meuPerfilBtn");
     const closeBtn = document.querySelector(".fecharModal");
-    const rncBtn = document.querySelector('#rncBtn');
+    
+    const dashBtn = document.querySelector('#dashBtn')
+    const relatorioBtn = document.querySelector('#relatorioBtn')
+    const rncBtn = document.querySelector('#rncBtn')
+    const dashDetalhadoBtn = document.querySelector('#dashDetalhadoBtn')
     const monitoramentoBtn = document.querySelector('#monitoramentoBtn')
-   
-    monitoramentoBtn.addEventListener('click', () => {
-        window.location.href = 'monitoramento.html'
-    })
 
-    rncBtn.addEventListener('click', () => {
-        window.location.href = 'abrirRnc.html';
-    });
+    const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn]
+    const urlSidebar = [
+        'homePage.html',
+        'inexistente.html',
+        'abrirRnc.html',
+        'dashDetalhe.html',
+        'monitoramento.html'
+    ]
+
+    for(let i = 0; i < listaSidebarBtn.length; i++) {
+        listaSidebarBtn[i].addEventListener('click', () => {
+            window.location.href = urlSidebar[i]
+        })
+    }
 
     btn.addEventListener('click', () => {
         modal.classList.add("show");

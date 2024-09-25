@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QualiCore - Home</title>
-    <script src="css/js/img/mainPage.js"></script>
+    <script type="module" src="css/js/img/mainPage.js" defer></script>
     <!-- BootsTrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
@@ -22,10 +22,10 @@
                 <span>A qualidade à um click</span>
             </div>
             <div class="conteudoSideBar">
-                <button type="button"><i class="bi bi-house-door"></i>Dashboard</button>
-                <button type="button"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
+                <button type="button" id="dashBtn"><i class="bi bi-house-door"></i>Dashboard</button>
+                <button type="button" id="relatorioBtn"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
                 <button type="button" id="rncBtn"><i class="bi bi-exclamation-triangle"></i>RNC</button>
-                <button type="button"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
+                <button type="button" id="dashDetalhadoBtn"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
                 <button type="button" id="monitoramentoBtn"><i class="bi bi-clock"></i>Monitoramento</button>
             </div>
         </div>

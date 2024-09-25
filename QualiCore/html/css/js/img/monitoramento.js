@@ -19,7 +19,6 @@ for(let i = 0; i < listaSidebarBtn.length; i++) {
     })
 }
 
-
 function atualizaSeveridade(select) {
     const tr = select.closest('tr');
     const severidade = select.value;
@@ -89,3 +88,5 @@ function verDetalhes(rncId) {
     // Abrir modal com os detalhes
     alert(`Detalhes da RNC ${rncId}`);
 }
+
+

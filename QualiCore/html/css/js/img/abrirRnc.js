@@ -1,3 +1,24 @@
+const dashBtn = document.querySelector('#dashBtn')
+const relatorioBtn = document.querySelector('#relatorioBtn')
+const rncBtn = document.querySelector('#rncBtn')
+const dashDetalhadoBtn = document.querySelector('#dashDetalhadoBtn')
+const monitoramentoBtn = document.querySelector('#monitoramentoBtn')
+
+const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn]
+const urlSidebar = [
+    'homePage.html',
+    'inexistente.html',
+    'abrirRnc.html',
+    'dashDetalhe.html',
+    'monitoramento.html'
+]
+
+for(let i = 0; i < listaSidebarBtn.length; i++) {
+    listaSidebarBtn[i].addEventListener('click', () => {
+        window.location.href = urlSidebar[i]
+    })
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('rncForm');
     const tableContainer = document.getElementById('rncTableContainer');
@@ -25,12 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
         form.reset();
     });
 });
-
-const dash = document.querySelector('#dash');
-
-dash.addEventListener('click', () => {
-    window.location.href = 'homePage.html'
-})
 
 const selectedOptions = new Set();
 
@@ -115,3 +130,5 @@ document.getElementById('anexo').addEventListener('change', function() {
         anexoTable.closest('table').style.display = 'table'; // Mostra a tabela se houver anexos
     }
 });
+
+
