@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 position: 'bottom',
                 labels: {
                     font: {
-                        family: "'Poppins', sans-serif",
+                        family: "'Roboto', sans-serif",
                         size: 12
                     },
                     usePointStyle: true,
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip: {
                 backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 titleFont: {
-                    family: "'Poppins', sans-serif",
+                    family: "'Roboto', sans-serif",
                     size: 14
                 },
                 bodyFont: {
@@ -93,6 +93,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 cornerRadius: 8,
                 padding: 12
+            },
+            datalabels: {
+                color: 'white',
+                anchor: 'end',
+                align: 'end',
+                formatter: (value, context) => {
+                    const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                    const percentage = ((value / total) * 100).toFixed(2) + '%';
+                    return percentage;
+                }
             }
         }
     };
@@ -101,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('meuGrafico').getContext('2d');
     const labels = ['Douglas Abilio - TI', 'Juliana - Enfermaria', 'Silvia - Ambulatório', 'Maria - Laboratório', 'Marcelo - Coleta', 'Rose - Recepção'];
     const data = [12, 19, 3, 5, 2, 3];
-    
+
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -152,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ...commonOptions.plugins,
                 title: {
                     display: true,
-                    text: 'Indice de Não Conformidades Abertas por Setor',
+                    text: 'Índice de Não Conformidades Abertas por Setor',
                     font: {
                         family: "'Roboto', sans-serif",
                         size: 18,
@@ -166,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
 
     // Gráfico de rosca
     const ctxRosca = document.getElementById('meuGraficoRosca').getContext('2d');

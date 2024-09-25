@@ -12,10 +12,6 @@ main {
     width: 100% !important;
     margin-left: 16.5rem;
     z-index: 10;
-    
-    
-    
-    
 }
 @media (min-width: 1024px) {
   main {

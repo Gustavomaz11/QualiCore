@@ -19,33 +19,6 @@ for(let i = 0; i < listaSidebarBtn.length; i++) {
     })
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('rncForm');
-    const tableContainer = document.getElementById('rncTableContainer');
-    const table = document.getElementById('rncTable');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
-        const newRow = table.insertRow(-1);
-        newRow.innerHTML = `
-            <td>${Math.floor(Math.random() * 1000)}</td>
-            <td>${document.getElementById('setorAutuado').value}</td>
-            <td>${document.getElementById('descrever').value.substring(0, 30)}...</td>
-            <td>Arquivo1.pdf</td>
-            <td>${new Date().toLocaleString()}</td>
-            <td><button>Ver</button></td>
-        `;
-
-        // Show the table container with a fade-in effect
-        tableContainer.style.display = 'block';
-        setTimeout(() => {
-            tableContainer.classList.add('fade-in');
-        }, 10);
-
-        // Clear the form
-        form.reset();
-    });
-});
 
 const selectedOptions = new Set();
 

@@ -76,7 +76,7 @@
                         <th></th>
                         <th>Nº RNC</th>
                         <th>Origem</th>
-                        <th>Setor/Responsável</th>
+                        <th>Setor Autuante</th>
                         <th>Enquadramento</th>
                         <th>Data/Hora</th>
                         <th>Severidade</th>
@@ -86,7 +86,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>bolinha</td>
+                        <td><span class="bolinha severidadeAlta"></span></td>
                         <td>001</td>
                         <td>Reclamação</td>
                         <td>Tecnologia da Informação</td>
@@ -110,10 +110,10 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" onclick="verDetalhes(001)">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" id="detalheRnc">Ver Detalhes</button></td>
                     </tr>
                     <tr>
-                        <td>bolinha</td>
+                        <td><span class="bolinha severidadeAlta"></span></td>
                         <td>002</td>
                         <td>Melhorias</td>
                         <td>Enfermaria</td>
@@ -137,13 +137,13 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" onclick="verDetalhes(001)">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" onclick="verDetalhes(002)">Ver Detalhes</button></td>
                     </tr>
                     <tr>
-                        <td>bolinha</td>
+                        <td><span class="bolinha severidadeMedia"></span></td>
                         <td>003</td>
                         <td>Auditoria Interna</td>
-                        <td>Reursos Humanos</td>
+                        <td>Recursos Humanos</td>
                         <td>ABNT NBR ISO 9001:2015</td>
                         <td>24/09/2024 - 15:45</td>
                         <td>
@@ -164,11 +164,11 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" onclick="verDetalhes(001)">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" onclick="verDetalhes(003)">Ver Detalhes</button></td>
                     </tr>
                     <tr>
-                        <td>bolinha</td>
-                        <td>005</td>
+                        <td><span class="bolinha severidadeBaixa"></span></td>
+                        <td>004</td>
                         <td>Auditoria Externa</td>
                         <td>Coleta</td>
                         <td>ABNT NBR ISO 9001:2015</td>
@@ -191,40 +191,108 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" onclick="verDetalhes(001)">Ver Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>bolinha</td>
-                        <td>006</td>
-                        <td>Reclamação</td>
-                        <td>Recursos Humanos</td>
-                        <td>ABNT NBR ISO 9001:2015</td>
-                        <td>24/09/2024 - 15:45</td>
-                        <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="urgente">Urgente</option>
-                                <option value="alta">Alta</option>
-                                <option value="media">Média</option>
-                                <option value="baixa">Baixa</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="emAndamento">Em Andamento</option>
-                                <option value="deferido">Deferido</option>
-                                <option value="indefinido">Indefinido</option>
-                                <option value="concluido">Concluído</option>
-                            </select>
-                        </td>
-                        <td><button class="submitBtn" onclick="verDetalhes(001)">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" onclick="verDetalhes(004)">Ver Detalhes</button></td>
                     </tr>
                 </tbody>
             </table>
+            
         </nav>
+        <div id="rncDetailsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Detalhes da RNC <span id="rncNumber"></span></h2>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="rncDataHora">Data/Hora:</label>
+                        <input type="text" id="rncDataHora" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="rncSetorAutuante">Setor Autuante:</label>
+                        <input type="text" id="rncSetorAutuante" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="rncOrigem">Origem:</label>
+                        <input type="text" id="rncOrigem" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="rncSetorAuditado">Setor para ser auditado:</label>
+                        <select id="rncSetorAuditado">
+                            <option value="">Selecione um setor</option>
+                            <option value="setor1">Setor 1</option>
+                            <option value="setor2">Setor 2</option>
+                            <option value="setor3">Setor 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rncSeveridade">Nível de Severidade:</label>
+                        <input type="text" id="rncSeveridade" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="rncStatus">Status:</label>
+                        <input type="text" id="rncStatus" readonly>
+                    </div>
+                    
+                    <h3>Ação para ser tomada</h3>
+                    <table id="acoesTable">
+                        <thead>
+                            <tr>
+                                <th>O que?</th>
+                                <th>Quem</th>
+                                <th>Quando</th>
+                                <th>Onde</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="acao-o-que"></td>
+                                <td><input type="text" class="acao-quem"></td>
+                                <td><input type="text" class="acao-quando"></td>
+                                <td><input type="text" class="acao-onde"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button id="addAcaoBtn" class="btn btn-secondary">Adicionar Ação</button>
+                    
+                    <h3>Métodos de Verificação de Eficácia</h3>
+                    <div>
+                        <input type="checkbox" id="metodoDocumental" name="metodoVerificacao" value="documental">
+                        <label for="metodoDocumental">Documental</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="metodoVisual" name="metodoVerificacao" value="visual">
+                        <label for="metodoVisual">Visual</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="metodoEntrevista" name="metodoVerificacao" value="entrevista">
+                        <label for="metodoEntrevista">Entrevista</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="metodoOutro" name="metodoVerificacao" value="outro">
+                        <label for="metodoOutro">Outro</label>
+                        <input type="text" id="metodoOutroTexto" style="display: none;">
+                    </div>
+                    
+                    <h3>Tipo de RNC</h3>
+                    <div>
+                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
+                        <label for="tipoPreventiva">Preventiva</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
+                        <label for="tipoCorretiva">Corretiva</label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: right; margin-top: 20px;">
+                    <button id="saveBtn" class="btn btn-primary">Salvar</button>
+                    <button id="closeBtn" class="btn btn-secondary">Fechar</button>
+                </div>
+            </div>
+        </div>
 
     </main>
+    
     
 </body>
 </html>
