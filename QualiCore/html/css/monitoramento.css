@@ -131,8 +131,9 @@ table#tabelaRNC {
     background-color: #fefefe;
     /* margin: 5% auto; */
     margin-left: 15rem;
-    margin-top: 1.5rem;
+    margin-top: .5rem;
     padding: 20px;
+    height: 93vh;
     border: 1px solid #888;
     width: 80%;
     max-width: 150rem;
@@ -156,51 +157,83 @@ table#tabelaRNC {
 }
 
 /* Timeline styles */
-.timeline {
+.linhaDoTempo {
     position: relative;
-    max-width: 200px;
+    max-width: 75rem;
     margin: 0 auto;
-    padding: 20px 0;
 }
 
-.timeline::after {
+.linhaDoTempo::before {
     content: '';
     position: absolute;
-    width: 2px;
-    background-color: #007bff;
     top: 0;
-    bottom: 0;
     left: 50%;
-    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+    background: #ccc;
+    transform: translateX(-50%);
 }
 
-.timeline-item {
-    padding: 10px 40px;
+.itemLinhaDoTempo {
+    padding: 10px 0;
+    opacity: 1;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.itemLinhaDoTempo.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    
+}
+
+.conteudoLinhaDoTempo {
     position: relative;
-    background-color: inherit;
-    width: 50%;
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+    
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.timeline-item::after {
+.itemLinhaDoTempo:nth-child(odd) .conteudoLinhaDoTempo {
+    left: 150px;
+    
+
+}
+
+.itemLinhaDoTempo:nth-child(even) .conteudoLinhaDoTempo {
+    right: 150px;
+    
+}
+
+.conteudoLinhaDoTempo::before {
     content: '';
     position: absolute;
-    width: 15px;
-    height: 15px;
-    right: -8px;
-    background-color: white;
-    border: 2px solid #007bff;
-    top: 15px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid var(--cor-principal);
     border-radius: 50%;
-    z-index: 1;
+    background-color: #2980b9;
 }
 
-.timeline-content {
-    padding: 10px;
-    background-color: white;
-    position: relative;
-    border-radius: 6px;
-    border: 1px solid #ddd;
+.itemLinhaDoTempo:nth-child(odd) .conteudoLinhaDoTempo::before {
+    left: -40px;
 }
+
+.itemLinhaDoTempo:nth-child(even) .conteudoLinhaDoTempo::before {
+    right: -40px;
+}
+
+.conteudoLinhaDoTempo p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+
 
 /* Form styles */
 .form-group {

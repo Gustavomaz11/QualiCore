@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const botaoPerfil = document.getElementById('botaoPerfil');
     const menuPerfil = document.getElementById('menuPerfil');
-    const modal = document.getElementById("modalPerfil");
+    const modal = document.querySelector(".modalPerfil");
     const btn = document.getElementById("meuPerfilBtn");
     const closeBtn = document.querySelector(".fecharModal");
     
