@@ -110,97 +110,15 @@
                                 <option value="concluido">Concluído</option>
                             </select>
                         </td>
-                        <td><button class="submitBtn" id="detalheRnc" onclick="openModal()">Ver Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td><span class="bolinha severidadeAlta"></span></td>
-                        <td>002</td>
-                        <td>Melhorias</td>
-                        <td>Enfermaria</td>
-                        <td>ABNT NBR ISO 9001:2015</td>
-                        <td>24/09/2024 - 15:45</td>
-                        <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="urgente">Urgente</option>
-                                <option value="alta">Alta</option>
-                                <option value="media">Média</option>
-                                <option value="baixa">Baixa</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="emAndamento">Em Andamento</option>
-                                <option value="deferido">Deferido</option>
-                                <option value="indefinido">Indefinido</option>
-                                <option value="concluido">Concluído</option>
-                            </select>
-                        </td>
-                        <td><button class="submitBtn" onclick="verDetalhes()">Ver Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td><span class="bolinha severidadeMedia"></span></td>
-                        <td>003</td>
-                        <td>Auditoria Interna</td>
-                        <td>Recursos Humanos</td>
-                        <td>ABNT NBR ISO 9001:2015</td>
-                        <td>24/09/2024 - 15:45</td>
-                        <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="urgente">Urgente</option>
-                                <option value="alta">Alta</option>
-                                <option value="media">Média</option>
-                                <option value="baixa">Baixa</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="emAndamento">Em Andamento</option>
-                                <option value="deferido">Deferido</option>
-                                <option value="indefinido">Indefinido</option>
-                                <option value="concluido">Concluído</option>
-                            </select>
-                        </td>
-                        <td><button class="submitBtn" onclick="verDetalhes()">Ver Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td><span class="bolinha severidadeBaixa"></span></td>
-                        <td>004</td>
-                        <td>Auditoria Externa</td>
-                        <td>Coleta</td>
-                        <td>ABNT NBR ISO 9001:2015</td>
-                        <td>24/09/2024 - 15:45</td>
-                        <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="urgente">Urgente</option>
-                                <option value="alta">Alta</option>
-                                <option value="media">Média</option>
-                                <option value="baixa">Baixa</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="emAndamento">Em Andamento</option>
-                                <option value="deferido">Deferido</option>
-                                <option value="indefinido">Indefinido</option>
-                                <option value="concluido">Concluído</option>
-                            </select>
-                        </td>
-                        <td><button class="submitBtn" onclick="verDetalhes()">Ver Detalhes</button></td>
+                        <td><button class="submitBtn" id="detalheRnc">Ver Detalhes</button></td>
                     </tr>
                 </tbody>
             </table>
-            
         </nav>
         <div id="rncDetailsModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Detalhes da RNC <span id="rncNumber">001</span></h2>    
+                <h2>Detalhes da RNC <span id="rncNumber">001</span></h2>  
                 
                 <div style="display: flex;">
                     <div class="linhaDoTempo">
@@ -245,23 +163,38 @@
                                 <input type="text" id="rncOrigem" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="rncSetorAuditado">Setor para ser auditado:</label>
+                                <label for="rncSetorAuditado">Setor para ser Autuado:</label>
                                 <select id="rncSetorAuditado">
                                     <option value="">Selecione um setor</option>
-                                    <option value="setor1">Setor 1</option>
-                                    <option value="setor2">Setor 2</option>
-                                    <option value="setor3">Setor 3</option>
+                                    <option value="setor1">Enfermaria</option>
+                                    <option value="setor2">Recepção</option>
+                                    <option value="setor3">Tecnologia da Informação</option>
+                                    <option value="setor3">Ambulatório</option>
+                                    <option value="setor3">Laboratório</option>
+                                    <option value="setor3">Super Intendencia</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="rncSeveridade">Nível de Severidade:</label>
-                                <input type="text" id="rncSeveridade" readonly>
+                                <select name="nvSeveridade" id="nvSeveridade">
+                                    <option value="null">Selecione o Nivel de Severidade</option>
+                                    <option value="null">Urgente</option>
+                                    <option value="null">Alta</option>
+                                    <option value="null">Média</option>
+                                    <option value="null">Baixa</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="rncStatus">Status:</label>
-                                <input type="text" id="rncStatus" readonly>
+                                <select name="rncStatus" id="rncStatus">
+                                    <option value="null">Selecione o Status</option>
+                                    <option value="deferido">Deferido</option>
+                                    <option value="indeferido">Indeferido</option>
+                                    <option value="emAndamento">Em andamento</option>
+                                    <option value="null">Concluido</option>
+                                </select>
                             </div>
                         </div>
                         
@@ -321,35 +254,43 @@
                             </div>
                             <hr/>
                             <div id="segundoGrupo">
-                                <h3>Tipo de RNC</h3>
+                                <h3>Verificação de Eficácia</h3>
                                 <div class="checkGrupo">
                             
                                     <div class="checkTiposdeVerificacaoeRnc">
-                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
-                                        <label for="tipoPreventiva">Preventiva</label>
+                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="eficacia">
+                                        <label for="tipoPreventiva">Sim, foi eficaz</label>
                                     </div>
                                     <div class="checkTiposdeVerificacaoeRnc">
-                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
-                                        <label for="tipoCorretiva">Corretiva</label>
+                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="eficacia">
+                                        <label for="tipoCorretiva">Não</label>
                                     </div>
                                 </div>
                             </div>
                             <hr/>
                             <div id="terceiroGrupo">
-                                <h3>Verificação de Eficácia</h3>
+                                <h3>Tipo de RNC</h3>
                                 <div class="checkGrupo"></div>
                             
                                     <div class="checkTiposdeVerificacaoeRnc">
-                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventiva">
+                                        <input type="radio" id="tipoPreventiva" name="tipoRNC" value="preventivaOuCorretiva">
                                         <label for="tipoPreventiva">Preventiva</label>
                                     </div>
                                     <div class="checkTiposdeVerificacaoeRnc">
-                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="corretiva">
+                                        <input type="radio" id="tipoCorretiva" name="tipoRNC" value="preventivaOuCorretiva">
                                         <label for="tipoCorretiva">Corretiva</label>
                                     </div>
                                 </div>
 
                             </div>
+                            <div id="quartoGrupo">
+                                <h3>Anexe as Evidencias da Verificação</h3>
+                                <label for="anexoEvidencias">Anexe as Evidências
+                                    <input type="file" name="anexoEvidencias" id="anexoEvidencias" multiple>
+                                </label>
+                            </div>
+                            
+
                         </div>
                         
                     </div>

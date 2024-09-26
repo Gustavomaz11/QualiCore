@@ -59,24 +59,6 @@ function atualizaStatus(select) {
     atualizarTabela();
 }
 
-function atualizarTabela() {
-    const tabela = document.getElementById('tabelaRNC');
-    const rows = Array.from(tabela.rows).slice(1);
-
-    // Ordenar por severidade e status
-    rows.sort((a, b) => {
-        const severidadeA = getSeveridadeValue(a);
-        const severidadeB = getSeveridadeValue(b);
-
-        if (severidadeA === severidadeB) {
-            return getStatusValue(a) - getStatusValue(b);
-        }
-        return severidadeA - severidadeB;
-    });
-
-    rows.forEach(row => tabela.appendChild(row));
-}
-
 function getSeveridadeValue(row) {
     const severidade = row.querySelector('.severidadeSelect').value;
     if (severidade === 'urgente') return 1;
@@ -101,7 +83,8 @@ const closeBtnFooter = document.getElementById("closeBtn");
 const metodoOutro = document.getElementById("metodoOutro");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
-function openModal() {
+function openModal(button) {
+
     const rncData = {
         numero: "001",
         dataHora: '01/08/2024 - 14:00',
@@ -111,22 +94,35 @@ function openModal() {
         status: 'Em Andamento'
     };
 
-    document.getElementById("rncNumber").textContent = rncData.numero;
-    document.getElementById("rncDataHora").value = rncData.dataHora;
-    document.getElementById("rncSetorAutuante").value = rncData.setorAutuante;
-    document.getElementById("rncOrigem").value = rncData.origem;
-    document.getElementById("rncSeveridade").value = rncData.severidade;
-    document.getElementById("rncStatus").value = rncData.status;
+    const numeroRnc = rncData.numero
+    const dataHoraRnc = rncData.dataHora
+    const setorAutuanteRnc = rncData.setorAutuante
+    const origiemRnc = rncData.origem
+    const severidadeRnc = rncData.severidade
+    const statusRnc = rncData.status
+
+
+    document.getElementById("rncNumber").textContent = numeroRnc;
+    document.getElementById("rncDataHora").value = dataHoraRnc;
+    document.getElementById("rncSetorAutuante").value = setorAutuanteRnc;
+    document.getElementById("rncOrigem").value = origiemRnc;
+    // document.getElementById("rncSeveridade").value = severidadeRnc;
+    // document.getElementById("rncStatus").value = statusRnc;
 
     modal.style.display = "block";
 }
+
+const detalheRnc = document.querySelector('#detalheRnc')
+detalheRnc.addEventListener('click', () => {
+    openModal()
+})
 
 function closeModal() {
     modal.style.display = "none";
 }
 
 closeBtn.onclick = closeModal;
-closeBtnFooter.onclick = closeModal;
+
 
 saveBtn.onclick = function() {
     console.log("Salvando dados...");
