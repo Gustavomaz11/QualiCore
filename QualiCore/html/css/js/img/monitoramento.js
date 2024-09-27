@@ -118,53 +118,42 @@ function getStatusValue(row) {
 
 // Essa parte é para a troca de abas dentro do modal ver detalhes no monitoramento
 
-const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn')
-const andamentoBtn = document.querySelector('#andamentoBtn')
-const conclusaoBtn = document.querySelector('#conclusaoBtn')
+const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn');
+const andamentoBtn = document.querySelector('#andamentoBtn');
+const conclusaoBtn = document.querySelector('#conclusaoBtn');
 
-const abaDetalhamento = document.querySelector('#detalhamento')
-const abaAndamento = document.querySelector('#andamento')
-const abaConclusao = document.querySelector('#conclusao')
+const abaDetalhamento = document.querySelector('#detalhamento');
+const abaAndamento = document.querySelector('#andamento');
+const abaConclusao = document.querySelector('#conclusao');
 
-const listaDetalhesBtn = [detalhamentoRncBtn, andamentoBtn, conclusaoBtn]
+const listaDetalhesBtn = [detalhamentoRncBtn, andamentoBtn, conclusaoBtn];
+const abas = [abaDetalhamento, abaAndamento, abaConclusao];
 
-for(let z = 0; z < listaDetalhesBtn.length; z++) {
-    listaDetalhesBtn[z].addEventListener('click', (e) => {
-        e.preventDefault()
-        switch (z) {
-            case 2:
-                abaAndamento.style.display = 'none'
-                abaDetalhamento.style.display = 'none'
-                abaConclusao.style.display = 'flex'
-                listaDetalhesBtn[z-2].classList.remove('active')
-                listaDetalhesBtn[z-1].classList.remove('active')
-                
-               
-                break;
-
-            case 1:
-                abaConclusao.style.display = 'none'
-                abaDetalhamento.style.display = 'none'
-                abaAndamento.style.display = 'flex'
-                listaDetalhesBtn[z-1].classList.remove('active')        
-                listaDetalhesBtn[z+1].classList.remove('active')
-                
-                break;
-            case 0:
-                abaAndamento.style.display = 'none'
-                abaConclusao.style.display = 'none'
-                abaDetalhamento.style.display = 'flex'
-                listaDetalhesBtn[z+2].classList.remove('active')        
-                listaDetalhesBtn[z+1].classList.remove('active')
-                
-                
-                       
-                break;
-    
-            default:
-                break;
-        }
-        listaDetalhesBtn[z].classList.add('active')
-        
-    })
+// Função para ocultar todas as abas e remover 'active' de todos os botões
+function resetAbas() {
+    abas.forEach(aba => aba.style.display = 'none'); // Esconder todas as abas
+    listaDetalhesBtn.forEach(btn => btn.classList.remove('active')); // Remover 'active' de todos os botões
 }
+
+// Mostrar a aba Detalhamento inicialmente
+function inicializarAba() {
+    resetAbas(); // Esconder todas as abas inicialmente
+    abaDetalhamento.style.display = 'flex'; // Mostrar a aba de Detalhamento
+    detalhamentoRncBtn.classList.add('active'); // Marcar o botão de Detalhamento como ativo
+}
+
+// Adiciona eventos de clique para trocar as abas
+for (let z = 0; z < listaDetalhesBtn.length; z++) {
+    listaDetalhesBtn[z].addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        resetAbas(); // Ocultar todas as abas e remover 'active' de todos os botões
+        
+        abas[z].style.display = 'flex'; // Mostrar aba correspondente ao botão clicado
+        listaDetalhesBtn[z].classList.add('active'); // Adicionar 'active' ao botão clicado
+    });
+}
+
+// Inicializa a primeira aba ao carregar a página
+inicializarAba();
+

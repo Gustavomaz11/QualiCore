@@ -130,24 +130,24 @@
 
 
                 <div class="modalBody">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-content">
+                    <div class="linhaDoTempo">
+                        <div class="itemLinhaDoTempo">
+                            <div class="conteudoLinhaDoTempo">
                                 <p>10/08 - 14:00<br>Aberto por GUSTAVO-TI</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-content">
+                        <div class="itemLinhaDoTempo">
+                            <div class="conteudoLinhaDoTempo">
                                 <p>10/02 - 16:00<br>Status: Deferido por Weber<br>Enviado p/ Juliana - Enfermaria</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-content">
+                        <div class="itemLinhaDoTempo">
+                            <div class="conteudoLinhaDoTempo">
                                 <p>11/02 - 08:30<br>Status: Em andamento por Juliana</p>
                             </div>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-content">
+                        <div class="itemLinhaDoTempo">
+                            <div class="conteudoLinhaDoTempo">
                                 <p>Aguardando atualizações</p>
                             </div>
                         </div>
@@ -263,20 +263,149 @@
                         </div>
                         <div class="tab-content" id="andamento">
                             <h3>Ação para ser tomada</h3>
-                            <!-- Adicione o conteúdo para a aba de andamento aqui -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="oQue">O que?</label>
+                                    <input type="text" name="oQue" id="oQue" placeholder="O que será feito?" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quem">Quem?</label>
+                                    <input type="text" name="quem" id="quem" placeholder="Quem irá fazer ?" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="quando">Quando?</label>
+                                    <input type="date" name="quando" id="quando" placeholder="Quando será realizado a correção?" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="onde">Onde ?</label>
+                                    <input type="text" name="onde" id="onde" placeholder="Onde será realizado ?" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="como">Como ?</label>
+                                    <input type="text" name="como" id="como" placeholder="Como será resolvido ? " readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="porque">Porque?</label>
+                                    <input type="text" name="poruqe" id="porque" placeholder="Porque precisa ser feito ?" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="custo">Custo:</label>
+                                    <input type="number" step="0.01" min="0" placeholder="R$ 0,00" readonly>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="evid">Caso necessário anexe evidências do andamento</label>
+                                    <input type="file" name="evid" id="evid" multiple>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <table id="tabelaRNC">
+                                    <thead>
+                                        <tr>
+                                            <th>Evidência</th>
+                                            <th>Data/Hora</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>evidencia1.jpeg</td>
+                                            <td>27/09/2024 - 15:15h</td>
+                                            <td>
+                                                <button class="verBtn">Ver Evidência</button>
+                                                <button class="aceitarBtn">Aceitar Evidência</button>
+                                                <button class="recusarBtn">Recusar Evidência</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn">Informar a Qualidade</button>
                         </div>
                         <div class="tab-content" id="conclusao">
                             <h3>Conclusão</h3>
-                            <!-- Adicione o conteúdo para a aba de conclusão aqui -->
+                            <div class="form-row">
+                                <div class="form-groupRadioConclusao">
+                                    <label for="verificarEficacia">Método de Verificação de Eficácia</label>
+                                    <div>
+                                        <input type="checkbox" name="tipoRnc" id="tipoRnc"> Documental
+                                        <input type="checkbox" name="tipoRnc" id="tipoRnc"> Visual
+                                        <input type="checkbox" name="tipoRnc" id="tipoRnc"> Entrevista
+                                        <input type="input" name="tipoRnc" id="tipoRncText" placeholder="Caso outro, descreva aqui"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-groupRadioConclusao">
+                                    <label for="verificarEficacia">Verificação de Eficácia</label>
+                                    <div>
+                                        <input type="radio" name="tipoRnc" id="tipoRnc" value="verificacao"> Sim, foi eficaz
+                                        <input type="radio" name="tipoRnc" id="tipoRnc" value="verificacao"> Não, não foi eficaz
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="envidenciaDeEficacia">Anexe Arquivos para comprovar eficácia</label>
+                                    <input type="file" name="envidenciaDeEficacia" id="envidenciaDeEficacia" multiple>
+                                </div>
+                                <table id="tabelaRNC">
+                                    <thead>
+                                        <tr>
+                                            <th>Anexos</th>
+                                            <th>Data/Hora do Anexo</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>evidencia1.jpeg</td>
+                                            <td>27/09/2024 - 15:15h</td>
+                                            <td>
+                                                <button class="verBtn">Ver Evidência</button>
+                                                <button class="aceitarBtn">Aceitar Evidência</button>
+                                                <button class="recusarBtn">Recusar Evidência</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>evidencia1.jpeg</td>
+                                            <td>27/09/2024 - 15:15h</td>
+                                            <td>
+                                                <button class="verBtn">Ver Evidência</button>
+                                                <button class="aceitarBtn">Aceitar Evidência</button>
+                                                <button class="recusarBtn">Recusar Evidência</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-row" style="margin-top: 0.5rem;">
+                                <div class="form-group">
+                                    <label for="gestoQuali">Gestor da Qualidade</label>
+                                    <input type="text" name="nomeResponsavel" id="nomeResponsavel" placeholder="Weber Santana - 27/09/2024 15:36h " disabled>      
+                                </div>
+                                <div class="form-group">
+                                    <label for="gestorDep">Gestor de Departamento Autuado</label>
+                                    <input type="text" name="gestorResponsavel" id="gestorResponsavel" placeholder="Juliana Oliveira - 27/09/2024 - 15:36h" disabled>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
                    
                 </div>
+                <div class="modal-footer">
+                    <button id="saveBtn" class="btn">Salvar</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button id="saveBtn" class="btn">Salvar</button>
-            </div>
+            
         </div>
         </div>
 

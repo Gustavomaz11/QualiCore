@@ -191,6 +191,7 @@ table#tabelaRNC {
     max-width: 75rem;
     margin: 0 auto 30px;
     padding: 20px 0;
+    
 }
 
 .linhaDoTempo::before {
@@ -318,6 +319,24 @@ table#tabelaRNC {
     margin-right: 1rem;
     font-size: 14px;
     
+}
+
+.form-groupRadioConclusao {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.form-groupRadioConclusao label{
+    color: var(--cor-principal);
+}
+
+.form-groupRadioConclusao #tipoRncText {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 .form-groupRadio label {
