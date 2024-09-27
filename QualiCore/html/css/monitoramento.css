@@ -124,7 +124,7 @@ table#tabelaRNC {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
 }
 
 .modal-header {
@@ -136,8 +136,8 @@ table#tabelaRNC {
 }
 
 .modal-header h2 {
-    margin: 0;
     font-size: 1.5rem;
+    color: #333;
 }
 
 .modal-footer {
@@ -146,32 +146,36 @@ table#tabelaRNC {
     border-top: 1px solid #ddd;
 }
 
-.modal-body {
-    max-height: calc(100vh - 200px);
-    overflow-y: auto;
-    padding: 20px 0;
+.modalBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
+
 
 .modal-content {
     background-color: #fefefe;
-    /* margin: 5% auto; */
-    margin-left: 15rem;
-    margin-top: .5rem;
+    margin: 2% auto;
     padding: 20px;
-    height: 93vh;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 150rem;
+    width: 100%;
+    height: 100%;
+    max-height: 850px;
+    max-width: 1750px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
 }
 
 .close:hover,
@@ -293,6 +297,7 @@ table#tabelaRNC {
     font-weight: bold;
     font-size: 12px;
     font-family: var(--fonte-principal);
+    color: var(--cor-principal);
 }
 
 .form-group input,
@@ -304,11 +309,28 @@ table#tabelaRNC {
     
 }
 
+.form-groupRadio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    margin-right: 1rem;
+    font-size: 14px;
+    
+}
+
+.form-groupRadio label {
+    font-family: var(--fonte-principal);
+    color: var(--cor-principal);
+}
+
 .form-row {
     display: flex;
     justify-content: space-between;
     margin-right: 1rem;
     flex-wrap: wrap;
+    width: 45vw;
     
 }
 
@@ -378,4 +400,106 @@ hr {
 h3 {
     font-size: 1rem;
     color: #444;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background-color: #f8f9fa;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 16px;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-button:hover {
+    background-color: #ddd;
+}
+
+.tab-button.active {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.minhaTab {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.tab-pane {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    animation: fadeEffect 1s;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Botões de Ação da tabela de evidencias anexadas dentro do modal de ver detalhes do RNC */
+.verBtn {
+    padding: 5px 15px;
+    color: #fff;
+    background-color: var(--cor-principal);
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.verBtn:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+.aceitarBtn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #27ae60;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.aceitarBtn:hover {
+    background-color: #2ecc71;
+}
+
+.recusarBtn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #b81414;
+    font-weight: bold;
+    color: #fff;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.recusarBtn:hover {
+    background-color: #ec5353;
 }
