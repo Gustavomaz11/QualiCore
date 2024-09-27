@@ -5,39 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QualiCore - Esqueci minha Senha</title>
     <link rel="stylesheet" href="css/esqueceuSenha.css">
-    <script src="css/js/img/esqueceuSenha.js" defer></script>
+    <script src="js/esqueceuSenha.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="menuCabecalho">
+        <div class="logo">
             <h1>QualiCore</h1>
-        </div>
-        <div class="menuCabecalho">
-            <img src="css/js/img/logo_1_1.webp" alt="logo" width="auto" height="75rem">
+            <img src="css/js/img/logo_1_1-removebg-preview.png" alt="logoMarcaFSPH-Gov">
         </div>
     </header>
     <main>
-        <form action="/" id="esqueceuSenhaForm">
-            <div class="divisaoElementos">
-                <h2>Esqueçeu sua senha?</h2>
-                <p>Informe seu email e enviaremos um link para a recuperação da sua conta</p>
-            </div>
-            
-            <div class="divisaoElementos">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="inputPadrao" placeholder="Digite seu email para recuperação">
-            </div>
-
-            <div class="divisaoElementos">
-                <button class="submitBtn">Recuperar</button>
-                <div class="subDivisaoElementosSenha">
-                    <span id="login">Entrar</span>
-                    <hr/>
-                    <span id="cadastro">Cadastre-se</span>
+        <div class="forgot-password-container">
+            <h2>Esqueceu sua senha?</h2>
+            <p>Informe seu email e enviaremos um link para a recuperação da sua conta</p>
+            <form id="esqueceuSenhaForm">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email para recuperação" required>
                 </div>
+                <button type="submit" class="recover-button">Recuperar</button>
+            </form>
+            <div class="links">
+                <a href="index.html" id="login">Entrar</a>
+                <span class="separator">|</span>
+                <a href="cadastro.html" id="cadastro">Cadastre-se</a>
             </div>
-
-        </form>
+        </div>
     </main>
 </body>
 </html>

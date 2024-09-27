@@ -1,10 +1,14 @@
-const voltarLogin = document.querySelector('.subDivisaoElementosSenha #login')
-const voltarCadastro = document.querySelector('.subDivisaoElementosSenha #cadastro')
+const esqueciSenha = document.querySelector('#esqueciSenha')
+const criarConta = documen.querySelector('#criarConta')
 
-voltarLogin.addEventListener('click', () => {
-    window.location.href = 'index.html'
-})
+const listaBtnLogin = [esqueciSenha ,criarConta]
+const listaUrllogin = [
+    'esqueceuSenha.html',
+    'cadastro.html'
+]
 
-voltarCadastro.addEventListener('click', () => {
-    window.location.href = 'cadastro.html'
-})
+for(let c = 0; c < listaBtnLogin.length; c++) {
+    listaBtnLogin[c].addEventListener('click', () => {
+        window.location.href = listaUrllogin[c]
+    })
+}

@@ -5,38 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QualiCore</title>
     <link rel="stylesheet" href="css/login.css">
-    <script src="css/js/img/scrips.js" defer></script>
+    <script src="js/scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="menuCabecalho">
-            <img src="logo.svg" alt="" width="200rem" height="auto">
-            <!-- <h1>QualiCore</h1> -->
-        </div>
-        <div class="menuCabecalho">
-            <img src="css/js/img/logo_1_1.webp" alt="logoMarcaFSPH-Gov" width="auto" height="75rem">
+        <div class="logo">
+            <h1>QualiCore</h1>
+            <img src="css/js/img//logo_1_1-removebg-preview.png" alt="logoMarcaFSPH-Gov">
         </div>
     </header>
     <main>
-        <form action="">
+        <div class="login-container">
             <h2>Entrar</h2>
-            <div class="divisaoElementos">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="inputPadrao" placeholder="@fsph.com.br">
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" class="inputPadrao" placeholder="Digite sua senha">
-                <div class="subDivisaoElementos">
-                    <div><input type="checkbox" name="lembrarSenha" id="lembrarSenha"> Lembrar Senha</div>
-                    <span>Esqueci minha senha</span>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="@fsph.com.br" required>
                 </div>
-            </div>
-            <div class="divisaoElementos">
-                <button type="button" class="submitBtn">Entrar</button>
-                <div class="subDivisaoElementos">
-                    <h5>Não tem conta ainda? <span>Crie uma conta</span></h5>
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
                 </div>
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="lembrarSenha" name="lembrarSenha">
+                        <label for="lembrarSenha">Lembrar Senha</label>
+                    </div>
+                    <a href="esqueceuSenha.html" class="forgot-password" id="esqueciSenha">Esqueci minha senha</a>
+                </div>
+                <button type="submit" class="login-button">Entrar</button>
+            </form>
+            <div class="signup-link">
+                Não tem conta ainda? <a href="cadastro.html" id="criarConta">Crie uma conta</a>
             </div>
-        </form>
+        </div>
     </main>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>Usuário ou senha inválida</p>
+            <button id="closePopup">Fechar</button>
+        </div>
+    </div>
 </body>
 </html>
