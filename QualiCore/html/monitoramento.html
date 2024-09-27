@@ -97,21 +97,13 @@
                         <td>ABNT NBR ISO 9001:2015</td>
                         <td>24/09/2024 - 15:45</td>
                         <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="urgente">Urgente</option>
-                                <option value="alta">Alta</option>
-                                <option value="media">Média</option>
-                                <option value="baixa">Baixa</option>
+                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)" disabled>
+                                <option value="null">--Em Análise--</option>
                             </select>
                         </td>
                         <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)">
-                                <option value="null">--Selecione--</option>
-                                <option value="emAndamento">Em Andamento</option>
-                                <option value="deferido">Deferido</option>
-                                <option value="indefinido">Indefinido</option>
-                                <option value="concluido">Concluído</option>
+                            <select class="statusSelect" onchange="atualizaStatus(this)" disabled>
+                                <option value="null">--Em Análise--</option>
                             </select>
                         </td>
                         <td><button class="submitBtn" id="detalheRnc">Ver Detalhes</button></td>

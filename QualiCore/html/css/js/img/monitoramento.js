@@ -5,6 +5,7 @@ const saveBtn = document.getElementById("saveBtn");
 // const metodoOutro = document.getElementById("metodoOutro");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
+
 function openModal() {
     const rncData = {
         numero: "001",
@@ -12,11 +13,15 @@ function openModal() {
         setorAutuante: 'Tecnologia da Informação',
         origem: 'Reclamação',
         severidade: 'Alta',
-        status: 'Em Andamento'
+        status: 'Em Andamento',
+        enquadramento: 'ABNT NBR ISO 9001:2015'
     };
 
     document.getElementById("rncNumber").textContent = rncData.numero;
-
+    document.querySelector('#data-hora').value = rncData.dataHora;
+    document.querySelector('#origem').value = rncData.origem;
+    document.querySelector('#setor-autuante').value = rncData.setorAutuante
+    document.querySelector('#enquadramento').value = rncData.enquadramento
     modal.style.display = "block";
 }
 
