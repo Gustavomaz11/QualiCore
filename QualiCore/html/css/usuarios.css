@@ -2,3 +2,21 @@
 @import url('mainPage.css');
 @import url('abrirRnc.css');
 @import url('monitoramento.css');
+
+.gerenciamento {
+    display: flex;
+    width: 10rem;
+    justify-content: center;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    background-color: var(--cor-principal);
+    box-shadow: var(--sombra-padrao);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gerenciamento:hover {
+    opacity: 0.8;
+}

@@ -71,8 +71,9 @@
             </div>
         </section>
         <nav class="navPrincipal">
+            
             <legend>Departamentos</legend>
-            <button>Adicionar Departamento</button>
+            <button type="button" class="gerenciamento">Adicionar Departamento</button>
 
             
             <table id="tabelaRNC">
@@ -124,6 +125,32 @@
                 </tbody>
             </table>
         </nav>
+        <div id="gerenciamentoDepartamento" class="modal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2>Detalhes do Departamento <span id="rncNumber">Enfermaria</span></h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+
+
+                <div class="modalBody">
+                    
+                    <div class="detalhesRncDoModal">
+                       
+                        <h1>Aqui vai ter os bagulho para adicionar o perfil</h1>
+                        
+                        
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button id="saveBtn" class="btn">Salvar</button>
+                </div>
+            </div>
+            
+        </div>
     </main>
 </body>
 </html>
