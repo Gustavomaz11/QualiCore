@@ -7,6 +7,7 @@
     <title>QualiCore - Monitoramento</title>
     <link rel="stylesheet" href="css/monitoramento.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="css/js/img/favicon.png" type="image/x-icon">
 
     <script src="css/js/img/monitoramento.js" defer></script>
 </head>
@@ -20,11 +21,12 @@
             </div>
             <div class="conteudoSideBar">
                 <button type="button" id="dashBtn"><i class="bi bi-house-door"></i>Dashboard</button>
-                <button type="button" id="relatorioBtn"><i class="bi bi-clipboard2-data-fill"></i>Relatório de
-                    Qualidade</button>
+                <button type="button" id="relatorioBtn"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
                 <button type="button" id="rncBtn"><i class="bi bi-exclamation-triangle"></i>RNC</button>
                 <button type="button" id="dashDetalhadoBtn"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
                 <button type="button" id="monitoramentoBtn"><i class="bi bi-clock"></i>Monitoramento</button>
+                <button type="button" id="departamentoBtn"><i class="bi bi-grid"></i>Departamentos</button>
+                <button type="button" id="usuariosBtn"><i class="bi bi-people"></i>Usuários</button>
             </div>
         </div>
         <div class="divisaoSideBar">
@@ -96,16 +98,8 @@
                         <td>Tecnologia da Informação</td>
                         <td>ABNT NBR ISO 9001:2015</td>
                         <td>24/09/2024 - 15:45</td>
-                        <td>
-                            <select class="severidadeSelect" onchange="atualizaSeveridade(this)" disabled>
-                                <option value="null">--Em Análise--</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="statusSelect" onchange="atualizaStatus(this)" disabled>
-                                <option value="null">--Em Análise--</option>
-                            </select>
-                        </td>
+                        <td>--Em Análise--</td>
+                        <td>--Em Análise--</td>
                         <td><button class="submitBtn" id="detalheRnc">Ver Detalhes</button></td>
                     </tr>
                 </tbody>

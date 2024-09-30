@@ -47,10 +47,10 @@ header {
     margin-right: 1rem;
 }
 
-.logo img {
+/* .logo img {
     height: 40px;
     width: auto;
-}
+} */
 
 main {
     flex: 1;

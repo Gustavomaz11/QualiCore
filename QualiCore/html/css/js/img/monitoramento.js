@@ -1,3 +1,5 @@
+
+
 // Modal
 const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
@@ -54,7 +56,9 @@ const sidebarButtons = {
     relatorioBtn: 'inexistente.html',
     rncBtn: 'abrirRnc.html',
     dashDetalhadoBtn: 'dashDetalhe.html',
-    monitoramentoBtn: 'monitoramento.html'
+    monitoramentoBtn: 'monitoramento.html',
+    departamentoBtn: 'departamentos.html',
+    usuariosBtn: 'usuarios.html'
 };
 
 Object.keys(sidebarButtons).forEach(buttonId => {
