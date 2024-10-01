@@ -1,140 +1,133 @@
-@import url('style.css');
-@import url('mainPage.css');
-@import url('abrirRnc.css');
-@import url('kanban.css');
-
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
-
-table#tabelaRNC {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: "Roboto", sans-serif;
+    min-height: 750px;
 }
 
-#tabelaRNC thead {
-    background-color: var(--cor-principal);
-    color: white;
-}
-
-#tabelaRNC th {
+.kanban-column {
+    flex: 1;
+    min-width: 200px;
+    max-width: 290px;
     padding: 15px;
-    text-align: left;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#tabelaRNC tbody tr {
-    background-color: white;
-    transition: all 0.3s ease;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-#tabelaRNC tbody tr:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.kanban-cards {
+    min-height: 100px;
+    transition: background-color 0.2s ease;
 }
 
-#tabelaRNC td {
-    padding: 15px;
-    border: none;
-    vertical-align: middle;
+.kanban-cards.drag-over {
+    background-color: #e0e0e0;
 }
 
-.bolinha {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
+.column-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.column-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: auto;
+}
+
+.column-count {
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    padding: 2px 8px;
     margin-right: 10px;
-    transition: all 0.3s ease;
+    font-size: 14px;
 }
 
-.severidadeUrgente .bolinha {
-    background-color: #e74c3c;
-}
-
-.severidadeAlta .bolinha {
-    background-color: orange;
-}
-
-.severidadeMedia .bolinha {
-    background-color: #f1c40f;
-}
-
-.severidadeBaixa .bolinha {
-    background-color: #2ecc71;
-}
-
-.severidadeSelect,
-.statusSelect {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: white;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
-}
-
-.severidadeSelect:focus,
-.statusSelect:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
-
-.submitBtn {
-    padding: 8px 15px;
-    background-color: #3498db;
-    color: white;
+.add-card-btn {
+    background: none;
     border: none;
-    border-radius: 4px;
+    font-size: 24px;
+    color: #777;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
 }
 
-.submitBtn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.kanban-card {
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: move;
+    user-select: none;
+    transition: opacity 0.2s ease;
 }
 
-.statusConcluido {
-    background: linear-gradient(to right, rgba(46, 204, 113, 0.2), transparent);
+.kanban-card.dragging {
+    opacity: 0.5;
 }
 
-.statusConcluido td {
-    color: #27ae60;
-    font-weight: 500;
+.card-priority {
+    display: flex;
+    width: 1.5vw;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 1rem;
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #7158e2;
+    background-color: #cbc3f1;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+.card-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
-.severidadeUrgente .bolinha {
-    animation: pulse 1.5s infinite;
+.card-description {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 15px;
 }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignees {
+    display: flex;
+}
+
+.assignee {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin-right: -8px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #666;
+}
+
+.metrics {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #777;
+    gap: 10px;
+}
+
+
+/* Tudo que envolver o modal esta aqui abaixo */
 
 /* Modal */
 .modal {
@@ -549,8 +542,3 @@ h3 {
 .recusarBtn:hover {
     background-color: #ec5353;
 }
-
-.navPrincipal {
-    min-height: 800px;
-}
-

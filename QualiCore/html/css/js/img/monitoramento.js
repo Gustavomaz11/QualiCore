@@ -1,54 +1,8 @@
-
-
 // Modal
 const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
 const saveBtn = document.getElementById("saveBtn");
-// const metodoOutro = document.getElementById("metodoOutro");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
-
-
-function openModal() {
-    const rncData = {
-        numero: "001",
-        dataHora: '01/08/2024 - 14:00',
-        setorAutuante: 'Tecnologia da Informação',
-        origem: 'Reclamação',
-        severidade: 'Alta',
-        status: 'Em Andamento',
-        enquadramento: 'ABNT NBR ISO 9001:2015'
-    };
-
-    document.getElementById("rncNumber").textContent = rncData.numero;
-    document.querySelector('#data-hora').value = rncData.dataHora;
-    document.querySelector('#origem').value = rncData.origem;
-    document.querySelector('#setor-autuante').value = rncData.setorAutuante
-    document.querySelector('#enquadramento').value = rncData.enquadramento
-    modal.style.display = "block";
-}
-
-function closeModal() {
-    modal.style.display = "none";
-}
-
-// Event Listeners
-document.querySelector('#detalheRnc').addEventListener('click', openModal);
-closeBtn.onclick = closeModal;
-
-saveBtn.onclick = function() {
-    console.log("Salvando dados...");
-    closeModal();
-};
-
-// metodoOutro.onchange = function() {
-//     metodoOutroTexto.style.display = this.checked ? "inline-block" : "none";
-// };
-
-window.onclick = function(event) {
-    if (event.target === modal) {
-        closeModal();
-    }
-};
 
 // Sidebar Navigation
 const sidebarButtons = {
@@ -68,101 +22,183 @@ Object.keys(sidebarButtons).forEach(buttonId => {
     });
 });
 
-// Atualizar Severidade e Status
-function atualizaSeveridade(select) {
-    const tr = select.closest('tr');
-    const severidade = select.value;
-    const bolinha = tr.querySelector('.bolinha');
+// Kanban Card and Column Functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.kanban-card');
+    const columns = document.querySelectorAll('.kanban-cards');
 
-    // Remover classes de severidade
-    tr.classList.remove('severidadeUrgente', 'severidadeAlta', 'severidadeMedia', 'severidadeBaixa');
+    let draggedCard = null;
 
-    // Atualizar severidade e bolinha
-    if (severidade === 'urgente') {
-        tr.classList.add('severidadeUrgente');
-        bolinha.className = 'bolinha severidadeUrgente';
-    } else if (severidade === 'alta') {
-        tr.classList.add('severidadeAlta');
-        bolinha.className = 'bolinha severidadeAlta';
-    } else if (severidade === 'media') {
-        tr.classList.add('severidadeMedia');
-        bolinha.className = 'bolinha severidadeMedia';
-    } else if (severidade === 'baixa') {
-        tr.classList.add('severidadeBaixa');
-        bolinha.className = 'bolinha severidadeBaixa';
+    // Funções de arrastar
+    function handleDragStart(e) {
+        draggedCard = this;
+        this.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
     }
 
-    atualizarTabela();
-}
-
-function atualizaStatus(select) {
-    const tr = select.closest('tr');
-    const status = select.value;
-
-    if (status === 'concluido') {
-        tr.classList.add('statusConcluido');
-    } else {
-        tr.classList.remove('statusConcluido');
+    function handleDragEnd(e) {
+        this.classList.remove('dragging');
+        columns.forEach(column => column.classList.remove('drag-over'));
     }
 
-    atualizarTabela();
-}
+    function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        return false;
+    }
 
-// Helper Functions for Severidade e Status
-function getSeveridadeValue(row) {
-    const severidade = row.querySelector('.severidadeSelect').value;
-    const severidadeMap = {
-        'urgente': 1,
-        'alta': 2,
-        'media': 3,
-        'baixa': 4
-    };
-    return severidadeMap[severidade] || 5; // Se não houver severidade
-}
+    function handleDragEnter(e) {
+        this.classList.add('drag-over');
+    }
 
-function getStatusValue(row) {
-    const status = row.querySelector('.statusSelect').value;
-    return status === 'concluido' ? 1 : 2; // Outros estados têm a mesma prioridade
-}
+    function handleDragLeave(e) {
+        this.classList.remove('drag-over');
+    }
 
-// Essa parte é para a troca de abas dentro do modal ver detalhes no monitoramento
+    function handleDrop(e) {
+        e.stopPropagation();
+        if (draggedCard !== this) {
+            this.classList.remove('drag-over');
+            this.appendChild(draggedCard);
+            updateColumnCounts();
+        }
+        return false;
+    }
 
-const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn');
-const andamentoBtn = document.querySelector('#andamentoBtn');
-const conclusaoBtn = document.querySelector('#conclusaoBtn');
+    function openModalOnDoubleClick(e) {
+        const rncData = {
+            numero: "001",
+            dataHora: '01/08/2024 - 14:00',
+            setorAutuante: 'Tecnologia da Informação',
+            origem: 'Reclamação',
+            severidade: 'Alta',
+            status: 'analise',
+            enquadramento: 'ABNT NBR ISO 9001:2015'
+        };
 
-const abaDetalhamento = document.querySelector('#detalhamento');
-const abaAndamento = document.querySelector('#andamento');
-const abaConclusao = document.querySelector('#conclusao');
+        document.getElementById("rncNumber").textContent = rncData.numero;
+        document.querySelector('#data-hora').value = rncData.dataHora;
+        document.querySelector('#origem').value = rncData.origem;
+        document.querySelector('#setor-autuante').value = rncData.setorAutuante;
+        document.querySelector('#enquadramento').value = rncData.enquadramento;
+        document.querySelector('#status').value = rncData.status
+        modal.style.display = "block";
+    }
 
-const listaDetalhesBtn = [detalhamentoRncBtn, andamentoBtn, conclusaoBtn];
-const abas = [abaDetalhamento, abaAndamento, abaConclusao];
-
-// Função para ocultar todas as abas e remover 'active' de todos os botões
-function resetAbas() {
-    abas.forEach(aba => aba.style.display = 'none'); // Esconder todas as abas
-    listaDetalhesBtn.forEach(btn => btn.classList.remove('active')); // Remover 'active' de todos os botões
-}
-
-// Mostrar a aba Detalhamento inicialmente
-function inicializarAba() {
-    resetAbas(); // Esconder todas as abas inicialmente
-    abaDetalhamento.style.display = 'flex'; // Mostrar a aba de Detalhamento
-    detalhamentoRncBtn.classList.add('active'); // Marcar o botão de Detalhamento como ativo
-}
-
-// Adiciona eventos de clique para trocar as abas
-for (let z = 0; z < listaDetalhesBtn.length; z++) {
-    listaDetalhesBtn[z].addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        resetAbas(); // Ocultar todas as abas e remover 'active' de todos os botões
-        
-        abas[z].style.display = 'flex'; // Mostrar aba correspondente ao botão clicado
-        listaDetalhesBtn[z].classList.add('active'); // Adicionar 'active' ao botão clicado
+    // Add event listeners to cards and columns
+    cards.forEach(card => {
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('dblclick', openModalOnDoubleClick);
     });
-}
 
-// Inicializa a primeira aba ao carregar a página
-inicializarAba();
+    columns.forEach(column => {
+        column.addEventListener('dragover', handleDragOver);
+        column.addEventListener('dragenter', handleDragEnter);
+        column.addEventListener('dragleave', handleDragLeave);
+        column.addEventListener('drop', handleDrop);
+    });
 
+    function updateColumnCounts() {
+        columns.forEach(column => {
+            const count = column.children.length;
+            const countSpan = column.parentElement.querySelector('.column-count');
+            countSpan.textContent = count;
+        });
+    }
+
+    // Add card button functionality
+    const addButtons = document.querySelectorAll('.add-card-btn');
+    addButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const column = this.closest('.kanban-column').querySelector('.kanban-cards');
+            const newCard = createNewCard();
+            column.appendChild(newCard);
+            updateColumnCounts();
+        });
+    });
+
+    function createNewCard() {
+        const card = document.createElement('div');
+        card.className = 'kanban-card';
+        card.draggable = true;
+        card.innerHTML = `
+            <div class="card-priority">Nova tarefa</div>
+            <div class="card-title">Clique para editar</div>
+            <div class="card-description">Adicione uma descrição</div>
+            <div class="card-footer">
+                <div class="assignees">
+                    <div class="assignee">+</div>
+                </div>
+                <div class="metrics">
+                    <div class="metric">0</div>
+                    <div class="metric">0</div>
+                </div>
+            </div>
+        `;
+
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('dblclick', openModalOnDoubleClick);
+
+        return card;
+    }
+
+    // Inicializa os contadores
+    updateColumnCounts();
+
+    // Funções para abrir e fechar o modal de Detalhes de RNC
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    closeBtn.onclick = closeModal;
+
+    saveBtn.onclick = function () {
+        console.log("Salvando dados...");
+        closeModal();
+    };
+
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    // Funções para troca de abas no modal
+    const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn');
+    const andamentoBtn = document.querySelector('#andamentoBtn');
+    const conclusaoBtn = document.querySelector('#conclusaoBtn');
+
+    const abaDetalhamento = document.querySelector('#detalhamento');
+    const abaAndamento = document.querySelector('#andamento');
+    const abaConclusao = document.querySelector('#conclusao');
+
+    const listaDetalhesBtn = [detalhamentoRncBtn, andamentoBtn, conclusaoBtn];
+    const abas = [abaDetalhamento, abaAndamento, abaConclusao];
+
+    function resetAbas() {
+        abas.forEach(aba => aba.style.display = 'none');
+        listaDetalhesBtn.forEach(btn => btn.classList.remove('active'));
+    }
+
+    function inicializarAba() {
+        resetAbas();
+        abaDetalhamento.style.display = 'flex';
+        detalhamentoRncBtn.classList.add('active');
+    }
+
+    for (let z = 0; z < listaDetalhesBtn.length; z++) {
+        listaDetalhesBtn[z].addEventListener('click', (e) => {
+            e.preventDefault();
+            resetAbas();
+            abas[z].style.display = 'flex';
+            listaDetalhesBtn[z].classList.add('active');
+        });
+    }
+
+    inicializarAba();
+});
