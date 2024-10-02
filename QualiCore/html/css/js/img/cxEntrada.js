@@ -29,33 +29,33 @@ const notifications = [
     {
         id: 1,
         sender: {
-            name: 'Carlos Silva',
-            avatar: 'CS'
+            name: 'Douglas Abilio',
+            avatar: 'DA'
         },
-        ncNumber: 'NC-2024-001',
+        ncNumber: 'RNC-2024-001',
         time: '2 horas atrás',
         content: 'Nova não conformidade identificada no processo de controle de qualidade.',
         status: 'pending',
         unread: true,
         involvedUsers: [
-            { initials: 'MS', name: 'Maria Santos' },
-            { initials: 'JP', name: 'João Pereira' },
-            { initials: 'AL', name: 'Ana Lima' }
+            { initials: 'WS', name: 'Weber Santana' },
+            { initials: 'MN', name: 'Marcelo Nascimento' },
+            { initials: 'JS', name: 'Juliana Santana' }
         ]
     },
     {
         id: 2,
         sender: {
-            name: 'Juliana Oliveira',
-            avatar: 'JO'
+            name: 'Adriano Menezes',
+            avatar: 'AM'
         },
-        ncNumber: 'NC-2024-002',
+        ncNumber: 'RNC-2024-002',
         time: '4 horas atrás',
         content: 'Atualização na resolução da não conformidade do setor de produção.',
         status: 'progress',
         unread: false,
         involvedUsers: [
-            { initials: 'CS', name: 'Carlos Silva' },
+            { initials: 'OB', name: 'Ovidio Batista' },
             { initials: 'RF', name: 'Rafael Ferreira' }
         ]
     }
