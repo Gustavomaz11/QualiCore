@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const monitoramentoBtn = document.querySelector('#monitoramentoBtn')
     const departamentoBtn = document.querySelector('#departamentoBtn')
     const usuariosBtn = document.querySelector('#usuariosBtn')
+    const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
 
-    const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn]
+    const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn]
     const urlSidebar = [
         'homePage.html',
         'inexistente.html',
@@ -22,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'dashDetalhe.html',
         'monitoramento.html',
         'departamentos.html',
-        'usuarios.html'
+        'usuarios.html',
+        'cxEntrada.html'
     ]
 
     for(let i = 0; i < listaSidebarBtn.length; i++) {

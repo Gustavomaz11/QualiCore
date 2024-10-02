@@ -12,7 +12,8 @@ const sidebarButtons = {
     dashDetalhadoBtn: 'dashDetalhe.html',
     monitoramentoBtn: 'monitoramento.html',
     departamentoBtn: 'departamentos.html',
-    usuariosBtn: 'usuarios.html'
+    usuariosBtn: 'usuarios.html',
+    cxEntradaBtn: 'cxEntrada.html'
 };
 
 Object.keys(sidebarButtons).forEach(buttonId => {
