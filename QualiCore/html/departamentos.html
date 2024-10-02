@@ -71,86 +71,36 @@
             </div>
         </section>
         <nav class="navPrincipal">
-            
-            <legend>Departamentos</legend>
-            <button type="button" class="gerenciamento">Adicionar Departamento</button>
-
-            
-            <table id="tabelaRNC">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Departamento</th>
-                        <th>Responsável</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>Enfermaria</td>
-                        <td>Enfª Juliana</td>
-                        <td>
-                            <button type="button" class="verBtn">Editar</button>
-                            <button type="button" class="recusarBtn">Remover Dep.</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>Farmácia</td>
-                        <td>Silvia</td>
-                        <td>
-                            <button type="button" class="verBtn">Editar</button>
-                            <button type="button" class="recusarBtn">Remover Dep.</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>003</td>
-                        <td>Recepção</td>
-                        <td>Fulano de Tal</td>
-                        <td>
-                            <button type="button" class="verBtn">Editar</button>
-                            <button type="button" class="recusarBtn">Remover Dep.</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>004</td>
-                        <td>Coleta</td>
-                        <td>Cricrano</td>
-                        <td>
-                            <button type="button" class="verBtn">Editar</button>
-                            <button type="button" class="recusarBtn">Remover Dep.</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="logo">Departamentos</div>
+            <button class="add-btn" onclick="openModal()">
+                <i class="fas fa-plus"></i> Novo Departamento
+            </button>
         </nav>
-        <div id="gerenciamentoDepartamento" class="modal">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h2>Detalhes do Departamento <span id="rncNumber">Enfermaria</span></h2>
-                    <span class="close" onclick="closeModal()">&times;</span>
-                </div>
-
-
-                <div class="modalBody">
-                    
-                    <div class="detalhesRncDoModal">
-                       
-                        <h1>Aqui vai ter os bagulho para adicionar o perfil</h1>
-                        
-                        
-                    </div>
-                   
-                </div>
-                <div class="modal-footer">
-                    <button id="saveBtn" class="btn">Salvar</button>
-                </div>
-            </div>
-            
+    
+        <div class="container">
+            <div class="departments-grid" id="departmentsGrid"></div>
         </div>
+    
+        <div class="modal" id="addDepartmentModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Adicionar Departamento</h2>
+                    <button class="close-modal" onclick="closeModal()">&times;</button>
+                </div>
+                <form id="addDepartmentForm">
+                    <div class="form-group">
+                        <label for="departmentName">Nome do Departamento</label>
+                        <input type="text" id="departmentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="managerName">Nome do Gestor</label>
+                        <input type="text" id="managerName" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    
     </main>
 </body>
 </html>
