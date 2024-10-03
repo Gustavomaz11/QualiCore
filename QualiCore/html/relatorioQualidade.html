@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualiCore - Relatório de Qualidade</title>
+    <script src="css/js/img/relatorioQualidade.js" defer></script>
+    <link rel="stylesheet" href="css/relatorioQualidade.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="css/js/img/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <aside>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                <h2>QualiCore</h2>
+                <span>A qualidade à um click</span>
+            </div>
+            <div class="conteudoSideBar">
+                <button type="button" id="dashBtn"><i class="bi bi-house-door"></i>Dashboard</button>
+                <button type="button" id="relatorioBtn"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
+                <button type="button" id="rncBtn"><i class="bi bi-exclamation-triangle"></i>RNC</button>
+                <button type="button" id="dashDetalhadoBtn"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
+                <button type="button" id="monitoramentoBtn"><i class="bi bi-clock"></i>Monitoramento</button>
+                <button type="button" id="departamentoBtn"><i class="bi bi-grid"></i>Departamentos</button>
+                <button type="button" id="usuariosBtn"><i class="bi bi-people"></i>Usuários</button>
+            </div>
+        </div>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                <h5>QualiCore - Governo do Estado de Sergipe</h5>
+                <h6>2024 Fundação de Saúde Parreiras Horta</h6>
+            </div>
+            <div class="conteudoSideBar">
+                <h5>FSPH - Sergipe</h5>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <section class="secaoPrincipal">
+            <div class="containerBusca">
+                <input type="text" id="busca" class="campoBusca" placeholder="Procurar">
+                <i class="bi bi-search iconeBusca"></i>
+            </div>
+            <div class="botoesAcao">
+                <button type="button" class="botaoIcone"><i class="bi bi-bell"></i></button>
+                <button type="button" class="botaoIcone" id="cxEntradaBtn"><i class="bi bi-envelope"></i></button>  
+            </div>
+            <hr/>
+            <div class="infoUsuario">
+                <span>Olá, Gustavo</span>
+                <div class="avatarUsuario" id="botaoPerfil">
+                    <i class="bi bi-person"></i>
+                </div>
+            </div>
+        </section>
+
+        <nav class="navPrincipal">
+            <div class="logo">Relatórios de Não Conformidade</div>
+        </nav>
+
+        <div class="container">
+            <div class="rnc-grid" id="rncGrid"></div>
+        </div>
+
+        <div class="modal" id="rncDetailModal">
+            <div class="modal-content">
+                <!-- O conteúdo será preenchido dinamicamente -->
+            </div>
+        </div>
+
+        
+    </main>
+    
+
+</body>
+</html>

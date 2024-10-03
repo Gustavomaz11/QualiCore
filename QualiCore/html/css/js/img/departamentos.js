@@ -7,10 +7,11 @@ const departamentoBtn = document.querySelector('#departamentoBtn')
 const usuariosBtn = document.querySelector('#usuariosBtn')
 const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
 
+
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn]
 const urlSidebar = [
     'homePage.html',
-    'inexistente.html',
+    'relatorioQualidade.html',
     'abrirRnc.html',
     'dashDetalhe.html',
     'monitoramento.html',
@@ -19,7 +20,7 @@ const urlSidebar = [
     'cxEntrada.html'
 ]
 
-for (let i = 0; i < listaSidebarBtn.length; i++) {
+for(let i = 0; i < listaSidebarBtn.length; i++) {
     listaSidebarBtn[i].addEventListener('click', () => {
         window.location.href = urlSidebar[i]
     })

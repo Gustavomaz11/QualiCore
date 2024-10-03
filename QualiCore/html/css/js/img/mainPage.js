@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const usuariosBtn = document.querySelector('#usuariosBtn')
     const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
 
+
     const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn]
     const urlSidebar = [
         'homePage.html',
-        'inexistente.html',
+        'relatorioQualidade.html',
         'abrirRnc.html',
         'dashDetalhe.html',
         'monitoramento.html',
@@ -27,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
         'cxEntrada.html'
     ]
 
-    for(let i = 0; i < listaSidebarBtn.length; i++) {
-        listaSidebarBtn[i].addEventListener('click', () => {
-            window.location.href = urlSidebar[i]
-        })
-    }
+for(let i = 0; i < listaSidebarBtn.length; i++) {
+    listaSidebarBtn[i].addEventListener('click', () => {
+        window.location.href = urlSidebar[i]
+    })
+}
 
     btn.addEventListener('click', () => {
         modal.classList.add("show");

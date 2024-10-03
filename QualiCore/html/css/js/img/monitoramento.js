@@ -7,7 +7,7 @@ const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 // Sidebar Navigation
 const sidebarButtons = {
     dashBtn: 'homePage.html',
-    relatorioBtn: 'inexistente.html',
+    relatorioBtn: 'relatorioQualidade.html',
     rncBtn: 'abrirRnc.html',
     dashDetalhadoBtn: 'dashDetalhe.html',
     monitoramentoBtn: 'monitoramento.html',
