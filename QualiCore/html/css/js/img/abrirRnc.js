@@ -1,3 +1,9 @@
+const botaoPerfil = document.getElementById('botaoPerfil');
+const menuPerfil = document.getElementById('menuPerfil');
+const modal = document.querySelector(".modalPerfil");
+const btn = document.getElementById("meuPerfilBtn");
+const closeBtn = document.querySelector(".fecharModal");
+
 const dashBtn = document.querySelector('#dashBtn')
 const relatorioBtn = document.querySelector('#relatorioBtn')
 const rncBtn = document.querySelector('#rncBtn')
@@ -6,18 +12,20 @@ const monitoramentoBtn = document.querySelector('#monitoramentoBtn')
 const departamentoBtn = document.querySelector('#departamentoBtn')
 const usuariosBtn = document.querySelector('#usuariosBtn')
 const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
+const meuPerfilBtn = document.querySelector('#meuPerfilBtn')
 
 
-const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn]
+const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
 const urlSidebar = [
     'homePage.html',
     'relatorioQualidade.html',
     'abrirRnc.html',
-    'dashDetalhe.html',
+    'graficosDetalhados.html',
     'monitoramento.html',
     'departamentos.html',
     'usuarios.html',
-    'cxEntrada.html'
+    'cxEntrada.html',
+    'meuPerfil.html'
 ]
 
 for(let i = 0; i < listaSidebarBtn.length; i++) {
@@ -25,7 +33,6 @@ for(let i = 0; i < listaSidebarBtn.length; i++) {
         window.location.href = urlSidebar[i]
     })
 }
-
 
 const selectedOptions = new Set();
 
@@ -110,5 +117,8 @@ document.getElementById('anexo').addEventListener('change', function() {
         anexoTable.closest('table').style.display = 'table'; // Mostra a tabela se houver anexos
     }
 });
+
+
+
 
 

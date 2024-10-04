@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QualiCore - Gráficos Detalhados</title>
+    <link rel="stylesheet" href="css/graficosDetalhados.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="css/js/img/favicon.png" type="image/x-icon">
+    <script src="css/js/img/graficosDetalhados.js" defer></script>
+
+    <!-- Bibliote Char.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+<body>
+    <aside>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                <h2>QualiCore</h2>
+                <span>A qualidade à um click</span>
+            </div>
+            <div class="conteudoSideBar">
+                <button type="button" id="dashBtn"><i class="bi bi-house-door"></i>Dashboard</button>
+                <button type="button" id="relatorioBtn"><i class="bi bi-clipboard2-data-fill"></i>Relatório de Qualidade</button>
+                <button type="button" id="rncBtn"><i class="bi bi-exclamation-triangle"></i>RNC</button>
+                <button type="button" id="dashDetalhadoBtn"><i class="bi bi-graph-up"></i>Gráficos Detalhados</button>
+                <button type="button" id="monitoramentoBtn"><i class="bi bi-clock"></i>Monitoramento</button>
+                <button type="button" id="departamentoBtn"><i class="bi bi-grid"></i>Departamentos</button>
+                <button type="button" id="usuariosBtn"><i class="bi bi-people"></i>Usuários</button>
+            </div>
+        </div>
+        <div class="divisaoSideBar">
+            <div class="conteudoSideBar">
+                <h5>QualiCore - Governo do Estado de Sergipe</h5>
+                <h6>2024 Fundação de Saúde Parreiras Horta</h6>
+            </div>
+            <div class="conteudoSideBar">
+                <h5>FSPH - Sergipe</h5>
+            </div>
+        </div>
+    </aside>
+    <main>
+        <section class="secaoPrincipal">
+            <div class="containerBusca">
+                <input type="text" id="busca" class="campoBusca" placeholder="Procurar">
+                <i class="bi bi-search iconeBusca"></i>
+            </div>
+            <div class="botoesAcao">
+                <button type="button" class="botaoIcone"><i class="bi bi-bell"></i></button>
+                <button type="button" class="botaoIcone" id="cxEntradaBtn"><i class="bi bi-envelope"></i></button>  
+            </div>
+            <hr/>
+            <div class="infoUsuario">
+                <span>Olá, Gustavo</span>
+                <div class="avatarUsuario" id="botaoPerfil">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="dropdownPerfil" id="menuPerfil">
+                    <a class="itemDropdown" id="meuPerfilBtn">
+                        <i class="bi bi-person-circle"></i>
+                        Meu Perfil
+                    </a>
+                    <a href="#" class="itemDropdown">
+                        <i class="bi bi-bell"></i>
+                        Notificações
+                    </a>
+                    <div class="separadorDropdown"></div>
+                    <a href="index.html" class="itemDropdown">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </section>
+        <nav class="navPrincipal">
+            <legend>Gráficos Detalhados</legend>
+        </nav>
+        <div class="container">
+            <div class="grid">
+                <div class="chart-container">
+                    <h2 class="chart-title">Tendência de Não Conformidades</h2>
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Causa Raiz das Não Conformidades</h2>
+                    <canvas id="rootCauseChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Tempo Médio de Resolução</h2>
+                    <canvas id="resolutionTimeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Reincidência de Não Conformidades</h2>
+                    <canvas id="recurrenceChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Eficácia das Ações Corretivas</h2>
+                    <canvas id="correctiveActionsChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Classificação por Severidade</h2>
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

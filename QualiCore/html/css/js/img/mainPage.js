@@ -14,25 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const departamentoBtn = document.querySelector('#departamentoBtn')
     const usuariosBtn = document.querySelector('#usuariosBtn')
     const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
+    const meuPerfilBtn = document.querySelector('#meuPerfilBtn')
 
 
-    const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn]
+    const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
     const urlSidebar = [
         'homePage.html',
         'relatorioQualidade.html',
         'abrirRnc.html',
-        'dashDetalhe.html',
+        'graficosDetalhados.html',
         'monitoramento.html',
         'departamentos.html',
         'usuarios.html',
-        'cxEntrada.html'
+        'cxEntrada.html',
+        'meuPerfil.html'
     ]
 
-for(let i = 0; i < listaSidebarBtn.length; i++) {
-    listaSidebarBtn[i].addEventListener('click', () => {
-        window.location.href = urlSidebar[i]
-    })
-}
+    for(let i = 0; i < listaSidebarBtn.length; i++) {
+        listaSidebarBtn[i].addEventListener('click', () => {
+            window.location.href = urlSidebar[i]
+        })
+    }
 
     btn.addEventListener('click', () => {
         modal.classList.add("show");

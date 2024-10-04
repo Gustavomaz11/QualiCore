@@ -419,16 +419,16 @@ canvas {
 }
 
 
-:root {
+/* :root {
   --primary-color: #3498db;
   --secondary-color: #2ecc71;
   --background-color: #1a1a2e;
   --text-color: #e0e0e0;
   --input-bg: rgba(255, 255, 255, 0.1);
   --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
+} */
 
-.modalPerfil {
+/* .modalPerfil {
   display: none;
   position: fixed;
   z-index: 1000;
@@ -442,9 +442,9 @@ canvas {
   transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
   backdrop-filter: blur(5px);
   
-}
+} */
 
-.modal.show {
+/* .modal.show {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -464,9 +464,9 @@ canvas {
   transform: translateY(-50px) scale(0.9);
   transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   overflow: hidden;
-}
+} */
 
-.modal.show .conteudoModal {
+/* .modal.show .conteudoModal {
   transform: translateY(0) scale(1);
 }
 
@@ -522,9 +522,9 @@ canvas {
   display: flex;
   flex-direction: row;
 
-}
+} */
 
-.profileImageContainer {
+/* .profileImageContainer {
   display: flex;
   align-items: start;
   flex-direction: column;
@@ -547,9 +547,9 @@ canvas {
 .profileImage:hover {
   transform: scale(1.05);
   box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
-}
+} */
 
-.changePhotoBtn {
+/* .changePhotoBtn {
   background-color: var(--secondary-color);
   color: #fff;
   display: flex;
@@ -580,9 +580,9 @@ canvas {
 
 .changePhotoBtn:hover::before {
   left: 100%;
-}
+} */
 
-.profileForm {
+/* .profileForm {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -673,4 +673,4 @@ canvas {
 
 .profileImage {
   animation: pulse 2s infinite;
-}
+} */

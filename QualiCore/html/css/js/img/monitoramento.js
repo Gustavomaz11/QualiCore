@@ -4,16 +4,18 @@ const closeBtn = document.getElementsByClassName("close")[0];
 const saveBtn = document.getElementById("saveBtn");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
+
 // Sidebar Navigation
 const sidebarButtons = {
     dashBtn: 'homePage.html',
     relatorioBtn: 'relatorioQualidade.html',
     rncBtn: 'abrirRnc.html',
-    dashDetalhadoBtn: 'dashDetalhe.html',
+    dashDetalhadoBtn: 'graficosDetalhados.html',
     monitoramentoBtn: 'monitoramento.html',
     departamentoBtn: 'departamentos.html',
     usuariosBtn: 'usuarios.html',
-    cxEntradaBtn: 'cxEntrada.html'
+    cxEntradaBtn: 'cxEntrada.html',
+    meuPerfilBtn: 'meuPerfil.html'
 };
 
 Object.keys(sidebarButtons).forEach(buttonId => {
