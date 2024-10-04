@@ -4,6 +4,9 @@ const closeBtn = document.getElementsByClassName("close")[0];
 const saveBtn = document.getElementById("saveBtn");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
+let rnc = localStorage.getItem('rnc')
+rnc = JSON.parse(rnc)
+console.log(rnc)
 
 // Sidebar Navigation
 const sidebarButtons = {
@@ -123,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    const divAnalise = document.querySelector('.kanban-cards')
+    rnc.map((elementos)=>{
+        divAnalise.appendChild(reloadCard(elementos))
+    })
+
     function createNewCard() {
         const card = document.createElement('div');
         card.className = 'kanban-card';
@@ -148,6 +156,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return card;
     }
+
+    function reloadCard(rnc) {
+        const card = document.createElement('div');
+        card.className = 'kanban-card';
+        card.draggable = true;
+        card.innerHTML = `
+            <div class="kanban-cards" data-column="em-analise">
+                <div class="kanban-card" draggable="true">
+                    <div class="card-priority">...</div>
+                    <div class="card-title">${rnc.enquadramento?.join(', ')}</div>
+                    <div class="card-description">Aberto por: Douglas Abilio</div>
+                    <div class="card-description">${rnc.setorAutuado}</div>
+                    <div class="card-description">${rnc.data} - ${rnc.hora}</div>
+                    <div class="card-footer">
+                        <div class="assignees">
+                            <div class="assignee">DA</div>
+                            <div class="assignee">WS</div>s
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('dblclick', openModalOnDoubleClick);
+    
+        return card;
+    }
+    
+    // add rnc que foi feita pelo js
+    reloadCard(rnc)
+
 
     // Inicializa os contadores
     updateColumnCounts();
