@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const divAnalise = document.querySelector('.kanban-cards')
     rnc.map((elementos)=>{
-        divAnalise.appendChild(reloadCard(elementos))
+        divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
     })
 
     function createNewCard() {
@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="kanban-cards" data-column="em-analise">
                 <div class="kanban-card" draggable="true">
                     <div class="card-priority">...</div>
-                    <div class="card-title">${rnc.enquadramento?.join(', ')}</div>
-                    <div class="card-description">Aberto por: Douglas Abilio</div>
+                    <div class="card-title">${rnc.enquadramento.length > 1?rnc.enquadramento[0] +" +"+rnc.enquadramento.length :rnc.enquadramento}</div>
+                    <div class="card-description">Aberto por:  ${rnc.criador.nome}</div>
                     <div class="card-description">${rnc.setorAutuado}</div>
                     <div class="card-description">${rnc.data} - ${rnc.hora}</div>
                     <div class="card-footer">
