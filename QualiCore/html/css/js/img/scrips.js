@@ -22,6 +22,8 @@ loginForm.addEventListener('click', () => {
         if (email === nomeUsuarios[i] && senha === senhasUsuarios[i]) {
             validacao = true;
             window.location.href = 'homePage.html';
+            let nome = nomeUsuarios[i].split('@')[0]
+            localStorage.setItem('login',JSON.stringify({nome,email:nomeUsuarios[i]}))
             break;
         }
     }
