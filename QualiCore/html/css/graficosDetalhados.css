@@ -30,10 +30,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
     transition: transform 0.3s ease;
-    height: 350px; /* Altura fixa para todos os containers */
+    height: 310px; /* Altura fixa para todos os containers */
 }
 .chart-container:hover {
     transform: translateY(-5px);
+}
+
+canvas {
+    height: 25vh !important;
 }
 .chart-title {
     font-size: 1.2rem;

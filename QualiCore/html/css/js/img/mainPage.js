@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Índice de Eficácia das Nãos Conformidades',
+                    text: 'Índice de Eficácia das Não Conformidades',
                     font: {
                         size: 20,
                         weight: 'bold'
