@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
+  <!-- Background Rectangle (hidden) for viewBox reference -->
+  <rect width="500" height="200" fill="none"/>
+  
+  <!-- Logo Group -->
+  <g transform="translate(50, 50)">
+    <!-- Stylized QC symbol -->
+    <path d="M 40,20 
+             A 40,40 0 1,1 40,100 
+             L 90,100 
+             L 90,80
+             L 60,80
+             A 20,20 0 1,1 60,40
+             L 90,40
+             L 90,20 
+             Z" 
+          fill="#f0f0f0"/>
+    
+    <!-- Dot in Q -->
+    <circle cx="65" cy="60" r="5" fill="#f0f0f0"/>
+    
+    <!-- Text QUALICORE -->
+    <text x="110" y="70" 
+          font-family="Arial, sans-serif" 
+          font-weight="700" 
+          font-size="48" 
+          letter-spacing="1"
+          fill="#f0f0f0">QUALICORE</text>
+    
+    <!-- Tagline -->
+    <text x="110" y="95" 
+          font-family="Arial, sans-serif" 
+          font-size="16" 
+          fill="#f0f0f0"
+          letter-spacing="0.5">A qualidade à um click.</text>
+    
+    <!-- Decorative Line -->
+    <line x1="110" y1="78" x2="400" y2="78" 
+          stroke="#f0f0f0" 
+          stroke-width="1" 
+          opacity="0.3"/>
+  </g>
+</svg>

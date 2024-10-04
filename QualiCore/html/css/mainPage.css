@@ -38,6 +38,10 @@ main section hr {
     margin-right: 0.4rem;
 }
 
+.conteudoSideBar img {
+  margin-left: -2.5rem;
+}
+
 .secaoPrincipal {
   position: fixed;
   background-color: var(--cor-secundaria);
