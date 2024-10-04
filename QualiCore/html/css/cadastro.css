@@ -47,7 +47,7 @@ header {
     margin-right: 1rem;
 }
 
-.logo img {
+.logo #fsphLogo {
     height: 40px;
     width: auto;
 }
