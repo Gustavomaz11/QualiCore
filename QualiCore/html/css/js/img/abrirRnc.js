@@ -24,6 +24,9 @@ const acaoImediata = document.querySelector("#acaoImediata")
 const investigacao = document.querySelector('#investigacao')
 const setorAutuado = document.querySelector('#setorAutuado')
 
+let user = localStorage.getItem('login')
+user = JSON.parse(user)
+
 const rnc = {
     enquadramento:null,
     origem:null,
@@ -33,7 +36,8 @@ const rnc = {
     investigacao:null,
     setorAutuado:null,
     data:null,
-    hora:null
+    hora:null,
+    criador:null
 }
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
@@ -165,6 +169,7 @@ rncForm.addEventListener('submit',(evt)=>{
     rnc.setorAutuado = setorAutuado.value 
     rnc.data = `${dia}/${mes}/${ano}`
     rnc.hora = `${hora}:${minutos}`
+    rnc.criador = user
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         rncs.push(rnc)
