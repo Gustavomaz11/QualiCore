@@ -4,9 +4,35 @@ const closeBtn = document.getElementsByClassName("close")[0];
 const saveBtn = document.getElementById("saveBtn");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 
-let rnc = localStorage.getItem('rnc')
-rnc = JSON.parse(rnc)
-console.log(rnc)
+//popup
+const popup = document.querySelector('.popup')
+const body = document.querySelector('aside')
+body.addEventListener('click',()=>{
+    if(popup.className == 'popup show'){
+        popup.classList.remove('show')
+    }else{
+        popup.classList.add('show')
+    }
+})
+// pegando a rnc pelo localstorege
+let rnc = JSON.parse(localStorage.getItem('rnc'))
+let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+
+// sistema que lança o popup quando tem uma nona rnc
+const vendoAtualizacaoNoRnc = ()=>{
+    if(rnc.length > lengthRnc){
+        popup.classList.add('show')
+        localStorage.setItem('lengthRnc', lengthRnc + 1)
+    }else{
+        popup.classList.remove('show')
+    }
+    rnc = JSON.parse(localStorage.getItem('rnc'))
+    lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+    
+}
+vendoAtualizacaoNoRnc()
+const timer = setInterval(vendoAtualizacaoNoRnc,5000)
+
 
 // Sidebar Navigation
 const sidebarButtons = {
@@ -128,10 +154,28 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // const divAnalise = document.querySelector('.kanban-cards')
-    // rnc.map((elementos)=>{
-    //     divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
-    // })
+    // sitema que joga as rnc para o html
+    const divAnalise = document.querySelector('.kanban-cards')
+    rnc.map((elementos)=>{
+        divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+    })
+
+    // sistema que adiciona a nova rnc no hmtl
+    function addRncAtualizado (){
+        rnc = JSON.parse(localStorage.getItem('rnc'))
+        lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+        if(rnc.length > lengthRnc){
+            while(divAnalise.firstChild){ // removendo todos as rnc do html
+                divAnalise.removeChild(divAnalise.firstChild)
+            }
+            rnc.map((elementos)=>{
+                divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+            })
+            localStorage.setItem('lengthRnc', lengthRnc + 1)
+        }
+    }
+
+    setInterval(addRncAtualizado, 5000)
 
     function createNewCard() {
         const card = document.createElement('div');
