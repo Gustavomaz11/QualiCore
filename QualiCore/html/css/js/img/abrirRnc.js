@@ -1,4 +1,3 @@
-anexoTable
 const botaoPerfil = document.getElementById('botaoPerfil');
 const menuPerfil = document.getElementById('menuPerfil');
 const modal = document.querySelector(".modalPerfil");
@@ -172,15 +171,17 @@ rncForm.addEventListener('submit',(evt)=>{
     rnc.criador = user
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
+        localStorage.setItem('lengthRnc', rncs.length)
         rncs.push(rnc)
         localStorage.setItem('rnc', JSON.stringify(rncs))
-        console.log('foi aqui')
     }else{
+        localStorage.setItem('lengthRnc', 0)
         localStorage.setItem('rnc', JSON.stringify([rnc]))
-        console.log('foi la')
     }
 })
 
 // localStorage.removeItem('rnc')
+// localStorage.removeItem('lengthRnc')
+
 
 
