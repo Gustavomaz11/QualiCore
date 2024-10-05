@@ -21,6 +21,8 @@ const sidebarButtons = {
     meuPerfilBtn: 'meuPerfil.html'
 };
 
+andamento
+
 Object.keys(sidebarButtons).forEach(buttonId => {
     const button = document.querySelector(`#${buttonId}`);
     button.addEventListener('click', () => {
@@ -126,10 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    const divAnalise = document.querySelector('.kanban-cards')
-    rnc.map((elementos)=>{
-        divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
-    })
+    // const divAnalise = document.querySelector('.kanban-cards')
+    // rnc.map((elementos)=>{
+    //     divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+    // })
 
     function createNewCard() {
         const card = document.createElement('div');
@@ -186,10 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return card;
     }
     
-    // add rnc que foi feita pelo js
-    reloadCard(rnc)
-
-
     // Inicializa os contadores
     updateColumnCounts();
 
