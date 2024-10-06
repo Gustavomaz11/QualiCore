@@ -89,7 +89,7 @@ input:focus {
 button {
     width: 100%;
     padding: 0.75rem;
-    background: #164095;  /* Alterado para a cor do header */
+    background: linear-gradient(90deg, #60A5FA, #818CF8);
     color: white;
     border: none;
     border-radius: 0.5rem;
@@ -100,10 +100,23 @@ button {
     overflow: hidden;
 }
 
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+}
+
+.signup-link {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .signup-link a {
     color: #164095;  /* Alterado para a cor do header */
     text-decoration: none;
     font-weight: 500;
+    
 }
 
 .particles {

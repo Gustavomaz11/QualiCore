@@ -1,11 +1,6 @@
-
-const voltarLogin = document.querySelector('.divisaoElementos h5 span')
-voltarLogin.addEventListener('click', () => {
-    window.location.href = 'index.html'
-})
-
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -39,6 +34,7 @@ class Particle {
 }
 
 function init() {
+    particles = [];
     for (let i = 0; i < 100; i++) {
         particles.push(new Particle());
     }
@@ -84,3 +80,61 @@ window.addEventListener('resize', function () {
 init();
 animate();
 
+// Form handling
+const form = document.getElementById('cadastroForm');
+const cpfInput = document.getElementById('cpf');
+const emailInput = document.getElementById('email');
+const senhaInput = document.getElementById('senha');
+const confirmarSenhaInput = document.getElementById('confirmarSenha');
+
+// CPF formatting
+cpfInput.addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length > 9) {
+        value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
+    } else if (value.length > 6) {
+        value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
+    } else if (value.length > 3) {
+        value = value.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
+    }
+
+    e.target.value = value;
+});
+
+// Email domain validation
+emailInput.addEventListener('blur', function () {
+    if (this.value && !this.value.endsWith('@fsph.com.br')) {
+        this.value += '@fsph.com.br';
+    }
+});
+
+// Form submission
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Password validation
+    if (senhaInput.value !== confirmarSenhaInput.value) {
+        alert('As senhas não coincidem!');
+        return;
+    }
+
+    const button = form.querySelector('button');
+    button.textContent = 'Registrando...';
+    button.disabled = true;
+
+    // Simulate API call
+    setTimeout(() => {
+        alert('Cadastro realizado com sucesso!');
+        button.textContent = 'Registrar';
+        button.disabled = false;
+        form.reset();
+    }, 2000);
+});
+
+
+const voltarLogin = document.querySelector('.divisaoElementos h5 span')
+voltarLogin.addEventListener('click', () => {
+    window.location.href = 'index.html'
+})
