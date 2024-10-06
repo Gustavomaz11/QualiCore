@@ -1,4 +1,4 @@
-const loginForm = document.querySelector('.login-form'); // Corrigido
+const loginForm = document.querySelector('.login-form');
 const emailInput = document.getElementById('email');
 const senhaInput = document.getElementById('senha');
 const popup = document.getElementById('popup');
