@@ -174,3 +174,10 @@ input[type="password"].error {
 .popup-content button:hover {
     background-color: #0f2d6a;
 }
+
+@media only screen and (max-width: 480px) {
+    .logo {
+        max-width: 190px;
+        height: auto;
+    }
+}
