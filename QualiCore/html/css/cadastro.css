@@ -157,7 +157,7 @@ select {
 }
 
 .login-link a {
-    color: #60A5FA;
+    color: var(--cor-principal);
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
