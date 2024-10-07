@@ -36,7 +36,12 @@ const rnc = {
     setorAutuado:null,
     data:null,
     hora:null,
-    criador:null
+    criador:null,
+    severidade:null,
+    status:'analise',
+    tipo:null,
+    setorAtuar:null,
+    id:1
 }
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
@@ -108,7 +113,6 @@ function updateSelected(checkbox) {
 document.getElementById('anexo').addEventListener('change', function() {
     const arquivos = this.files;
     const anexoTable = document.getElementById('anexoTable').getElementsByTagName('tbody')[0];
-
     for (let i = 0; i < arquivos.length; i++) {
         const newRow = anexoTable.insertRow(-1);
         
@@ -118,6 +122,8 @@ document.getElementById('anexo').addEventListener('change', function() {
         deleteBtn.textContent = '✖';
         deleteBtn.style.color = 'red';
         deleteBtn.onclick = function(evt) {
+            let nomeAnexo = evt.target.parentNode.parentNode.firstChild.innerText
+            rnc.anexos = rnc.anexos.filter((anexo)=> anexo != nomeAnexo)
             anexoTable.deleteRow(newRow.rowIndex - 1); // Remove a linha da tabela
             const input = document.getElementById('anexo');
             const dataTransfer = new DataTransfer();
@@ -127,20 +133,24 @@ document.getElementById('anexo').addEventListener('change', function() {
                 if (input.files[j].name !== arquivos[i].name) {
                     dataTransfer.items.add(input.files[j]);
                 }
+
             }
             input.files = dataTransfer.files; // Atualiza os arquivos no input
             if (anexoTable.rows.length === 0) {
                 anexoTable.closest('table').style.display = 'none'; // Esconde a tabela se não houver anexos
             }
+            console.log(rnc)
         };
         
         newRow.insertCell(1).appendChild(deleteBtn);
+        rnc.anexos.push(arquivos[i].name);
     }
-
+    
     if (anexoTable.rows.length > 0) {
         anexoTable.closest('table').style.display = 'table'; // Mostra a tabela se houver anexos
     }
-    rnc.anexos.push(this.files[0])
+    // rnc.anexos.push(this.files[0])
+    console.log(rnc)
 });
 
 // função para mandar as informação da rnc pro localstore
@@ -159,7 +169,6 @@ rncForm.addEventListener('submit',(evt)=>{
             radioCheck = radio.value
         }
     })
-    
     rnc.enquadramento=Array.from(selectedOptions)
     rnc.origem=radioCheck
     rnc.descricao=descrever.value
@@ -172,6 +181,7 @@ rncForm.addEventListener('submit',(evt)=>{
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
+        rnc.id+= 1
         rncs.push(rnc)
         localStorage.setItem('rnc', JSON.stringify(rncs))
     }else{
