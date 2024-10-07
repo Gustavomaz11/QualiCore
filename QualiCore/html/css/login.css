@@ -183,12 +183,8 @@ input[type="password"].error {
         max-width: 190px;
         height: auto;
     }
-}
 
-@media only screen and (max-width: 415px) {
-    .logo {
-        max-width: 125px;
-        height: auto;
+    header {
+        width: min-content;
     }
-
 }
