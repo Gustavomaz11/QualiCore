@@ -19,7 +19,7 @@ let rnc = JSON.parse(localStorage.getItem('rnc'))
 let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
 
 // sistema que lança o popup quando tem uma nova rnc
-const vendoAtualizacaoNoRnc = ()=>{
+const showPopup = ()=>{
     if(rnc?.length > lengthRnc){
         popup.classList.add('show')
         localStorage.setItem('lengthRnc', lengthRnc + 1)
@@ -30,9 +30,7 @@ const vendoAtualizacaoNoRnc = ()=>{
     lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
     
 }
-vendoAtualizacaoNoRnc()
-const timer = setInterval(vendoAtualizacaoNoRnc,5000)
-
+showPopup()
 
 // Sidebar Navigation
 const sidebarButtons = {
@@ -47,7 +45,6 @@ const sidebarButtons = {
     meuPerfilBtn: 'meuPerfil.html'
 };
 
-andamento
 
 Object.keys(sidebarButtons).forEach(buttonId => {
     const button = document.querySelector(`#${buttonId}`);
@@ -73,6 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleDragEnd(e) {
         this.classList.remove('dragging');
+        let element = e.target.parentNode
+        element.setAttribute('data-status',e.target.parentNode.parentNode.getAttribute('data-column'))
+        modificandoRncPeloId(element)
+        updateColumnCounts()
+        atualizandoRnc()
         columns.forEach(column => column.classList.remove('drag-over'));
     }
 
@@ -103,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
     function modificandoRncPeloId (rnc) {
-        console.log(rnc)
         let array = JSON.parse(localStorage.getItem('rnc'))
         let modificacao = false
         array.map((indexRnc)=>{
@@ -132,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const saveBtn = document.getElementById("saveBtn");
         
         const rncData = {
-            numero: "001",
+            numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
             dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
             setorAutuante: `${e.getAttribute('data-setorAutuado')}`,
             origem: `${e.getAttribute('data-origem')}`,
@@ -154,13 +155,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const status = document.querySelector('#status')
         status.value = rncData.status
         const newSaveBtn = saveBtn.cloneNode(true);  // Clona o botão para remover os eventos antigos
+        newSaveBtn.textContent = 'teste'
         saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);  // Substitui o botão antigo
         newSaveBtn.addEventListener('click',()=>{
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
             modificandoRncPeloId(e)
-            atualizandoRncPeloId()
+            atualizandoRnc()        
             closeModal()
         })
         modal.style.display = "block";
@@ -199,20 +201,28 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // sitema que joga as rnc para o html
-    const divAnalise = document.querySelector('.kanban-cards')
-    rnc?.map((elementos)=>{
-        divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+    const divsKanban = document.querySelectorAll('.kanban-cards')
+    rnc?.map((elementoRnc)=>{
+        divsKanban.forEach((div)=>{
+            if(div.getAttribute('data-column') == elementoRnc.status){
+                div.appendChild(reloadCard(elementoRnc))
+            }
+        })
     })
 
     // sistema que adiciona a nova rnc no hmtl
-    function atualizandoRncPeloId (){
+    function atualizandoRnc (){
         rnc = JSON.parse(localStorage.getItem('rnc'))
-        while(divAnalise.firstChild){ // removendo todos as rnc do html
-            divAnalise.removeChild(divAnalise.firstChild)
-        }
-        rnc.map((elementos)=>{
-            divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+        divsKanban.forEach((div)=>{
+            while(div.firstChild){ // removendo todos as rnc do html
+                div.removeChild(div.firstChild)
+            }
+            rnc?.map((elementoRnc)=>{
+                if(div.getAttribute('data-column') == elementoRnc.status){
+                    div.appendChild(reloadCard(elementoRnc))
+                }
+            })
+            updateColumnCounts()
         })
     }
     
@@ -220,12 +230,8 @@ document.addEventListener('DOMContentLoaded', function () {
         rnc = JSON.parse(localStorage.getItem('rnc'))
         lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
         if(rnc.length > lengthRnc){
-            while(divAnalise.firstChild){ // removendo todos as rnc do html
-                divAnalise.removeChild(divAnalise.firstChild)
-            }
-            rnc.map((elementos)=>{
-                divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
-            })
+            atualizandoRnc()
+            showPopup()
             localStorage.setItem('lengthRnc', lengthRnc + 1)
         }
     }
