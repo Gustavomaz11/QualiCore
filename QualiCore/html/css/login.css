@@ -180,11 +180,15 @@ input[type="password"].error {
 
 @media only screen and (max-width: 480px) {
     .logo {
-        max-width: 190px;
+        max-width: 160px;
         height: auto;
     }
 
     header {
-        width: min-content;
+        width: 84vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
     }
 }
