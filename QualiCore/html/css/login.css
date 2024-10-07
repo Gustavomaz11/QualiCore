@@ -18,6 +18,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100vw;
     color: #333;  /* Ajustado para melhor contraste com o fundo claro */
 }
 
