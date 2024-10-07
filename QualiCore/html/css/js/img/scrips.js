@@ -6,6 +6,13 @@ const closePopup = document.getElementById('closePopup');
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
+
+const users = [
+    { email: 'admin@fsph.gov.br',nome:'Jorge', senha: '123456', setor:'Recursos Humanos' },
+    { email: 'gmtrindade@fsph.gov.br',nome:"Gustavo" ,senha: 'secreta1995', setor:'Tecnologia da Informação' },
+    { email: 'laraevlyn@fsph.gov.br',nome:"Lara" ,senha: '00112233', setor:'Tecnologia da Informação' },
+    { email: 'mateusfraga@fsph.gov.br',nome:'Matheus' ,senha: '44556677', setor:'Marketing' }
+  ]
 const nomeUsuarios = ['admin@fsph.gov.br', 'gmtrindade@fsph.gov.br', 'laraevlyn@fsph.gov.br', 'mateusfraga@fsph.gov.br'];
 const senhasUsuarios = ['123456', 'secreta1995', '00112233', '44556677'];
 
@@ -98,15 +105,26 @@ loginForm.addEventListener('submit', (e) => {
 
     let validacao = false;
 
-    for (let i = 0; i < nomeUsuarios.length; i++) {
-        if (email === nomeUsuarios[i] && senha === senhasUsuarios[i]) {
-            validacao = true;
+    users.map((user)=>{
+        if (validacao) return
+
+        if(email == user.email && senha== user.senha){
+            validacao = true
+            localStorage.setItem('login', JSON.stringify(user));
             window.location.href = 'homePage.html';
-            let nome = nomeUsuarios[i].split('@')[0];
-            localStorage.setItem('login', JSON.stringify({ nome, email: nomeUsuarios[i] }));
-            break;
+
         }
-    }
+    })
+
+    // for (let i = 0; i < nomeUsuarios.length; i++) {
+    //     if (email === nomeUsuarios[i] && senha === senhasUsuarios[i]) {
+    //         validacao = true;
+    //         window.location.href = 'homePage.html';
+    //         let nome = nomeUsuarios[i].split('@')[0];
+    //         localStorage.setItem('login', JSON.stringify({ nome, email: nomeUsuarios[i] }));
+    //         break;
+    //     }
+    // }
 
     if (!validacao) {
         emailInput.classList.add('error');
