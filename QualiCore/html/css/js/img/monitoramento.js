@@ -4,6 +4,7 @@ const closeBtn = document.getElementsByClassName("close")[0];
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 const modalFooter = document.querySelector('.modal-footer')
 const bodyTabelaRnc = document.querySelector('#bodyTabelaRNC')
+const linhaDoTempo = document.querySelector('.linhaDoTempo')
 
 //popup
 const popup = document.querySelector('.popup')
@@ -19,6 +20,10 @@ body.addEventListener('click',()=>{
 // pegando a rnc pelo localstorege
 let rnc = JSON.parse(localStorage.getItem('rnc'))
 let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+
+// pegando usuario
+let user = localStorage.getItem('login')
+user = JSON.parse(user)
 
 // sistema que lança o popup quando tem uma nova rnc
 const showPopup = ()=>{
@@ -113,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if(indexRnc.id == rnc.getAttribute('data-id')){
                 if(indexRnc.status != rnc.getAttribute('data-status')){
                     indexRnc.status = rnc.getAttribute('data-status')
+                    indexRnc.linhadotempo = rnc.getAttribute('data-linhadotempo')
                     modificacao = true
                 }
                 if(indexRnc.severidade != rnc.getAttribute('data-severidade')){
@@ -133,6 +139,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openModalOnDoubleClick(e) {
         const saveBtn = document.getElementById("saveBtn");
+        const data = new Date()
+        let dia = data.getDate() < 10?"0"+data.getDate():data.getDate()
+        let mes = data.getMonth() + 1 < 10?"0"+data.getMonth():data.getMonth()+1
+        let ano = data.getFullYear()
+        let hora = data.getHours() <10?"0"+data.getHours():data.getHours()
+        let minutos = data.getMinutes() < 10?"0"+data.getMinutes():data.getMinutes()
         const rncData = {
             numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
             dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
@@ -142,13 +154,25 @@ document.addEventListener('DOMContentLoaded', function () {
             status: `${e.getAttribute('data-status')}`,
             enquadramento: `${e.getAttribute('data-enquadramento')}`,
             setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
-            anexos:`${e.getAttribute('data-anexos')}`
+            anexos:`${e.getAttribute('data-anexos')}`,
+            linhadotempo: JSON.parse(e.getAttribute('data-linhadotempo'))
         };
+        console.log('click')
+        console.log( rncData.linhadotempo)
+        linhaDoTempo.innerHTML = ''
+        rncData.linhadotempo.map((mudanca,index)=>{
+            let div = document.createElement('div')
+            div.classList.add('itemLinhaDoTempo')
+            div.innerHTML = `
+                <div class="conteudoLinhaDoTempo">
+                    <p>${mudanca.data} - ${mudanca.hora}<br>${index  == 0?'Aberto por ' + mudanca.criador.nome: 'Status ' + mudanca.status + " por: " + mudanca.criador.nome}</p>
+                </div>
+            `
+            linhaDoTempo.appendChild(div)
+        })
         rncData.anexos = rncData.anexos.split(',')
-        console.log(rncData.anexos)
         bodyTabelaRnc.innerHTML = ''
         rncData.anexos.map((anexo)=>{
-            console.log(anexo)
             const tr = document.createElement('tr')
             tr.innerHTML = `
                 <td>${anexo}</td>
@@ -180,6 +204,14 @@ document.addEventListener('DOMContentLoaded', function () {
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
+            rncData.linhadotempo.push({
+                criador: {nome:user.nome,setor:user.setor},
+                hora: `${hora}:${minutos}`,
+                data: `${dia}/${mes}/${ano}`,
+                status: status.value
+            })
+            console.log(rncData.linhadotempo)
+            e.setAttribute('data-linhadotempo', JSON.stringify(rncData.linhadotempo))
             modificandoRncPeloId(e)
             atualizandoRnc()        
             closeModal()
@@ -290,6 +322,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 card.setAttribute(`data-${key}`, value?.nome)
             }else if (key === 'enquadramento')
                 card.setAttribute(`data-${key}`, value.join(', '))
+            else if(key === 'linhaDoTempo'){
+                card.setAttribute(`data-${key}`, JSON.stringify(value))
+            }
             else
                 card.setAttribute(`data-${key}`, value)
         })
