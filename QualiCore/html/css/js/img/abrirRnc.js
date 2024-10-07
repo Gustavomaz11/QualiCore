@@ -198,8 +198,8 @@ rncForm.addEventListener('submit',(evt)=>{
     }
 })
 
-localStorage.removeItem('rnc')
-localStorage.removeItem('lengthRnc')
+// localStorage.removeItem('rnc')
+// localStorage.removeItem('lengthRnc')
 
 
 
