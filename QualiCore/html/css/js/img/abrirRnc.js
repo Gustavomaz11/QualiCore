@@ -26,6 +26,8 @@ const setorAutuado = document.querySelector('#setorAutuado')
 let user = localStorage.getItem('login')
 user = JSON.parse(user)
 
+console.log(user)
+
 const rnc = {
     enquadramento:null,
     origem:null,
@@ -150,8 +152,6 @@ document.getElementById('anexo').addEventListener('change', function() {
     if (anexoTable.rows.length > 0) {
         anexoTable.closest('table').style.display = 'table'; // Mostra a tabela se houver anexos
     }
-    // rnc.anexos.push(this.files[0])
-    console.log(rnc)
 });
 
 // função para mandar as informação da rnc pro localstore
@@ -178,7 +178,14 @@ rncForm.addEventListener('submit',(evt)=>{
     rnc.setorAutuado = setorAutuado.value 
     rnc.data = `${dia}/${mes}/${ano}`
     rnc.hora = `${hora}:${minutos}`
-    rnc.criador = user
+    rnc.criador = {nome:user.nome,setor:user.setor}
+    rnc.linhaDoTempo = [] 
+    rnc.linhaDoTempo.push({
+        criador:rnc.criador,
+        data:rnc.data,
+        hora:rnc.hora,
+        status:'analise'
+    })
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
@@ -191,8 +198,8 @@ rncForm.addEventListener('submit',(evt)=>{
     }
 })
 
-// localStorage.removeItem('rnc')
-// localStorage.removeItem('lengthRnc')
+localStorage.removeItem('rnc')
+localStorage.removeItem('lengthRnc')
 
 
 
