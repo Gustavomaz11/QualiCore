@@ -41,6 +41,7 @@ const rnc = {
     status:'analise',
     tipo:null,
     setorAtuar:null,
+    linhaDoTempo:[],
     id:1
 }
 
@@ -181,7 +182,7 @@ rncForm.addEventListener('submit',(evt)=>{
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
-        rnc.id+= 1
+        rnc.id = Math.floor(Math.random() * 9999999999)
         rncs.push(rnc)
         localStorage.setItem('rnc', JSON.stringify(rncs))
     }else{
