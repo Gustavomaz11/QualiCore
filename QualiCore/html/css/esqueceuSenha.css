@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(145deg, var(--cor-principal), #B2D0E6);
+    background: linear-gradient(145deg, var(--cor-principal), #000);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(22, 64, 149, 0.5);
+    background: transparent;
 }
 
 .logo {
@@ -49,7 +49,7 @@ header {
 }
 
 .forgot-password-container {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.8);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: var(--sombra-padrao);

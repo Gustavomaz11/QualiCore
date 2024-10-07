@@ -14,7 +14,7 @@
 
 body {
     font-family: var(--fonte-principal);
-    background: linear-gradient(145deg, var(--cor-principal), #B2D0E6);  /* Alterado para a cor main solicitada */
+    background: linear-gradient(145deg, var(--cor-principal), #000);  /* Alterado para a cor main solicitada */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(22, 64, 149,0.5);  /* Alterado para a cor header solicitada */
+    background: transparent;  /* Alterado para a cor header solicitada */
 }
 
 h1 {
@@ -52,7 +52,7 @@ h1 {
 }
 
 .login-form {
-    background: rgba(255, 255, 255, 0.5);  /* Ajustado para branco para contrastar com o fundo cinza claro */
+    background: rgba(255, 255, 255, 0.8);  /* Ajustado para branco para contrastar com o fundo cinza claro */
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(22, 64, 149, 0.2);  /* Ajustado para usar a cor do header */

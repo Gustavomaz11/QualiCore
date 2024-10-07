@@ -19,7 +19,7 @@
 
 body {
     font-family: var(--fonte-principal);
-    background: linear-gradient(145deg, var(--cor-principal), #B2D0E6);
+    background: linear-gradient(145deg, var(--cor-principal), #000);
     min-height: 100vh;
     color: #E2E8F0;
     display: flex;
@@ -29,10 +29,11 @@ body {
 header {
     padding: 1rem 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background: rgba(22, 64, 149,0.5);
+    background: transparent;
     backdrop-filter: blur(10px);
+    width: 100vw;
 }
 
 .logo {
@@ -59,7 +60,7 @@ main {
 }
 
 .register-container {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.8);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
