@@ -191,7 +191,4 @@ input[type="password"].error {
         height: auto;
     }
 
-    body {
-        max-width: 415px;
-    }
 }
