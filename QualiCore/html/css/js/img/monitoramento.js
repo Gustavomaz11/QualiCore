@@ -3,6 +3,7 @@ const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 const modalFooter = document.querySelector('.modal-footer')
+const bodyTabelaRnc = document.querySelector('#bodyTabelaRNC')
 
 //popup
 const popup = document.querySelector('.popup')
@@ -14,6 +15,7 @@ body.addEventListener('click',()=>{
         popup.classList.add('show')
     }
 })
+
 // pegando a rnc pelo localstorege
 let rnc = JSON.parse(localStorage.getItem('rnc'))
 let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
@@ -131,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openModalOnDoubleClick(e) {
         const saveBtn = document.getElementById("saveBtn");
-        
         const rncData = {
             numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
             dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
@@ -140,9 +141,27 @@ document.addEventListener('DOMContentLoaded', function () {
             severidade: `${e.getAttribute("data-severidade")!= null?e.getAttribute("data-severidade"):null}`,
             status: `${e.getAttribute('data-status')}`,
             enquadramento: `${e.getAttribute('data-enquadramento')}`,
-            setorAtuar: `${e.getAttribute('data-setorAtuar')}`
+            setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
+            anexos:`${e.getAttribute('data-anexos')}`
         };
+        rncData.anexos = rncData.anexos.split(',')
+        console.log(rncData.anexos)
+        bodyTabelaRnc.innerHTML = ''
+        rncData.anexos.map((anexo)=>{
+            console.log(anexo)
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${anexo}</td>
+                <td>${e.getAttribute("data-data")}</td>
+                <td>
+                    <button class="verBtn">Ver</button>
+                    <button class="aceitarBtn">Aceitar</button>
+                    <button class="recusarBtn">Recusar</button>
+                </td>
+            `
 
+            bodyTabelaRnc.appendChild(tr)
+        })
         document.getElementById("rncNumber").textContent = rncData.numero;
         document.querySelector('#data-hora').value = rncData.dataHora;
         document.querySelector('#origem').value = rncData.origem;
