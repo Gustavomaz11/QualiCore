@@ -10,7 +10,8 @@ body {
 main {
     background-color: var(--cor-secundaria);
     width: 100% !important;
-    margin-left: 16.5rem;
+    background-attachment: fixed;
+    margin-left: 17rem;
     z-index: 10;
 }
 @media (min-width: 1024px) {
