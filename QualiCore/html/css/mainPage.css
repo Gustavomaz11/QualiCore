@@ -53,8 +53,11 @@ main section hr {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 85%;
+  width: calc(100% - 295px);
+  max-width: 85%; 
   z-index: 9;
+  top: 0;
+  right: 10px;
   
 }
 
