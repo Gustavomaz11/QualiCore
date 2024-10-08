@@ -4,14 +4,13 @@ body {
     display: flex;
     flex-direction: row;
     height: 100vh;
-    
+
 }
 
 main {
     background-color: var(--cor-secundaria);
     width: 100% !important;
-    background-attachment: fixed;
-    margin-left: 17rem;
+    margin-left: 16.5rem;
     z-index: 10;
 }
 @media (min-width: 1024px) {
