@@ -26,7 +26,30 @@ const setorAutuado = document.querySelector('#setorAutuado')
 let user = localStorage.getItem('login')
 user = JSON.parse(user)
 
-console.log(user)
+let funcionarios = localStorage.getItem('funcionarios')
+funcionarios = JSON.parse(funcionarios)
+
+function atualizandoUser (user,funcionarios){
+    funcionarios.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
+
+
+if(user == null)
+    window.location.href = 'index.html';
 
 const rnc = {
     enquadramento:null,
@@ -178,10 +201,10 @@ rncForm.addEventListener('submit',(evt)=>{
     rnc.setorAutuado = setorAutuado.value 
     rnc.data = `${dia}/${mes}/${ano}`
     rnc.hora = `${hora}:${minutos}`
-    rnc.criador = {nome:user.nome,setor:user.setor}
+    rnc.criador = user.nome
     rnc.linhaDoTempo = [] 
     rnc.linhaDoTempo.push({
-        criador:rnc.criador,
+        criador:{nome:rnc.criador,avatar:user.avatar,email:user.email,setor:user.setor},
         data:rnc.data,
         hora:rnc.hora,
         status:'analise'
