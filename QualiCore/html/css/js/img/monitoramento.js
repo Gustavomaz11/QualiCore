@@ -1,8 +1,8 @@
 // Modal
 const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
-const saveBtn = document.getElementById("saveBtn");
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
+const modalFooter = document.querySelector('.modal-footer')
 
 //popup
 const popup = document.querySelector('.popup')
@@ -18,9 +18,9 @@ body.addEventListener('click',()=>{
 let rnc = JSON.parse(localStorage.getItem('rnc'))
 let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
 
-// sistema que lança o popup quando tem uma nona rnc
-const vendoAtualizacaoNoRnc = ()=>{
-    if(rnc.length > lengthRnc){
+// sistema que lança o popup quando tem uma nova rnc
+const showPopup = ()=>{
+    if(rnc?.length > lengthRnc){
         popup.classList.add('show')
         localStorage.setItem('lengthRnc', lengthRnc + 1)
     }else{
@@ -30,9 +30,7 @@ const vendoAtualizacaoNoRnc = ()=>{
     lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
     
 }
-vendoAtualizacaoNoRnc()
-const timer = setInterval(vendoAtualizacaoNoRnc,5000)
-
+showPopup()
 
 // Sidebar Navigation
 const sidebarButtons = {
@@ -47,7 +45,6 @@ const sidebarButtons = {
     meuPerfilBtn: 'meuPerfil.html'
 };
 
-andamento
 
 Object.keys(sidebarButtons).forEach(buttonId => {
     const button = document.querySelector(`#${buttonId}`);
@@ -73,6 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleDragEnd(e) {
         this.classList.remove('dragging');
+        let element = e.target.parentNode
+        element.setAttribute('data-status',e.target.parentNode.parentNode.getAttribute('data-column'))
+        modificandoRncPeloId(element)
+        updateColumnCounts()
+        atualizandoRnc()
         columns.forEach(column => column.classList.remove('drag-over'));
     }
 
@@ -101,15 +103,44 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
+    function modificandoRncPeloId (rnc) {
+        let array = JSON.parse(localStorage.getItem('rnc'))
+        let modificacao = false
+        array.map((indexRnc)=>{
+            if(indexRnc.id == rnc.getAttribute('data-id')){
+                if(indexRnc.status != rnc.getAttribute('data-status')){
+                    indexRnc.status = rnc.getAttribute('data-status')
+                    modificacao = true
+                }
+                if(indexRnc.severidade != rnc.getAttribute('data-severidade')){
+                    indexRnc.severidade = rnc.getAttribute('data-severidade')
+                    modificacao = true
+                }
+                if(indexRnc.setorAtuar != rnc.getAttribute('data-setorAtuar')){
+                    indexRnc.setorAtuar = rnc.getAttribute('data-setorAtuar')
+                    modificacao =  true
+                }
+            }
+        })
+
+        if(modificacao){
+            localStorage.setItem('rnc', JSON.stringify(array))
+        }
+    }
+
     function openModalOnDoubleClick(e) {
+        const saveBtn = document.getElementById("saveBtn");
+        
         const rncData = {
-            numero: "001",
-            dataHora: '01/08/2024 - 14:00',
-            setorAutuante: 'Tecnologia da Informação',
-            origem: 'Reclamação',
-            severidade: 'Alta',
-            status: 'analise',
-            enquadramento: 'ABNT NBR ISO 9001:2015'
+            numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
+            dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
+            setorAutuante: `${e.getAttribute('data-setorAutuado')}`,
+            origem: `${e.getAttribute('data-origem')}`,
+            severidade: `${e.getAttribute("data-severidade")!= null?e.getAttribute("data-severidade"):null}`,
+            status: `${e.getAttribute('data-status')}`,
+            enquadramento: `${e.getAttribute('data-enquadramento')}`,
+            setorAtuar: `${e.getAttribute('data-setorAtuar')}`
         };
 
         document.getElementById("rncNumber").textContent = rncData.numero;
@@ -117,7 +148,23 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#origem').value = rncData.origem;
         document.querySelector('#setor-autuante').value = rncData.setorAutuante;
         document.querySelector('#enquadramento').value = rncData.enquadramento;
-        document.querySelector('#status').value = rncData.status
+        const setorAtuar = document.querySelector('#setor-atuar')
+        setorAtuar.value = rncData.setorAtuar
+        const severidade = document.querySelector('#severidade')
+        severidade.value = rncData.severidade
+        const status = document.querySelector('#status')
+        status.value = rncData.status
+        const newSaveBtn = saveBtn.cloneNode(true);  // Clona o botão para remover os eventos antigos
+        newSaveBtn.textContent = 'teste'
+        saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);  // Substitui o botão antigo
+        newSaveBtn.addEventListener('click',()=>{
+            e.setAttribute('data-status',status.value)
+            e.setAttribute('data-severidade',severidade.value)
+            e.setAttribute('data-setorAtuar',setorAtuar.value)
+            modificandoRncPeloId(e)
+            atualizandoRnc()        
+            closeModal()
+        })
         modal.style.display = "block";
     }
 
@@ -154,23 +201,37 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // sitema que joga as rnc para o html
-    const divAnalise = document.querySelector('.kanban-cards')
-    rnc.map((elementos)=>{
-        divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
+    const divsKanban = document.querySelectorAll('.kanban-cards')
+    rnc?.map((elementoRnc)=>{
+        divsKanban.forEach((div)=>{
+            if(div.getAttribute('data-column') == elementoRnc.status){
+                div.appendChild(reloadCard(elementoRnc))
+            }
+        })
     })
 
     // sistema que adiciona a nova rnc no hmtl
+    function atualizandoRnc (){
+        rnc = JSON.parse(localStorage.getItem('rnc'))
+        divsKanban.forEach((div)=>{
+            while(div.firstChild){ // removendo todos as rnc do html
+                div.removeChild(div.firstChild)
+            }
+            rnc?.map((elementoRnc)=>{
+                if(div.getAttribute('data-column') == elementoRnc.status){
+                    div.appendChild(reloadCard(elementoRnc))
+                }
+            })
+            updateColumnCounts()
+        })
+    }
+    
     function addRncAtualizado (){
         rnc = JSON.parse(localStorage.getItem('rnc'))
         lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
         if(rnc.length > lengthRnc){
-            while(divAnalise.firstChild){ // removendo todos as rnc do html
-                divAnalise.removeChild(divAnalise.firstChild)
-            }
-            rnc.map((elementos)=>{
-                divAnalise.insertBefore(reloadCard(elementos), divAnalise.firstChild)
-            })
+            atualizandoRnc()
+            showPopup()
             localStorage.setItem('lengthRnc', lengthRnc + 1)
         }
     }
@@ -205,12 +266,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function reloadCard(rnc) {
         const card = document.createElement('div');
+        Object.entries(rnc).forEach(([key, value]) => {
+            if(key === 'criador'){
+                card.setAttribute(`data-${key}`, value?.nome)
+            }else if (key === 'enquadramento')
+                card.setAttribute(`data-${key}`, value.join(', '))
+            else
+                card.setAttribute(`data-${key}`, value)
+        })
         card.className = 'kanban-card';
         card.draggable = true;
         card.innerHTML = `
-            <div class="kanban-cards" data-column="em-analise">
                 <div class="kanban-card" draggable="true">
-                    <div class="card-priority">...</div>
+                    <div class="card-priority">${rnc?.severidade!=null?rnc.severidade:'analise'}</div>
                     <div class="card-title">${rnc.enquadramento.length > 1?rnc.enquadramento[0] +" +"+rnc.enquadramento.length :rnc.enquadramento}</div>
                     <div class="card-description">Aberto por:  ${rnc.criador.nome}</div>
                     <div class="card-description">${rnc.setorAutuado}</div>
@@ -222,12 +290,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 </div>
-            </div>
         `;
     
         card.addEventListener('dragstart', handleDragStart);
         card.addEventListener('dragend', handleDragEnd);
-        card.addEventListener('dblclick', openModalOnDoubleClick);
+        card.addEventListener('dblclick', ()=>openModalOnDoubleClick(card));
     
         return card;
     }
@@ -241,12 +308,12 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = "none";
     }
 
-    closeBtn.onclick = closeModal;
+    // closeBtn.onclick = closeModal;
 
-    saveBtn.onclick = function () {
-        console.log("Salvando dados...");
-        closeModal();
-    };
+    // saveBtn.onclick = function () {
+    //     console.log("Salvando dados...");
+    //     closeModal();
+    // };
 
     window.onclick = function (event) {
         if (event.target === modal) {
