@@ -3,6 +3,8 @@ const modal = document.getElementById("rncDetailsModal");
 const closeBtn = document.getElementsByClassName("close")[0];
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 const modalFooter = document.querySelector('.modal-footer')
+const bodyTabelaRnc = document.querySelector('#bodyTabelaRNC')
+const linhaDoTempo = document.querySelector('.linhaDoTempo')
 
 //popup
 const popup = document.querySelector('.popup')
@@ -14,9 +16,63 @@ body.addEventListener('click',()=>{
         popup.classList.add('show')
     }
 })
+
 // pegando a rnc pelo localstorege
-let rnc = JSON.parse(localStorage.getItem('rnc'))
-let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+let rnc = localStorage.getItem('rnc')
+if (rnc!= null)
+    rnc = JSON.parse(rnc)
+let lengthRnc = localStorage.getItem('lengthRnc')
+if(lengthRnc != null)
+    lengthRnc = JSON.parse(lengthRnc)
+
+// pegando usuario
+let user = localStorage.getItem('login')
+if(user != null)
+    user = JSON.parse(user)
+
+const nome = document.querySelector('#nome')
+nome.innerText = user.nome?user.nome:'xxxx'
+
+// pegando funcionarios
+let funcionarios = localStorage.getItem('funcionarios')
+if(funcionarios != null)
+    funcionarios = JSON.parse(funcionarios)
+
+// limpando o cash
+const btnlimparCash = document.querySelector('#limparCash')
+btnlimparCash.addEventListener('click',()=>{
+    localStorage.removeItem('rnc')
+    localStorage.removeItem('lengthRnc')
+    console.log(funcionarios)
+    funcionarios.map((funcionario)=>{
+        funcionario.mensagens = []
+    })
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+})
+
+// função que deixa a cor da carta laranja caso tenha alguam msg não vista
+function atualizandoUser (user,funcionarios){
+    console.log(funcionarios)
+    funcionarios?.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
+
+
+if(user == null)
+    window.location.href = 'index.html';
 
 // sistema que lança o popup quando tem uma nova rnc
 const showPopup = ()=>{
@@ -103,6 +159,34 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    function pegarGestorDoSetor (siglaSetor){
+        const gestor = funcionarios.filter((indexUser)=>{
+            if(indexUser.setor.sigla == siglaSetor && indexUser.cargo == "Gerente Setor")
+                return indexUser
+        })
+
+        return gestor?gestor[0]:gestor
+    }
+
+    function addMsgProGestor (gestor,emissor,rnc,data,hora) {
+        gestor.mensagens.push({
+            emissor:{nome:emissor.nome, avatar:emissor.avatar},
+            lida:false,
+            menssagem:"Nova não conformidade identificada",
+            data,
+            hora,
+            rnc
+        })
+
+        funcionarios.map((funcionario)=>{
+            if(funcionario.email === gestor.email){
+                funcionario = gestor
+            }
+        })
+
+        localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+    }
+
     // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
     function modificandoRncPeloId (rnc) {
         let array = JSON.parse(localStorage.getItem('rnc'))
@@ -111,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if(indexRnc.id == rnc.getAttribute('data-id')){
                 if(indexRnc.status != rnc.getAttribute('data-status')){
                     indexRnc.status = rnc.getAttribute('data-status')
+                    indexRnc.linhadotempo = rnc.getAttribute('data-linhadotempo')
                     modificacao = true
                 }
                 if(indexRnc.severidade != rnc.getAttribute('data-severidade')){
@@ -131,7 +216,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openModalOnDoubleClick(e) {
         const saveBtn = document.getElementById("saveBtn");
-        
+        const data = new Date()
+        let dia = data.getDate() < 10?"0"+data.getDate():data.getDate()
+        let mes = data.getMonth() + 1 < 10?"0"+data.getMonth():data.getMonth()+1
+        let ano = data.getFullYear()
+        let hora = data.getHours() <10?"0"+data.getHours():data.getHours()
+        let minutos = data.getMinutes() < 10?"0"+data.getMinutes():data.getMinutes()
+        let fullHora =  `${hora}:${minutos}`
+        let fullData =  `${dia}/${mes}/${ano}`
         const rncData = {
             numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
             dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
@@ -140,9 +232,38 @@ document.addEventListener('DOMContentLoaded', function () {
             severidade: `${e.getAttribute("data-severidade")!= null?e.getAttribute("data-severidade"):null}`,
             status: `${e.getAttribute('data-status')}`,
             enquadramento: `${e.getAttribute('data-enquadramento')}`,
-            setorAtuar: `${e.getAttribute('data-setorAtuar')}`
+            setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
+            anexos:`${e.getAttribute('data-anexos')}`,
+            linhadotempo: JSON.parse(e.getAttribute('data-linhadotempo'))
         };
+        console.log(rncData.linhadotempo)
+        linhaDoTempo.innerHTML = ''
+        rncData.linhadotempo.map((mudanca,index)=>{
+            let div = document.createElement('div')
+            div.classList.add('itemLinhaDoTempo')
+            div.innerHTML = `
+                <div class="conteudoLinhaDoTempo">
+                    <p>${mudanca.data} - ${mudanca.hora}<br>${index  == 0?'Aberto por ' + mudanca.criador.nome: 'Status ' + mudanca.status + " por: " + mudanca.criador.nome}</p>
+                </div>
+            `
+            linhaDoTempo.appendChild(div)
+        })
+        rncData.anexos = rncData.anexos.split(',')
+        bodyTabelaRnc.innerHTML = ''
+        rncData.anexos.map((anexo)=>{
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+                <td>${anexo}</td>
+                <td>${e.getAttribute("data-data")}</td>
+                <td>
+                    <button class="verBtn">Ver</button>
+                    <button class="aceitarBtn">Aceitar</button>
+                    <button class="recusarBtn">Recusar</button>
+                </td>
+            `
 
+            bodyTabelaRnc.appendChild(tr)
+        })
         document.getElementById("rncNumber").textContent = rncData.numero;
         document.querySelector('#data-hora').value = rncData.dataHora;
         document.querySelector('#origem').value = rncData.origem;
@@ -161,8 +282,20 @@ document.addEventListener('DOMContentLoaded', function () {
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
+            let gestor = pegarGestorDoSetor(setorAtuar.value)
+            rncData.linhadotempo.push({
+                criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                hora:fullHora,
+                data: fullData,
+                status: status.value
+            })
+            if(rncData.setorAtuar != setorAtuar.value) // checando se o setor mudou para não ter um span de msg
+                addMsgProGestor(gestor,user,rncData,fullData, fullHora)
+            
+            e.setAttribute('data-linhadotempo', JSON.stringify(rncData.linhadotempo))
             modificandoRncPeloId(e)
-            atualizandoRnc()        
+            atualizandoRnc()
+            console.log(funcionarios)
             closeModal()
         })
         modal.style.display = "block";
@@ -271,6 +404,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 card.setAttribute(`data-${key}`, value?.nome)
             }else if (key === 'enquadramento')
                 card.setAttribute(`data-${key}`, value.join(', '))
+            else if(key === 'linhaDoTempo'){
+                card.setAttribute(`data-${key}`, JSON.stringify(value))
+            }
             else
                 card.setAttribute(`data-${key}`, value)
         })
