@@ -12,6 +12,9 @@ const meuPerfilBtn = document.querySelector('#meuPerfilBtn')
 let user = localStorage.getItem('login')
 user = JSON.parse(user)
 
+if(user == null)
+    window.location.href = 'index.html';
+
 // pegano os funcionarios
 let funcionarios = localStorage.getItem('funcionarios')
 funcionarios = JSON.parse(funcionarios)

@@ -9,6 +9,9 @@ let user = localStorage.getItem('login')
 if(user != null)
     user = JSON.parse(user)
 
+if(user == null)
+    window.location.href = 'index.html';
+
 const nome = document.querySelector('#nome')
 nome.innerText = user.nome?user.nome:'xxxx'
 
@@ -27,10 +30,10 @@ btnlimparCash.addEventListener('click',()=>{
         funcionario.mensagens = []
     })
     localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+    localStorage.removeItem('login')
+    window.location.href = 'index.html';
 })
 
-if(user == null)
-    window.location.href = 'index.html';
 
 // função que deixa a cor da carta laranja caso tenha alguam msg não vista
 function atualizandoUser (user,funcionarios){
