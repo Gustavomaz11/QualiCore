@@ -25,6 +25,33 @@ let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
 let user = localStorage.getItem('login')
 user = JSON.parse(user)
 
+// pegando funcionarios
+let funcionarios = localStorage.getItem('funcionarios')
+funcionarios = JSON.parse(funcionarios)
+
+// função que deixa a cor da carta laranja caso tenha alguam msg não vista
+function atualizandoUser (user,funcionarios){
+    funcionarios.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
+
+
+if(user == null)
+    window.location.href = 'index.html';
+
 // sistema que lança o popup quando tem uma nova rnc
 const showPopup = ()=>{
     if(rnc?.length > lengthRnc){
@@ -110,6 +137,34 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    function pegarGestorDoSetor (siglaSetor){
+        const gestor = funcionarios.filter((indexUser)=>{
+            if(indexUser.setor.sigla == siglaSetor && indexUser.cargo == "Gerente Setor")
+                return indexUser
+        })
+
+        return gestor?gestor[0]:gestor
+    }
+
+    function addMsgProGestor (gestor,emissor,rnc,data,hora) {
+        gestor.mensagens.push({
+            emissor:{nome:emissor.nome, avatar:emissor.avatar},
+            lida:false,
+            menssagem:"Nova não conformidade identificada",
+            data,
+            hora,
+            rnc
+        })
+
+        funcionarios.map((funcionario)=>{
+            if(funcionario.email === gestor.email){
+                funcionario = gestor
+            }
+        })
+
+        localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+    }
+
     // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
     function modificandoRncPeloId (rnc) {
         let array = JSON.parse(localStorage.getItem('rnc'))
@@ -145,6 +200,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let ano = data.getFullYear()
         let hora = data.getHours() <10?"0"+data.getHours():data.getHours()
         let minutos = data.getMinutes() < 10?"0"+data.getMinutes():data.getMinutes()
+        let fullHora =  `${hora}:${minutos}`
+        let fullData =  `${dia}/${mes}/${ano}`
         const rncData = {
             numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
             dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
@@ -157,8 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
             anexos:`${e.getAttribute('data-anexos')}`,
             linhadotempo: JSON.parse(e.getAttribute('data-linhadotempo'))
         };
-        console.log('click')
-        console.log( rncData.linhadotempo)
+        console.log(rncData.linhadotempo)
         linhaDoTempo.innerHTML = ''
         rncData.linhadotempo.map((mudanca,index)=>{
             let div = document.createElement('div')
@@ -204,16 +260,20 @@ document.addEventListener('DOMContentLoaded', function () {
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
+            let gestor = pegarGestorDoSetor(setorAtuar.value)
             rncData.linhadotempo.push({
-                criador: {nome:user.nome,setor:user.setor},
-                hora: `${hora}:${minutos}`,
-                data: `${dia}/${mes}/${ano}`,
+                criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                hora:fullHora,
+                data: fullData,
                 status: status.value
             })
-            console.log(rncData.linhadotempo)
+            if(rncData.setorAtuar != setorAtuar.value) // checando se o setor mudou para não ter um span de msg
+                addMsgProGestor(gestor,user,rncData,fullData, fullHora)
+            
             e.setAttribute('data-linhadotempo', JSON.stringify(rncData.linhadotempo))
             modificandoRncPeloId(e)
-            atualizandoRnc()        
+            atualizandoRnc()
+            console.log(funcionarios)
             closeModal()
         })
         modal.style.display = "block";
