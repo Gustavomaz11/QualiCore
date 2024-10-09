@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="kanban-card" draggable="true">
                     <div class="card-priority">${rnc?.severidade!=null?rnc.severidade:'analise'}</div>
                     <div class="card-title">${rnc.enquadramento.length > 1?rnc.enquadramento[0] +" +"+rnc.enquadramento.length :rnc.enquadramento}</div>
-                    <div class="card-description">Aberto por:  ${rnc.criador.nome}</div>
+                    <div class="card-description">Aberto por:  ${rnc.criador}</div>
                     <div class="card-description">${rnc.setorAutuado}</div>
                     <div class="card-description">${rnc.data} - ${rnc.hora}</div>
                     <div class="card-footer">
