@@ -399,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function reloadCard(rnc) {
         const card = document.createElement('div');
-        console.log('000000000')
         if(typeof rnc.linhaDoTempo == 'string')
             rnc.linhaDoTempo = JSON.parse(rnc.linhaDoTempo)
         Object.entries(rnc).forEach(([key, value]) => {
