@@ -410,6 +410,14 @@ document.addEventListener('DOMContentLoaded', function () {
             else
                 card.setAttribute(`data-${key}`, value)
         })
+        let linhaDoTempo = JSON.parse(rnc.linhadotempo)
+        let semReptidos = []
+        linhaDoTempo.forEach((edicoes,index)=>{
+            if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
+                semReptidos.push(edicoes)
+            }
+        })
+        rnc['pessoasAnexadas'] = semReptidos
         card.className = 'kanban-card';
         card.draggable = true;
         card.innerHTML = `
@@ -417,12 +425,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="card-priority">${rnc?.severidade!=null?rnc.severidade:'analise'}</div>
                     <div class="card-title">${rnc.enquadramento.length > 1?rnc.enquadramento[0] +" +"+rnc.enquadramento.length :rnc.enquadramento}</div>
                     <div class="card-description">Aberto por:  ${rnc.criador}</div>
-                    <div class="card-description">${rnc.setorAutuado}</div>
+                    <div class="card-description">Setor: ${rnc.setorAutuado}</div>
                     <div class="card-description">${rnc.data} - ${rnc.hora}</div>
                     <div class="card-footer">
                         <div class="assignees">
-                            <div class="assignee">DA</div>
-                            <div class="assignee">WS</div>s
+                            ${rnc.pessoasAnexadas?.map(pessoas => 
+                            `<div class="assignee" title="${pessoas.criador.nome}">${pessoas.criador.avatar}</div>`
+                        ).join('')}
                         </div>
                     </div>
                 </div>
