@@ -14,19 +14,21 @@
 
 body {
     font-family: var(--fonte-principal);
-    background: linear-gradient(145deg, var(--cor-principal), #B2D0E6);  /* Alterado para a cor main solicitada */
+    background: linear-gradient(145deg, var(--cor-principal), #000);  /* Alterado para a cor main solicitada */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100vw;
     color: #333;  /* Ajustado para melhor contraste com o fundo claro */
 }
 
 header {
     padding: 1rem 2rem;
+    width: 96.6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(22, 64, 149,0.5);  /* Alterado para a cor header solicitada */
+    background: transparent;  /* Alterado para a cor header solicitada */
 }
 
 h1 {
@@ -46,10 +48,11 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 2rem;
+    
 }
 
 .login-form {
-    background: rgba(255, 255, 255, 0.5);  /* Ajustado para branco para contrastar com o fundo cinza claro */
+    background: rgba(255, 255, 255, 0.8);  /* Ajustado para branco para contrastar com o fundo cinza claro */
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 20px rgba(22, 64, 149, 0.2);  /* Ajustado para usar a cor do header */
@@ -89,7 +92,7 @@ input:focus {
 button {
     width: 100%;
     padding: 0.75rem;
-    background: #164095;  /* Alterado para a cor do header */
+    background: linear-gradient(90deg, #60A5FA, #818CF8);
     color: white;
     border: none;
     border-radius: 0.5rem;
@@ -100,10 +103,23 @@ button {
     overflow: hidden;
 }
 
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+}
+
+.signup-link {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .signup-link a {
     color: #164095;  /* Alterado para a cor do header */
     text-decoration: none;
     font-weight: 500;
+    
 }
 
 .particles {
@@ -160,4 +176,19 @@ input[type="password"].error {
 
 .popup-content button:hover {
     background-color: #0f2d6a;
+}
+
+@media only screen and (max-width: 480px) {
+    .logo {
+        max-width: 160px;
+        height: auto;
+    }
+
+    header {
+        width: 84vw;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
 }
