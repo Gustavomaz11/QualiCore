@@ -8,6 +8,37 @@ const usuariosBtn = document.querySelector('#usuariosBtn')
 const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
 const meuPerfilBtn = document.querySelector('#meuPerfilBtn')
 
+// pegano o user
+let user = localStorage.getItem('login')
+user = JSON.parse(user)
+
+// pegano os funcionarios
+let funcionarios = localStorage.getItem('funcionarios')
+funcionarios = JSON.parse(funcionarios)
+
+function atualizandoUser (user,funcionarios){
+    funcionarios.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
+
+// jeito de atualizar o user
+funcionarios.map((funcionario)=>{
+    if(funcionario.email == user.email)
+        user = funcionario
+})
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
 const urlSidebar = [
@@ -68,34 +99,49 @@ function renderNotifications() {
     const notificationsList = document.getElementById('notificationsList');
     notificationsList.innerHTML = '';
 
-    notifications.forEach(notification => {
-        const card = document.createElement('div');
-        card.className = `notification-card ${notification.unread ? 'unread' : ''}`;
+    
+    user?.mensagens.map((mensagem)=>{
+        let semReptidos = []
+        mensagem.rnc.linhadotempo.forEach((edicoes,index)=>{
+            console.log(semReptidos[index])
+            if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
+                semReptidos.push(edicoes)
+            }
         
-        const statusText = notification.status === 'pending' ? 'Pendente' : 'Em andamento';
-        const statusClass = notification.status === 'pending' ? 'status-pending' : 'status-progress';
+        })
+
+        mensagem["pessoasAnexadas"] = semReptidos
+        console.log(mensagem)
+    })
+
+    user?.mensagens.forEach(notification => {
+        const card = document.createElement('div');
+        card.className = `notification-card ${notification.lida ? '' : 'unread'}`;
+        
+        const statusText = notification.rnc.status
+        const statusClass = notification.rnc.status
 
         card.innerHTML = `
             <div class="notification-header">
                 <div class="sender-info">
-                    <div class="avatar">${notification.sender.avatar}</div>
+                    <div class="avatar">${notification.emissor.avatar}</div>
                     <div class="sender-details">
-                        <span class="sender-name">${notification.sender.name}</span>
-                        <span class="notification-time">${notification.time}</span>
+                        <span class="sender-name">${notification.emissor.nome}</span>
+                        <span class="notification-time">${notification.data + " - " + notification.hora}</span>
                     </div>
                 </div>
-                <span class="nc-number">${notification.ncNumber}</span>
+                <span class="nc-number">${notification.rnc.numero}</span>
             </div>
             <div class="notification-content">
-                ${notification.content}
+                ${notification.menssagem}
             </div>
             <div class="involved-users">
                 <div class="involved-avatars">
-                    ${notification.involvedUsers.map(user => 
-                        `<div class="involved-avatar" title="${user.name}">${user.initials}</div>`
+                    ${notification.pessoasAnexadas?.map(pessoas => 
+                        `<div class="involved-avatar" title="${pessoas.criador.nome}">${pessoas.criador.avatar}</div>`
                     ).join('')}
                 </div>
-                <span class="involved-count">${notification.involvedUsers.length} envolvidos</span>
+                <span class="involved-count">${notification.pessoasAnexadas?.length} envolvidos</span>
             </div>
             <div class="notification-footer">
                 <span class="status-badge ${statusClass}">${statusText}</span>
