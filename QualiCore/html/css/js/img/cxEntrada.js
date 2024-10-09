@@ -102,7 +102,7 @@ function renderNotifications() {
     
     user?.mensagens.map((mensagem)=>{
         let semReptidos = []
-        mensagem.rnc.linhadotempo.forEach((edicoes,index)=>{
+        mensagem.rnc.linhaDoTempo.forEach((edicoes,index)=>{
             console.log(semReptidos[index])
             if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
                 semReptidos.push(edicoes)

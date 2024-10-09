@@ -4,7 +4,7 @@ const closeBtn = document.getElementsByClassName("close")[0];
 const metodoOutroTexto = document.getElementById("metodoOutroTexto");
 const modalFooter = document.querySelector('.modal-footer')
 const bodyTabelaRnc = document.querySelector('#bodyTabelaRNC')
-const linhaDoTempo = document.querySelector('.linhaDoTempo')
+const DivlinhaDoTempo = document.querySelector('.linhaDoTempo')
 
 //popup
 const popup = document.querySelector('.popup')
@@ -52,7 +52,6 @@ btnlimparCash.addEventListener('click',()=>{
 
 // função que deixa a cor da carta laranja caso tenha alguam msg não vista
 function atualizandoUser (user,funcionarios){
-    console.log(funcionarios)
     funcionarios?.map((funcionario)=>{
         if(funcionario.email == user.email){
             funcionario.mensagens.map((menssagem)=>{
@@ -195,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if(indexRnc.id == rnc.getAttribute('data-id')){
                 if(indexRnc.status != rnc.getAttribute('data-status')){
                     indexRnc.status = rnc.getAttribute('data-status')
-                    indexRnc.linhadotempo = rnc.getAttribute('data-linhadotempo')
+                    indexRnc.linhaDoTempo = rnc.getAttribute('data-linhaDoTempo')
                     modificacao = true
                 }
                 if(indexRnc.severidade != rnc.getAttribute('data-severidade')){
@@ -234,11 +233,12 @@ document.addEventListener('DOMContentLoaded', function () {
             enquadramento: `${e.getAttribute('data-enquadramento')}`,
             setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
             anexos:`${e.getAttribute('data-anexos')}`,
-            linhadotempo: JSON.parse(e.getAttribute('data-linhadotempo'))
+            linhaDoTempo: JSON.parse(e.getAttribute('data-linhaDoTempo'))
         };
-        console.log(rncData.linhadotempo)
-        linhaDoTempo.innerHTML = ''
-        rncData.linhadotempo.map((mudanca,index)=>{
+        console.log(rncData.linhaDoTempo)
+        let {linhaDoTempo} = rncData
+        DivlinhaDoTempo.innerHTML = ''
+        linhaDoTempo.map((mudanca,index)=>{
             let div = document.createElement('div')
             div.classList.add('itemLinhaDoTempo')
             div.innerHTML = `
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p>${mudanca.data} - ${mudanca.hora}<br>${index  == 0?'Aberto por ' + mudanca.criador.nome: 'Status ' + mudanca.status + " por: " + mudanca.criador.nome}</p>
                 </div>
             `
-            linhaDoTempo.appendChild(div)
+            DivlinhaDoTempo.appendChild(div)
         })
         rncData.anexos = rncData.anexos.split(',')
         bodyTabelaRnc.innerHTML = ''
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
             let gestor = pegarGestorDoSetor(setorAtuar.value)
-            rncData.linhadotempo.push({
+            rncData.linhaDoTempo.push({
                 criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
                 hora:fullHora,
                 data: fullData,
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if(rncData.setorAtuar != setorAtuar.value) // checando se o setor mudou para não ter um span de msg
                 addMsgProGestor(gestor,user,rncData,fullData, fullHora)
             
-            e.setAttribute('data-linhadotempo', JSON.stringify(rncData.linhadotempo))
+            e.setAttribute('data-linhaDoTempo', JSON.stringify(rncData.linhaDoTempo))
             modificandoRncPeloId(e)
             atualizandoRnc()
             console.log(funcionarios)
@@ -399,6 +399,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function reloadCard(rnc) {
         const card = document.createElement('div');
+        console.log('000000000')
+        if(typeof rnc.linhaDoTempo == 'string')
+            rnc.linhaDoTempo = JSON.parse(rnc.linhaDoTempo)
         Object.entries(rnc).forEach(([key, value]) => {
             if(key === 'criador'){
                 card.setAttribute(`data-${key}`, value?.nome)
@@ -410,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function () {
             else
                 card.setAttribute(`data-${key}`, value)
         })
-        let linhaDoTempo = JSON.parse(rnc.linhadotempo)
+        let linhaDoTempo = rnc.linhaDoTempo
         let semReptidos = []
         linhaDoTempo.forEach((edicoes,index)=>{
             if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
