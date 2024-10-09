@@ -87,6 +87,10 @@ textarea {
     resize: vertical;
 }
 
+.novaMenssagem{
+    background-color: rgb(255, 89, 0);
+}
+
 .submitBtn {
     background-color: var(--cor-principal);
     color: white;
