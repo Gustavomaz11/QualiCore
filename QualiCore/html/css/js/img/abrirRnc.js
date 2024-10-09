@@ -23,11 +23,33 @@ const acaoImediata = document.querySelector("#acaoImediata")
 const investigacao = document.querySelector('#investigacao')
 const setorAutuado = document.querySelector('#setorAutuado')
 
+// pegando usuario
 let user = localStorage.getItem('login')
-user = JSON.parse(user)
+if(user != null)
+    user = JSON.parse(user)
 
+const nome = document.querySelector('#nome')
+nome.innerText = user.nome?user.nome:'xxxx'
+
+// pegando funcionarios
 let funcionarios = localStorage.getItem('funcionarios')
-funcionarios = JSON.parse(funcionarios)
+if(funcionarios != null)
+    funcionarios = JSON.parse(funcionarios)
+
+// limpando o cash
+const btnlimparCash = document.querySelector('#limparCash')
+btnlimparCash.addEventListener('click',()=>{
+    localStorage.removeItem('rnc')
+    localStorage.removeItem('lengthRnc')
+    console.log(funcionarios)
+    funcionarios.map((funcionario)=>{
+        funcionario.mensagens = []
+    })
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+})
+
+if(user == null)
+    window.location.href = 'index.html';
 
 function atualizandoUser (user,funcionarios){
     funcionarios.map((funcionario)=>{

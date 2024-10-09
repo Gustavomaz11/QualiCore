@@ -18,20 +18,42 @@ body.addEventListener('click',()=>{
 })
 
 // pegando a rnc pelo localstorege
-let rnc = JSON.parse(localStorage.getItem('rnc'))
-let lengthRnc = JSON.parse(localStorage.getItem('lengthRnc'))
+let rnc = localStorage.getItem('rnc')
+if (rnc!= null)
+    rnc = JSON.parse(rnc)
+let lengthRnc = localStorage.getItem('lengthRnc')
+if(lengthRnc != null)
+    lengthRnc = JSON.parse(lengthRnc)
 
 // pegando usuario
 let user = localStorage.getItem('login')
-user = JSON.parse(user)
+if(user != null)
+    user = JSON.parse(user)
+
+const nome = document.querySelector('#nome')
+nome.innerText = user.nome?user.nome:'xxxx'
 
 // pegando funcionarios
 let funcionarios = localStorage.getItem('funcionarios')
-funcionarios = JSON.parse(funcionarios)
+if(funcionarios != null)
+    funcionarios = JSON.parse(funcionarios)
+
+// limpando o cash
+const btnlimparCash = document.querySelector('#limparCash')
+btnlimparCash.addEventListener('click',()=>{
+    localStorage.removeItem('rnc')
+    localStorage.removeItem('lengthRnc')
+    console.log(funcionarios)
+    funcionarios.map((funcionario)=>{
+        funcionario.mensagens = []
+    })
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+})
 
 // função que deixa a cor da carta laranja caso tenha alguam msg não vista
 function atualizandoUser (user,funcionarios){
-    funcionarios.map((funcionario)=>{
+    console.log(funcionarios)
+    funcionarios?.map((funcionario)=>{
         if(funcionario.email == user.email){
             funcionario.mensagens.map((menssagem)=>{
                 if(menssagem.lida == false){
