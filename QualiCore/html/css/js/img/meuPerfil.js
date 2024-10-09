@@ -36,6 +36,8 @@ function toggleEdit() {
     const editButton = document.querySelector('.edit-button');
     const editableElements = document.querySelectorAll('.info-value');
     const fullNameDisplay = document.getElementById('fullNameDisplay');
+    const username = document.getElementById('username')
+    const nomeUsuario = document.getElementById('nomeUsuario')
 
     if (isEditing) {
         profileCard.classList.add('editing');
@@ -57,6 +59,9 @@ function toggleEdit() {
         editableElements.forEach(element => {
             element.contentEditable = false;
         });
+
+        fullNameDisplay.innerText = username.innerText
+        nomeUsuario.innerText = username.innerText
         // Aqui você poderia adicionar a lógica para salvar as alterações no servidor
     }
 }
@@ -74,7 +79,7 @@ function changeProfilePicture(input) {
 }
 
 // Função para alternar o status (apenas para demonstração)
-document.getElementById('status').addEventListener('click', function() {
+/*document.getElementById('status').addEventListener('click', function() {
     if (isEditing) {
         const statusElement = this;
         const currentStatus = statusElement.textContent.toLowerCase();
@@ -98,4 +103,4 @@ document.getElementById('status').addEventListener('click', function() {
         statusElement.classList.add(statusClasses[nextStatus]);
         statusElement.textContent = nextStatus.charAt(0).toUpperCase() + nextStatus.slice(1);
     }
-});
+});*/

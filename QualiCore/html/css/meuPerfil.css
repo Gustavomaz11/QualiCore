@@ -76,9 +76,14 @@
 
 .profile-content {
     padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .info-group {
+    flex: 0 0 48%; 
     margin-bottom: 1.5rem;
 }
 
