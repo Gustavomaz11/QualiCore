@@ -9,13 +9,33 @@ const ctx = canvas.getContext('2d');
 
 const users = [
     {email: 'admin@fsph.gov.br',nome:'Jorge', avatar:"JO",senha: '123456', setor:{nome:"Recursos Humanos",id:1,sigla:"RH"}, cargo:"Gerente Geral", mensagens:[] },
+    {email: 'joao@fsph.gov.br', nome:'João', avatar:"JO", senha: '123456', setor:{nome:"Recursos Humanos", id:1, sigla:"RH"}, cargo:"Coordenador de Recrutamento", mensagens:[] },
+    {email: 'maria@fsph.gov.br', nome:'Maria', avatar:"MA", senha: '654321', setor:{nome:"Recursos Humanos", id:1, sigla:"RH"}, cargo:"Assistente de RH", mensagens:[] },
+    {email: 'lucas@fsph.gov.br', nome:'Lucas', avatar:"LU", senha: 'abcdef', setor:{nome:"Recursos Humanos", id:1, sigla:"RH"}, cargo:"Analista de Desenvolvimento Humano", mensagens:[] },
     {email: 'gmtrindade@fsph.gov.br',nome:"Gustavo",avatar:"GU" ,senha: 'secreta1995', setor:{nome:"Tecnologia da Informação",id:2,sigla:"TI"}, cargo:"Gerente Setor", mensagens:[] },
+    {email: 'carlos@fsph.gov.br', nome:'Carlos', avatar:"CA", senha: '123456', setor:{nome:"Tecnologia da Informação", id:2, sigla:"TI"}, cargo:"Desenvolvedor Front-end", mensagens:[] },
+    {email: 'ana@fsph.gov.br', nome:'Ana', avatar:"AN", senha: '654321', setor:{nome:"Tecnologia da Informação", id:2, sigla:"TI"}, cargo:"Analista de Suporte", mensagens:[] },
+    {email: 'pedro@fsph.gov.br', nome:'Pedro', avatar:"PE", senha: 'abcdef', setor:{nome:"Tecnologia da Informação", id:2, sigla:"TI"}, cargo:"Gerente de Infraestrutura", mensagens:[] },
     {email: 'laraevlyn@fsph.gov.br',nome:"Lara",avatar:"LA" ,senha: '00112233', setor:{nome:"Enfermaria",id:3,sigla:"ENF"}, cargo:"Gerente Setor", mensagens:[] },
-    {email: 'mateusfraga@fsph.gov.br',nome:'Matheus', avatar:"MA" ,senha: '44556677', setor:{nome:"Consultorio",id:4,sigla:"CONS"}, cargo:"Gerente Setor", mensagens:[] },
-    {email:'adsonLu@fsph.gov.br', nome:"Adson", avatar:"AD", senha:"40028922", setor:{nome:"Ambulatorio",id:5,sigla:"AMB"}, cargo:"Gerente Setor", mensagens:[]},
-    {email:'neymar@fsph.gov.br', nome:"Neymar", avatar:"NY", senha:"neymar123", setor:{nome:"Recepcao",id:6,sigla:"RECP"}, cargo:"Gerente Setor", mensagens:[]},
-    {email:'messi@fsph.gov.br', nome:"Messi", avatar:"ME", senha:"messi123", setor:{nome:"Labolatorio",id:7,sigla:"LAB"}, cargo:"Gerente Setor", mensagens:[]},
-    {email:'critianoRo@fsph.gov.br', nome:"Cristiano", avatar:"CR", senha:"cristiano", setor:{nome:"Labolatorio",id:7,sigla:"LAB"}, cargo:"Enfermeiro", mensagens:[]}
+    {email: 'fernanda@fsph.gov.br', nome:'Fernanda', avatar:"FE", senha: '123456', setor:{nome:"Enfermaria", id:3, sigla:"ENF"}, cargo:"Enfermeira Chefe", mensagens:[] },
+    {email: 'roberto@fsph.gov.br', nome:'Roberto', avatar:"RO", senha: '654321', setor:{nome:"Enfermaria", id:3, sigla:"ENF"}, cargo:"Técnico de Enfermagem", mensagens:[] },
+    {email: 'sara@fsph.gov.br', nome:'Sara', avatar:"SA", senha: 'abcdef', setor:{nome:"Enfermaria", id:3, sigla:"ENF"}, cargo:"Auxiliar de Enfermagem", mensagens:[] },
+    {email: 'mateusfraga@fsph.gov.br',nome:'Matheus', avatar:"MA" ,senha: '44556677', setor:{nome:"Consultório",id:4,sigla:"CONS"}, cargo:"Gerente Setor", mensagens:[] },
+    {email: 'juliana@fsph.gov.br', nome:'Juliana', avatar:"JU", senha: '123456', setor:{nome:"Consultório", id:4, sigla:"CONS"}, cargo:"Médica", mensagens:[] },
+    {email: 'marcos@fsph.gov.br', nome:'Marcos', avatar:"MA", senha: '654321', setor:{nome:"Consultório", id:4, sigla:"CONS"}, cargo:"Dentista", mensagens:[] },
+    {email: 'amanda@fsph.gov.br', nome:'Amanda', avatar:"AM", senha: 'abcdef', setor:{nome:"Consultório", id:4, sigla:"CONS"}, cargo:"Fisioterapeuta", mensagens:[] },
+    {email:'adsonLu@fsph.gov.br', nome:"Adson", avatar:"AD", senha:"40028922", setor:{nome:"Ambulatório",id:5,sigla:"AMB"}, cargo:"Gerente Setor", mensagens:[]},
+    {email: 'claudia@fsph.gov.br', nome:'Cláudia', avatar:"CL", senha: '123456', setor:{nome:"Ambulatório", id:5, sigla:"AMB"}, cargo:"Enfermeira", mensagens:[] },
+    {email: 'ricardo@fsph.gov.br', nome:'Ricardo', avatar:"RI", senha: '654321', setor:{nome:"Ambulatório", id:5, sigla:"AMB"}, cargo:"Técnico de Enfermagem", mensagens:[] },
+    {email: 'paula@fsph.gov.br', nome:'Paula', avatar:"PA", senha: 'abcdef', setor:{nome:"Ambulatório", id:5, sigla:"AMB"}, cargo:"Auxiliar de Enfermagem", mensagens:[] },
+    {email:'neymar@fsph.gov.br', nome:"Neymar", avatar:"NY", senha:"neymar123", setor:{nome:"Recepção",id:6,sigla:"RECP"}, cargo:"Gerente Setor", mensagens:[]},
+    {email: 'vanessa@fsph.gov.br', nome:'Vanessa', avatar:"VA", senha: '123456', setor:{nome:"Recepção", id:6, sigla:"RECP"}, cargo:"Recepcionista", mensagens:[] },
+    {email: 'leonardo@fsph.gov.br', nome:'Leonardo', avatar:"LE", senha: '654321', setor:{nome:"Recepção", id:6, sigla:"RECP"}, cargo:"Assistente de Recepção", mensagens:[] },
+    {email: 'raquel@fsph.gov.br', nome:'Raquel', avatar:"RA", senha: 'abcdef', setor:{nome:"Recepção", id:6, sigla:"RECP"}, cargo:"Recepcionista", mensagens:[] },
+    {email:'messi@fsph.gov.br', nome:"Messi", avatar:"ME", senha:"messi123", setor:{nome:"Laboratório",id:7,sigla:"LAB"}, cargo:"Gerente Setor", mensagens:[]},
+    {email:'critianoRo@fsph.gov.br', nome:"Cristiano", avatar:"CR", senha:"cristiano", setor:{nome:"Laboratório",id:7,sigla:"LAB"}, cargo:"Técnico de Laboratório", mensagens:[]},
+    {email: 'patricia@fsph.gov.br', nome:'Patrícia', avatar:"PA", senha: '654321', setor:{nome:"Laboratório", id:7, sigla:"LAB"}, cargo:"Bioquímica", mensagens:[] },
+    {email: 'felipe@fsph.gov.br', nome:'Felipe', avatar:"FE", senha: 'abcdef', setor:{nome:"Laboratório", id:7, sigla:"LAB"}, cargo:"Analista Clínico", mensagens:[] }
 ]
 
 if(JSON.parse(localStorage.getItem('funcionarios')) == null)
