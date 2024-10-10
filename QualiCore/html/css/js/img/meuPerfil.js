@@ -60,11 +60,45 @@ function toggleEdit() {
             element.contentEditable = false;
         });
 
-        fullNameDisplay.innerText = username.innerText
-        nomeUsuario.innerText = username.innerText
+        let valorUserName = username.innerText;
+
+        nomeUsuario.innerText = valorUserName;
+        fullNameDisplay.innerText = valorUserName;
+
+        var dados = {
+            nomeUsuario: nomeUsuario.innerText,
+            username: username.innerText,
+            fullNameDisplay: fullNameDisplay.innerText,
+            nomeCompleto: document.getElementById('nomeCompleto').innerText,
+            telefone:  document.getElementById('telefone').innerText,
+            instituicao:  document.getElementById('instituicao').innerText,
+            position: document.getElementById('department').innerText 
+
+        }
+
+        localStorage.setItem('dadosUsuario', JSON.stringify(dados))
+        window.dispatchEvent(new Event("storage"))
+        console.log('Dados salvos:', dados)
+
+       
+        /*fullNameDisplay.innerText = username.innerText
+        nomeUsuario.innerText = username.innerText*/
         // Aqui você poderia adicionar a lógica para salvar as alterações no servidor
     }
 }
+window.addEventListener('load',function(){
+    var dadosSalvos = this.localStorage.getItem('dadosUsuario')
+    if (dadosSalvos){
+        var dados = JSON.parse(dadosSalvos)
+        document.getElementById('nomeUsuario').innerText = dados.nomeUsuario;
+        fullNameDisplay.innerText = dados.fullNameDisplay;
+        username.innerText = dados.username
+        document.getElementById('nomeCompleto').innerText = dados.nomeCompleto;
+        document.getElementById('telefone').innerText = dados.telefone;
+        document.getElementById('instituicao').innerText = dados.instituicao;
+        document.getElementById('department').innerText = dados.position;
+    }
+})
 
 function changeProfilePicture(input) {
     if (input.files && input.files[0]) {

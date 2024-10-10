@@ -513,3 +513,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+window.addEventListener('load',function(){
+    var dadosSalvos = this.localStorage.getItem('dadosUsuario')
+    if (dadosSalvos){
+        var dados = JSON.parse(dadosSalvos)
+        document.getElementById('nomeUsuario').innerText = dados.nomeUsuario;
+    }
+})
