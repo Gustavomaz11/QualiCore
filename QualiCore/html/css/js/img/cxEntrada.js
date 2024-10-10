@@ -102,28 +102,13 @@ function renderNotifications() {
     const notificationsList = document.getElementById('notificationsList');
     notificationsList.innerHTML = '';
 
-    
-    user?.mensagens.map((mensagem)=>{
-        let semReptidos = []
-        mensagem.rnc.linhaDoTempo.forEach((edicoes,index)=>{
-            console.log(semReptidos[index])
-            if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
-                semReptidos.push(edicoes)
-            }
-        
-        })
-
-        mensagem["pessoasAnexadas"] = semReptidos
-        console.log(mensagem)
-    })
-
     user?.mensagens.forEach(notification => {
         const card = document.createElement('div');
         card.className = `notification-card ${notification.lida ? '' : 'unread'}`;
         
         const statusText = notification.rnc.status
         const statusClass = notification.rnc.status
-
+        console.log(notification)
         card.innerHTML = `
             <div class="notification-header">
                 <div class="sender-info">
@@ -140,11 +125,11 @@ function renderNotifications() {
             </div>
             <div class="involved-users">
                 <div class="involved-avatars">
-                    ${notification.pessoasAnexadas?.map(pessoas => 
-                        `<div class="involved-avatar" title="${pessoas.criador.nome}">${pessoas.criador.avatar}</div>`
+                    ${notification.rnc.pessoasAnexadas?.map(pessoas => 
+                        `<div class="involved-avatar" title="${pessoas.nome}">${pessoas.avatar}</div>`
                     ).join('')}
                 </div>
-                <span class="involved-count">${notification.pessoasAnexadas?.length} envolvidos</span>
+                <span class="involved-count">${notification.rnc.pessoasAnexadas?.length} envolvidos</span>
             </div>
             <div class="notification-footer">
                 <span class="status-badge ${statusClass}">${statusText}</span>
