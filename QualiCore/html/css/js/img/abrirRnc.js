@@ -54,6 +54,14 @@ btnlimparCash.addEventListener('click',()=>{
 
 })
 
+//
+let gestorSetor = funcionarios.filter((funcionario)=> {
+    if(funcionario.setor.sigla == user.setor.sigla && funcionario.cargo.includes('Gerente'))
+        return funcionario
+})
+
+setorAutuado.disabled  = true
+setorAutuado.value = gestorSetor[0].setor.nome
 
 
 function atualizandoUser (user,funcionarios){
@@ -94,6 +102,8 @@ const rnc = {
     tipo:null,
     setorAtuar:null,
     linhaDoTempo:[],
+    pessoasAnexadas:[],
+    quem:null,
     id:1
 }
 
@@ -192,7 +202,6 @@ document.getElementById('anexo').addEventListener('change', function() {
             if (anexoTable.rows.length === 0) {
                 anexoTable.closest('table').style.display = 'none'; // Esconde a tabela se não houver anexos
             }
-            console.log(rnc)
         };
         
         newRow.insertCell(1).appendChild(deleteBtn);
@@ -236,6 +245,12 @@ rncForm.addEventListener('submit',(evt)=>{
         hora:rnc.hora,
         status:'analise'
     })
+    rnc.pessoasAnexadas.push({
+        nome:rnc.criador,
+        avatar:user.avatar,
+        email:user.email,
+        setor:user.setor
+    })
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
@@ -247,9 +262,3 @@ rncForm.addEventListener('submit',(evt)=>{
         localStorage.setItem('rnc', JSON.stringify([rnc]))
     }
 })
-
-// localStorage.removeItem('rnc')
-// localStorage.removeItem('lengthRnc')
-
-
-
