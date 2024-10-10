@@ -17,6 +17,14 @@ body.addEventListener('click',()=>{
     }
 })
 
+//tab btns
+const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn');
+const andamentoBtn = document.querySelector('#andamentoBtn');
+const conclusaoBtn = document.querySelector('#conclusaoBtn');
+
+//
+const selectQuem = document.querySelector('#quem')
+
 // pegando a rnc pelo localstorege
 let rnc = localStorage.getItem('rnc')
 if (rnc!= null)
@@ -168,19 +176,19 @@ document.addEventListener('DOMContentLoaded', function () {
         return gestor?gestor[0]:gestor
     }
 
-    function addMsgProGestor (gestor,emissor,rnc,data,hora) {
-        gestor.mensagens.push({
+    function addMsg (usuario,emissor,rnc,data,hora,menssagem) {
+        usuario.mensagens.push({
             emissor:{nome:emissor.nome, avatar:emissor.avatar},
             lida:false,
-            menssagem:"Nova não conformidade identificada",
+            menssagem,
             data,
             hora,
             rnc
         })
 
         funcionarios.map((funcionario)=>{
-            if(funcionario.email === gestor.email){
-                funcionario = gestor
+            if(funcionario.email === usuario.email){
+                funcionario = usuario
             }
         })
 
@@ -189,9 +197,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
     function modificandoRncPeloId (rnc) {
+        console.log(JSON.parse(rnc.getAttribute('data-pessoasAnexadas')))
         let array = JSON.parse(localStorage.getItem('rnc'))
         let modificacao = false
         array.map((indexRnc)=>{
+            console.log(indexRnc.quem)
             if(indexRnc.id == rnc.getAttribute('data-id')){
                 if(indexRnc.status != rnc.getAttribute('data-status')){
                     indexRnc.status = rnc.getAttribute('data-status')
@@ -204,7 +214,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if(indexRnc.setorAtuar != rnc.getAttribute('data-setorAtuar')){
                     indexRnc.setorAtuar = rnc.getAttribute('data-setorAtuar')
+                    indexRnc.pessoasAnexadas = JSON.parse(rnc.getAttribute('data-pessoasAnexadas'))
                     modificacao =  true
+                }
+                if(indexRnc.quem != rnc.getAttribute('data-quem')){
+                    indexRnc.quem =  rnc.getAttribute('data-quem')
+                    indexRnc.pessoasAnexadas = JSON.parse(rnc.getAttribute('data-pessoasAnexadas'))
+                    modificacao = true
                 }
             }
         })
@@ -234,9 +250,10 @@ document.addEventListener('DOMContentLoaded', function () {
             enquadramento: `${e.getAttribute('data-enquadramento')}`,
             setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
             anexos:`${e.getAttribute('data-anexos')}`,
-            linhaDoTempo: JSON.parse(e.getAttribute('data-linhaDoTempo'))
+            linhaDoTempo: JSON.parse(e.getAttribute('data-linhaDoTempo')),
+            pessoasAnexadas: JSON.parse(e.getAttribute('data-pessoasAnexadas')),
+            quem: e.getAttribute('data-quem')
         };
-        console.log(rncData.linhaDoTempo)
         let {linhaDoTempo} = rncData
         DivlinhaDoTempo.innerHTML = ''
         linhaDoTempo.map((mudanca,index)=>{
@@ -279,28 +296,80 @@ document.addEventListener('DOMContentLoaded', function () {
         const newSaveBtn = saveBtn.cloneNode(true);  // Clona o botão para remover os eventos antigos
         newSaveBtn.textContent = 'teste'
         saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);  // Substitui o botão antigo
+        if(rncData.setorAtuar == "null"){
+            andamentoBtn.disabled = true
+        }else{
+            andamentoBtn.disabled = false
+        }
+        if(rncData.status != 'concluido'){
+            conclusaoBtn.disabled = true
+        }else{
+            conclusaoBtn.disabled = false
+        }
+        let funcioanriosSetorAtuar = funcionarios.filter((funcionario)=> funcionario.setor.sigla == rncData.setorAtuar)
+        selectQuem.innerHTML = `
+            <option value="null">--Selecione--</option>
+        `
+        funcioanriosSetorAtuar?.map((funcionarioSetorAtuar)=>{
+            const options = document.createElement('option')
+            options.value = funcionarioSetorAtuar.email
+            options.innerText = `${funcionarioSetorAtuar.nome} - ${funcionarioSetorAtuar.setor.sigla}` 
+            selectQuem.appendChild(options)
+        })
+        console.log(rncData.pessoasAnexadas)
         newSaveBtn.addEventListener('click',()=>{
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
             let gestor = pegarGestorDoSetor(setorAtuar.value)
-            rncData.linhaDoTempo.push({
+            let objMsg = {
                 criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
                 hora:fullHora,
                 data: fullData,
                 status: status.value
-            })
+            }
+
+            rncData.linhaDoTempo.push(objMsg)
+            rncData.pessoasAnexadas.push({avatar:user.avatar,nome:user.nome,setor:user.setor,email:user.email})
+            rncData.pessoasAnexadas = naoRepete(rncData.pessoasAnexadas)
+            rncData.quem = selectQuem.value
             if(rncData.setorAtuar != setorAtuar.value) // checando se o setor mudou para não ter um span de msg
-                addMsgProGestor(gestor,user,rncData,fullData, fullHora)
-            
+                addMsg(gestor,user,rncData,fullData, fullHora,"Nova não conformidade identificada")
             e.setAttribute('data-linhaDoTempo', JSON.stringify(rncData.linhaDoTempo))
+            e.setAttribute('data-pessoasAnexadas', JSON.stringify(rncData.pessoasAnexadas))
+            
+            if(selectQuem.value != "null"){    
+                let funcionarioSelecionado = funcioanriosSetorAtuar.filter((funcionarioSetorAtuar)=>funcionarioSetorAtuar.email == selectQuem.value)
+                rncData.pessoasAnexadas.push({avatar:funcionarioSelecionado[0].avatar,nome:funcionarioSelecionado[0].nome,setor:funcionarioSelecionado[0].setor,email:funcionarioSelecionado[0].email})
+                rncData.pessoasAnexadas = naoRepete(rncData.pessoasAnexadas)
+                e.setAttribute('data-pessoasAnexadas', JSON.stringify(rncData.pessoasAnexadas))
+                e.setAttribute('data-quem', rncData.quem)
+                console.log(rncData.pessoasAnexadas)
+                addMsg(funcionarioSelecionado[0],user,rncData,fullData,fullHora,"Você foi anexado a um não conformidade")
+                // rncData.linhaDoTempo.push({}) add na linha do tempo
+            }
+            
             modificandoRncPeloId(e)
             atualizandoRnc()
-            console.log(funcionarios)
+           
             closeModal()
         })
         modal.style.display = "block";
     }
+
+    
+function naoRepete (array){
+    let noRepeat = []
+    const set = new Set()
+    array.forEach(user => {
+        set.add(JSON.stringify(user))
+    });
+    set.forEach((user)=>{
+        noRepeat.push(JSON.parse(user))
+    })
+
+    return noRepeat
+}
 
     // Add event listeners to cards and columns
     cards.forEach(card => {
@@ -407,20 +476,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 card.setAttribute(`data-${key}`, value?.nome)
             }else if (key === 'enquadramento')
                 card.setAttribute(`data-${key}`, value.join(', '))
-            else if(key === 'linhaDoTempo'){
+            else if(key === 'linhaDoTempo' || key === 'pessoasAnexadas'){
                 card.setAttribute(`data-${key}`, JSON.stringify(value))
             }
             else
                 card.setAttribute(`data-${key}`, value)
         })
-        let linhaDoTempo = rnc.linhaDoTempo
-        let semReptidos = []
-        linhaDoTempo.forEach((edicoes,index)=>{
-            if(semReptidos[index -1]?.criador?.email != edicoes.criador.email){
-                semReptidos.push(edicoes)
-            }
-        })
-        rnc['pessoasAnexadas'] = semReptidos
         card.className = 'kanban-card';
         card.draggable = true;
         card.innerHTML = `
@@ -433,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="card-footer">
                         <div class="assignees">
                             ${rnc.pessoasAnexadas?.map(pessoas => 
-                            `<div class="assignee" title="${pessoas.criador.nome}">${pessoas.criador.avatar}</div>`
+                            `<div class="assignee" title="${pessoas.nome}">${pessoas.avatar}</div>`
                         ).join('')}
                         </div>
                     </div>
@@ -470,9 +531,6 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Funções para troca de abas no modal
-    const detalhamentoRncBtn = document.querySelector('#detalhamentoBtn');
-    const andamentoBtn = document.querySelector('#andamentoBtn');
-    const conclusaoBtn = document.querySelector('#conclusaoBtn');
 
     const abaDetalhamento = document.querySelector('#detalhamento');
     const abaAndamento = document.querySelector('#andamento');
