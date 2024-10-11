@@ -514,9 +514,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 window.addEventListener('load',function(){
-    var dadosSalvos = this.localStorage.getItem('dadosUsuario')
+    var dadosSalvos = localStorage.getItem('dadosUsuario')
     if (dadosSalvos){
         var dados = JSON.parse(dadosSalvos)
         document.getElementById('nomeUsuario').innerText = dados.nomeUsuario;
+    }
+    var imagemSalvo = localStorage.getItem('perfilImagem')
+    if(imagemSalvo) {
+        const avatarImage = document.getElementById('avatarImage')
+        const profilePicture = document.getElementById('profilePicture')
+        avatarImage.src = imagemSalvo
+        avatarImage.style.display = 'block'
+        document.getElementById('avatarIcon').style.display = 'none'
     }
 })

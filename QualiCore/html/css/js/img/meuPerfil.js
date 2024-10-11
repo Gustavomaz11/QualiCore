@@ -86,8 +86,29 @@ function toggleEdit() {
         // Aqui você poderia adicionar a lógica para salvar as alterações no servidor
     }
 }
+
+function changeProfilePicture(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const carregar = e.target.result
+            document.getElementById('profilePicture').src = carregar;
+            const avatarImage = document.getElementById('avatarImage')
+            avatarImage.src = carregar
+            avatarImage.style.display = 'block'
+            
+            document.getElementById('avatarIcon').style.display = 'none'
+            
+            localStorage.setItem('perfilImagem',carregar)
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 window.addEventListener('load',function(){
-    var dadosSalvos = this.localStorage.getItem('dadosUsuario')
+    var dadosSalvos = localStorage.getItem('dadosUsuario')
     if (dadosSalvos){
         var dados = JSON.parse(dadosSalvos)
         document.getElementById('nomeUsuario').innerText = dados.nomeUsuario;
@@ -98,24 +119,16 @@ window.addEventListener('load',function(){
         document.getElementById('instituicao').innerText = dados.instituicao;
         document.getElementById('department').innerText = dados.position;
     }
-})
-
-function changeProfilePicture(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            document.getElementById('profilePicture').src = e.target.result;
-            var avatarImage = document.getElementById('avatarImage')
-            avatarImage.src = e.target.result
-            avatarImage.style.display = 'block'
-
-            document.getElementById('avatarIcon').style.display = 'none'
-        };
-        
-        reader.readAsDataURL(input.files[0]);
+    var imagemSalvo = localStorage.getItem('perfilImagem')
+    if(imagemSalvo) {
+        const avatarImage = document.getElementById('avatarImage')
+        const profilePicture = document.getElementById('profilePicture')
+        avatarImage.src = imagemSalvo
+        profilePicture.src = imagemSalvo
+        avatarImage.style.display = 'block'
+        document.getElementById('avatarIcon').style.display = 'none'
     }
-}
+})
 
 // Função para alternar o status (apenas para demonstração)
 /*document.getElementById('status').addEventListener('click', function() {
