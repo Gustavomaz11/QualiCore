@@ -64,15 +64,28 @@ setorAutuado.disabled  = true
 setorAutuado.value = gestorSetor[0].setor.nome
 
 
-function atualizandoUser (user,funcionarios){
-    funcionarios.map((funcionario)=>{
+function atualizandoUser (user, funcionarios){
+    user = localStorage.getItem('login')
+    if(user != null)
+        user = JSON.parse(user)
+
+    console.log(user)
+
+    funcionarios = localStorage.getItem('funcionarios')
+    if(funcionarios != null)
+        funcionarios = JSON.parse(funcionarios)
+
+    funcionarios?.map((funcionario)=>{
         if(funcionario.email == user.email){
             funcionario.mensagens.map((menssagem)=>{
+                console.log(menssagem)
                 if(menssagem.lida == false){
                     if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
                     else
                         cxEntradaBtn.classList.add('novaMenssagem')
-                    
+                }
+                else{
+                    cxEntradaBtn.classList.remove('novaMenssagem')
                 }
             })
         }
@@ -80,7 +93,7 @@ function atualizandoUser (user,funcionarios){
 }
 
 atualizandoUser(user,funcionarios)
-setInterval(atualizandoUser(user,funcionarios),5000)
+setInterval(atualizandoUser(user, funcionarios),5000)
 
 
 if(user == null)
@@ -104,7 +117,7 @@ const rnc = {
     linhaDoTempo:[],
     pessoasAnexadas:[],
     quem:null,
-    id:1
+    numero:1
 }
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
@@ -254,7 +267,7 @@ rncForm.addEventListener('submit',(evt)=>{
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
-        rnc.id = Math.floor(Math.random() * 9999999999)
+        rnc.numero = Math.floor(Math.random() * 9999999999)
         rncs.push(rnc)
         localStorage.setItem('rnc', JSON.stringify(rncs))
     }else{
