@@ -45,15 +45,28 @@ btnlimparCash.addEventListener('click',()=>{
 
 
 // função que deixa a cor da carta laranja caso tenha alguam msg não vista
-function atualizandoUser (user,funcionarios){
-    funcionarios.map((funcionario)=>{
+function atualizandoUser (user, funcionarios){
+    user = localStorage.getItem('login')
+    if(user != null)
+        user = JSON.parse(user)
+
+    console.log(user)
+
+    funcionarios = localStorage.getItem('funcionarios')
+    if(funcionarios != null)
+        funcionarios = JSON.parse(funcionarios)
+
+    funcionarios?.map((funcionario)=>{
         if(funcionario.email == user.email){
             funcionario.mensagens.map((menssagem)=>{
+                console.log(menssagem)
                 if(menssagem.lida == false){
                     if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
                     else
                         cxEntradaBtn.classList.add('novaMenssagem')
-                    
+                }
+                else{
+                    cxEntradaBtn.classList.remove('novaMenssagem')
                 }
             })
         }
@@ -61,7 +74,7 @@ function atualizandoUser (user,funcionarios){
 }
 
 atualizandoUser(user,funcionarios)
-setInterval(atualizandoUser(user,funcionarios),5000)
+setInterval(atualizandoUser(user, funcionarios),5000)
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
 const urlSidebar = [
