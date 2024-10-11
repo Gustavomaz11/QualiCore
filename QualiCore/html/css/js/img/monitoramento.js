@@ -64,7 +64,15 @@ btnlimparCash.addEventListener('click',()=>{
 })
 
 // função que deixa a cor da carta laranja caso tenha alguam msg não vista
-function atualizandoUser (user,funcionarios){
+function atualizandoUser (user, funcionarios){
+    user = localStorage.getItem('login')
+    if(user != null)
+        user = JSON.parse(user)
+
+    funcionarios = localStorage.getItem('funcionarios')
+    if(funcionarios != null)
+        funcionarios = JSON.parse(funcionarios)
+
     funcionarios?.map((funcionario)=>{
         if(funcionario.email == user.email){
             funcionario.mensagens.map((menssagem)=>{
@@ -72,7 +80,9 @@ function atualizandoUser (user,funcionarios){
                     if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
                     else
                         cxEntradaBtn.classList.add('novaMenssagem')
-                    
+                }
+                else{
+                    cxEntradaBtn.classList.remove('novaMenssagem')
                 }
             })
         }
@@ -80,7 +90,7 @@ function atualizandoUser (user,funcionarios){
 }
 
 atualizandoUser(user,funcionarios)
-setInterval(atualizandoUser(user,funcionarios),5000)
+setInterval(atualizandoUser(user, funcionarios),5000)
 
 // sistema que lança o popup quando tem uma nova rnc
 const showPopup = ()=>{
@@ -197,28 +207,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // função que vai checar se atualizou a rnc e quando atualizar ela ira salvar
     function modificandoRncPeloId (rnc) {
-        console.log(JSON.parse(rnc.getAttribute('data-pessoasAnexadas')))
+        console.log(rnc)
         let array = JSON.parse(localStorage.getItem('rnc'))
         let modificacao = false
         array.map((indexRnc)=>{
-            console.log(indexRnc.quem)
-            if(indexRnc.id == rnc.getAttribute('data-id')){
+            console.log(indexRnc)
+            if(indexRnc.numero == rnc.getAttribute('data-numero')){
                 if(indexRnc.status != rnc.getAttribute('data-status')){
                     indexRnc.status = rnc.getAttribute('data-status')
                     indexRnc.linhaDoTempo = rnc.getAttribute('data-linhaDoTempo')
                     modificacao = true
                 }
                 if(indexRnc.severidade != rnc.getAttribute('data-severidade')){
+                    indexRnc.linhaDoTempo = rnc.getAttribute('data-linhaDoTempo')
                     indexRnc.severidade = rnc.getAttribute('data-severidade')
                     modificacao = true
                 }
                 if(indexRnc.setorAtuar != rnc.getAttribute('data-setorAtuar')){
                     indexRnc.setorAtuar = rnc.getAttribute('data-setorAtuar')
+                    indexRnc.linhaDoTempo = rnc.getAttribute('data-linhaDoTempo')
                     indexRnc.pessoasAnexadas = JSON.parse(rnc.getAttribute('data-pessoasAnexadas'))
                     modificacao =  true
                 }
                 if(indexRnc.quem != rnc.getAttribute('data-quem')){
                     indexRnc.quem =  rnc.getAttribute('data-quem')
+                    indexRnc.linhaDoTempo = rnc.getAttribute('data-linhaDoTempo')
                     indexRnc.pessoasAnexadas = JSON.parse(rnc.getAttribute('data-pessoasAnexadas'))
                     modificacao = true
                 }
@@ -241,19 +254,26 @@ document.addEventListener('DOMContentLoaded', function () {
         let fullHora =  `${hora}:${minutos}`
         let fullData =  `${dia}/${mes}/${ano}`
         const rncData = {
-            numero: `${e.getAttribute('data-id')<10? "00"+e.getAttribute('data-id'):"0"+e.getAttribute('data-id')}`,
-            dataHora: `${e.getAttribute('data-data')} - ${e.getAttribute('data-hora')}`,
+            numero: `${e.getAttribute('data-numero')}`,
+            data: `${e.getAttribute('data-data')}`,
+            hora:` ${e.getAttribute('data-hora')}`,
             setorAutuante: `${e.getAttribute('data-setorAutuado')}`,
+            descricao:e.getAttribute('data-descricao'),
             origem: `${e.getAttribute('data-origem')}`,
             severidade: `${e.getAttribute("data-severidade")!= null?e.getAttribute("data-severidade"):null}`,
             status: `${e.getAttribute('data-status')}`,
-            enquadramento: `${e.getAttribute('data-enquadramento')}`,
+            enquadramento: `${JSON.parse(e.getAttribute('data-enquadramento'))}`,
+            acaoImediata:e.getAttribute('data-acaoImediata'),
             setorAtuar: `${e.getAttribute('data-setorAtuar')}`,
+            investigacao:e.getAttribute('data-investigacao'),
+            criador:e.getAttribute('data-criador'),
             anexos:`${e.getAttribute('data-anexos')}`,
             linhaDoTempo: JSON.parse(e.getAttribute('data-linhaDoTempo')),
             pessoasAnexadas: JSON.parse(e.getAttribute('data-pessoasAnexadas')),
-            quem: e.getAttribute('data-quem')
+            quem: e.getAttribute('data-quem'),
+            tipo:e.getAttribute('data-tipo')
         };
+        console.log(rncData)
         let {linhaDoTempo} = rncData
         DivlinhaDoTempo.innerHTML = ''
         linhaDoTempo.map((mudanca,index)=>{
@@ -261,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
             div.classList.add('itemLinhaDoTempo')
             div.innerHTML = `
                 <div class="conteudoLinhaDoTempo">
-                    <p>${mudanca.data} - ${mudanca.hora}<br>${index  == 0?'Aberto por ' + mudanca.criador.nome: 'Status ' + mudanca.status + " por: " + mudanca.criador.nome}</p>
+                    <p>${mudanca.data} - ${mudanca.hora}<br>${index  == 0?'Aberto por ' + mudanca.criador.nome: mudanca.menssagem}</p>
                 </div>
             `
             DivlinhaDoTempo.appendChild(div)
@@ -282,11 +302,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             bodyTabelaRnc.appendChild(tr)
         })
+        console.log(rncData.enquadramento)
         document.getElementById("rncNumber").textContent = rncData.numero;
-        document.querySelector('#data-hora').value = rncData.dataHora;
+        document.querySelector('#data-hora').value = rncData.data + " - " + rncData.hora;
         document.querySelector('#origem').value = rncData.origem;
         document.querySelector('#setor-autuante').value = rncData.setorAutuante;
-        document.querySelector('#enquadramento').value = rncData.enquadramento;
+        document.querySelector('#enquadramento').value = rncData.enquadramento
+        const tipo = document.getElementsByName('tipoRnc')
+        tipo.value = rncData.tipo
         const setorAtuar = document.querySelector('#setor-atuar')
         setorAtuar.value = rncData.setorAtuar
         const severidade = document.querySelector('#severidade')
@@ -316,40 +339,67 @@ document.addEventListener('DOMContentLoaded', function () {
             options.innerText = `${funcionarioSetorAtuar.nome} - ${funcionarioSetorAtuar.setor.sigla}` 
             selectQuem.appendChild(options)
         })
-        console.log(rncData.pessoasAnexadas)
+        selectQuem.value = rncData.quem
         newSaveBtn.addEventListener('click',()=>{
             e.setAttribute('data-status',status.value)
             e.setAttribute('data-severidade',severidade.value)
             e.setAttribute('data-setorAtuar',setorAtuar.value)
             let gestor = pegarGestorDoSetor(setorAtuar.value)
-            let objMsg = {
-                criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
-                hora:fullHora,
-                data: fullData,
-                status: status.value
+            if(status.value != rncData.status){
+                rncData.status = status.value
+                rncData.linhaDoTempo.push({
+                    criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                    hora:fullHora,
+                    data: fullData,
+                    menssagem: `status alterado para ${status.value} por: ${user.nome}`
+                })
+            }
+            if(severidade.value != rncData.severidade){
+                rncData.linhaDoTempo.push({
+                    criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                    hora:fullHora,
+                    data: fullData,
+                    menssagem: `severidade alterada para ${severidade.value} por: ${user.nome}`
+                }) 
+            }
+            if(setorAtuar.value != rncData.setorAtuar){
+                rncData.linhaDoTempo.push({
+                    criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                    hora:fullHora,
+                    data: fullData,
+                    menssagem: `setor ${setorAtuar.value} foi anexado por: ${user.nome}`
+                }) 
+            }
+            rncData.pessoasAnexadas.push({nome:user.nome,avatar:user.avatar,email:user.email,setor:user.setor})
+            rncData.pessoasAnexadas = naoRepete(rncData.pessoasAnexadas)
+
+            rncData.severidade = severidade.value
+            rncData.origem = origem.value
+            rncData.tipo = tipo.value
+
+            if(rncData.setorAtuar != setorAtuar.value){ // checando se o setor mudou para não ter um span de msg
+                rncData.setorAtuar = setorAtuar.value
+                addMsg(gestor,user,rncData,fullData, fullHora,"Nova não conformidade identificada")
             }
 
-            rncData.linhaDoTempo.push(objMsg)
-            rncData.pessoasAnexadas.push({avatar:user.avatar,nome:user.nome,setor:user.setor,email:user.email})
-            rncData.pessoasAnexadas = naoRepete(rncData.pessoasAnexadas)
-            rncData.quem = selectQuem.value
-            if(rncData.setorAtuar != setorAtuar.value) // checando se o setor mudou para não ter um span de msg
-                addMsg(gestor,user,rncData,fullData, fullHora,"Nova não conformidade identificada")
-            e.setAttribute('data-linhaDoTempo', JSON.stringify(rncData.linhaDoTempo))
-            e.setAttribute('data-pessoasAnexadas', JSON.stringify(rncData.pessoasAnexadas))
-            
             if(selectQuem.value != "null"){    
                 let funcionarioSelecionado = funcioanriosSetorAtuar.filter((funcionarioSetorAtuar)=>funcionarioSetorAtuar.email == selectQuem.value)
                 rncData.pessoasAnexadas.push({avatar:funcionarioSelecionado[0].avatar,nome:funcionarioSelecionado[0].nome,setor:funcionarioSelecionado[0].setor,email:funcionarioSelecionado[0].email})
                 rncData.pessoasAnexadas = naoRepete(rncData.pessoasAnexadas)
                 e.setAttribute('data-pessoasAnexadas', JSON.stringify(rncData.pessoasAnexadas))
-                e.setAttribute('data-quem', rncData.quem)
-                console.log(rncData.pessoasAnexadas)
+                e.setAttribute('data-quem', selectQuem.value)
+                rncData.linhaDoTempo.push({
+                    criador: {nome:user.nome,setor:user.setor,avatar:user.avatar,email:user.email},
+                    hora:fullHora,
+                    data: fullData,
+                    menssagem: `${user.nome} anexou ${funcionarioSelecionado[0].nome}`
+                })
                 addMsg(funcionarioSelecionado[0],user,rncData,fullData,fullHora,"Você foi anexado a um não conformidade")
-                // rncData.linhaDoTempo.push({}) add na linha do tempo
             }
-            
+            e.setAttribute('data-linhaDoTempo', JSON.stringify(rncData.linhaDoTempo))
+            e.setAttribute('data-pessoasAnexadas', JSON.stringify(rncData.pessoasAnexadas))
             modificandoRncPeloId(e)
+            console.log(rncData)
             atualizandoRnc()
            
             closeModal()
@@ -474,9 +524,9 @@ function naoRepete (array){
         Object.entries(rnc).forEach(([key, value]) => {
             if(key === 'criador'){
                 card.setAttribute(`data-${key}`, value?.nome)
-            }else if (key === 'enquadramento')
-                card.setAttribute(`data-${key}`, value.join(', '))
-            else if(key === 'linhaDoTempo' || key === 'pessoasAnexadas'){
+            } //else if (key === 'enquadramento')
+            //     card.setAttribute(`data-${key}`, JSON.stringify(value))
+            else if(key === 'linhaDoTempo' || key === 'pessoasAnexadas' || key === 'enquadramento'){
                 card.setAttribute(`data-${key}`, JSON.stringify(value))
             }
             else
