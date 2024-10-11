@@ -133,9 +133,19 @@ main section hr {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
     color: white;
     font-size: 18px;
     cursor: pointer;
+}
+
+.avatarUsuario img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 50%; 
+  display: none;
 }
 
 .dropdownPerfil {

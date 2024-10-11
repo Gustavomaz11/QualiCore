@@ -106,6 +106,11 @@ function changeProfilePicture(input) {
         
         reader.onload = function(e) {
             document.getElementById('profilePicture').src = e.target.result;
+            var avatarImage = document.getElementById('avatarImage')
+            avatarImage.src = e.target.result
+            avatarImage.style.display = 'block'
+
+            document.getElementById('avatarIcon').style.display = 'none'
         };
         
         reader.readAsDataURL(input.files[0]);
