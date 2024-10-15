@@ -8,6 +8,56 @@ const usuariosBtn = document.querySelector('#usuariosBtn')
 const cxEntradaBtn = document.querySelector('#cxEntradaBtn')
 const meuPerfilBtn = document.querySelector('#meuPerfilBtn')
 
+let lengthRnc = localStorage.getItem('lengthRnc')
+if(lengthRnc != null)
+    lengthRnc = JSON.parse(lengthRnc)
+
+// pegando usuario
+let user = localStorage.getItem('login')
+if(user != null)
+    user = JSON.parse(user)
+
+const nome = document.querySelector('#nome')
+nome.innerText = user.nome?user.nome:'xxxx'
+
+// pegando funcionarios
+let funcionarios = localStorage.getItem('funcionarios')
+if(funcionarios != null)
+    funcionarios = JSON.parse(funcionarios)
+
+// limpando o cash
+const btnlimparCash = document.querySelector('#limparCash')
+btnlimparCash.addEventListener('click',()=>{
+    localStorage.removeItem('rnc')
+    localStorage.removeItem('lengthRnc')
+    console.log(funcionarios)
+    funcionarios.map((funcionario)=>{
+        funcionario.mensagens = []
+    })
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+})
+// função que deixa a cor da carta laranja caso tenha alguam msg não vista
+
+if(user == null)
+    window.location.href = 'index.html';
+
+function atualizandoUser (user,funcionarios){
+    funcionarios.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
 
 const listaSidebarBtn = [dashBtn, relatorioBtn, rncBtn, dashDetalhadoBtn, monitoramentoBtn, departamentoBtn, usuariosBtn, cxEntradaBtn, meuPerfilBtn]
 const urlSidebar = [

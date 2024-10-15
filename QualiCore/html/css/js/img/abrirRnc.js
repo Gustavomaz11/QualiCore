@@ -23,8 +23,55 @@ const acaoImediata = document.querySelector("#acaoImediata")
 const investigacao = document.querySelector('#investigacao')
 const setorAutuado = document.querySelector('#setorAutuado')
 
+// pegando usuario
 let user = localStorage.getItem('login')
-user = JSON.parse(user)
+if(user != null)
+    user = JSON.parse(user)
+
+const nome = document.querySelector('#nome')
+nome.innerText = user.nome?user.nome:'xxxx'
+
+// pegando funcionarios
+let funcionarios = localStorage.getItem('funcionarios')
+if(funcionarios != null)
+    funcionarios = JSON.parse(funcionarios)
+
+// limpando o cash
+const btnlimparCash = document.querySelector('#limparCash')
+btnlimparCash.addEventListener('click',()=>{
+    localStorage.removeItem('rnc')
+    localStorage.removeItem('lengthRnc')
+    console.log(funcionarios)
+    funcionarios.map((funcionario)=>{
+        funcionario.mensagens = []
+    })
+    localStorage.setItem('funcionarios', JSON.stringify(funcionarios))
+})
+
+if(user == null)
+    window.location.href = 'index.html';
+
+function atualizandoUser (user,funcionarios){
+    funcionarios.map((funcionario)=>{
+        if(funcionario.email == user.email){
+            funcionario.mensagens.map((menssagem)=>{
+                if(menssagem.lida == false){
+                    if(cxEntradaBtn.className == 'botaoIcone novaMenssagem') return
+                    else
+                        cxEntradaBtn.classList.add('novaMenssagem')
+                    
+                }
+            })
+        }
+    })
+}
+
+atualizandoUser(user,funcionarios)
+setInterval(atualizandoUser(user,funcionarios),5000)
+
+
+if(user == null)
+    window.location.href = 'index.html';
 
 const rnc = {
     enquadramento:null,
@@ -41,6 +88,7 @@ const rnc = {
     status:'analise',
     tipo:null,
     setorAtuar:null,
+    linhaDoTempo:[],
     id:1
 }
 
@@ -149,8 +197,6 @@ document.getElementById('anexo').addEventListener('change', function() {
     if (anexoTable.rows.length > 0) {
         anexoTable.closest('table').style.display = 'table'; // Mostra a tabela se houver anexos
     }
-    // rnc.anexos.push(this.files[0])
-    console.log(rnc)
 });
 
 // função para mandar as informação da rnc pro localstore
@@ -177,11 +223,18 @@ rncForm.addEventListener('submit',(evt)=>{
     rnc.setorAutuado = setorAutuado.value 
     rnc.data = `${dia}/${mes}/${ano}`
     rnc.hora = `${hora}:${minutos}`
-    rnc.criador = user
+    rnc.criador = user.nome
+    rnc.linhaDoTempo = [] 
+    rnc.linhaDoTempo.push({
+        criador:{nome:rnc.criador,avatar:user.avatar,email:user.email,setor:user.setor},
+        data:rnc.data,
+        hora:rnc.hora,
+        status:'analise'
+    })
     if(JSON.parse(localStorage.getItem('rnc')) != null){
         const rncs = JSON.parse(localStorage.getItem('rnc'))
         localStorage.setItem('lengthRnc', rncs.length)
-        rnc.id+= 1
+        rnc.id = Math.floor(Math.random() * 9999999999)
         rncs.push(rnc)
         localStorage.setItem('rnc', JSON.stringify(rncs))
     }else{

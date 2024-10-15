@@ -6,8 +6,33 @@ const closePopup = document.getElementById('closePopup');
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 
-const nomeUsuarios = ['admin@fsph.gov.br', 'gmtrindade@fsph.gov.br', 'laraevlyn@fsph.gov.br', 'mateusfraga@fsph.gov.br'];
-const senhasUsuarios = ['123456', 'secreta1995', '00112233', '44556677'];
+
+const users = [
+    {email: 'admin@fsph.gov.br',nome:'Jorge', avatar:"JO",senha: '123456', setor:{nome:"Recursos Humanos",id:1,sigla:"RH"}, cargo:"Gerente Geral", mensagens:[] },
+    {email: 'gmtrindade@fsph.gov.br',nome:"Gustavo",avatar:"GU" ,senha: 'secreta1995', setor:{nome:"Tecnologia da Informação",id:2,sigla:"TI"}, cargo:"Gerente Setor", mensagens:[] },
+    {email: 'laraevlyn@fsph.gov.br',nome:"Lara",avatar:"LA" ,senha: '00112233', setor:{nome:"Enfermaria",id:3,sigla:"ENF"}, cargo:"Gerente Setor", mensagens:[] },
+    {email: 'mateusfraga@fsph.gov.br',nome:'Matheus', avatar:"MA" ,senha: '44556677', setor:{nome:"Consultorio",id:4,sigla:"CONS"}, cargo:"Gerente Setor", mensagens:[] },
+    {email:'adsonLu@fsph.gov.br', nome:"Adson", avatar:"AD", senha:"40028922", setor:{nome:"Ambulatorio",id:5,sigla:"AMB"}, cargo:"Gerente Setor", mensagens:[]},
+    {email:'neymar@fsph.gov.br', nome:"Neymar", avatar:"NY", senha:"neymar123", setor:{nome:"Recepcao",id:6,sigla:"RECP"}, cargo:"Gerente Setor", mensagens:[]},
+    {email:'messi@fsph.gov.br', nome:"Messi", avatar:"ME", senha:"messi123", setor:{nome:"Labolatorio",id:7,sigla:"LAB"}, cargo:"Gerente Setor", mensagens:[]},
+    {email:'critianoRo@fsph.gov.br', nome:"Cristiano", avatar:"CR", senha:"cristiano", setor:{nome:"Labolatorio",id:7,sigla:"LAB"}, cargo:"Enfermeiro", mensagens:[]}
+]
+
+if(JSON.parse(localStorage.getItem('funcionarios')) == null)
+    localStorage.setItem('funcionarios', JSON.stringify(users))
+
+const setor = [
+    {nome:"Recursos Humanos",id:1,sigla:"RH"},
+    {nome:"Tecnologia da Informação",id:2,sigla:"TI"},
+    {nome:"Enfermaria",id:3,sigla:"ENF"},
+    {nome:"Consultorio",id:4,sigla:"CONS"},
+    {nome:"Ambulatorio",id:5,sigla:"AMB"},
+    {nome:"Recepcao",id:6,sigla:"RECP"},
+    {nome:"Labolatorio",id:7,sigla:"LAB"}
+]
+
+// add departamentos no localStore
+localStorage.setItem('setor',JSON.stringify(setor))
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -98,15 +123,16 @@ loginForm.addEventListener('submit', (e) => {
 
     let validacao = false;
 
-    for (let i = 0; i < nomeUsuarios.length; i++) {
-        if (email === nomeUsuarios[i] && senha === senhasUsuarios[i]) {
-            validacao = true;
+    users.map((user)=>{
+        if (validacao) return
+
+        if(email == user.email && senha== user.senha){
+            validacao = true
+            localStorage.setItem('login', JSON.stringify(user));
             window.location.href = 'homePage.html';
-            let nome = nomeUsuarios[i].split('@')[0];
-            localStorage.setItem('login', JSON.stringify({ nome, email: nomeUsuarios[i] }));
-            break;
+
         }
-    }
+    })
 
     if (!validacao) {
         emailInput.classList.add('error');

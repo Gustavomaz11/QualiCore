@@ -26,6 +26,7 @@
                 <button type="button" id="monitoramentoBtn"><i class="bi bi-clock"></i>Monitoramento</button>
                 <button type="button" id="departamentoBtn"><i class="bi bi-grid"></i>Departamentos</button>
                 <button type="button" id="usuariosBtn"><i class="bi bi-people"></i>Usuários</button>
+                <button type="button" id="limparCash">Limpar cash</button>
             </div>
         </div>
         <div class="divisaoSideBar">
@@ -50,7 +51,7 @@
             </div>
             <hr/>
             <div class="infoUsuario">
-                <span>Olá, Gustavo</span>
+                <span>Olá, <span id="nome">Gustavo</span></span>
                 <div class="avatarUsuario" id="botaoPerfil">
                     <i class="bi bi-person"></i>
                 </div>
@@ -129,7 +130,7 @@
                         </div>
                         <button class="add-card-btn">+</button>
                     </div>
-                    <div class="kanban-cards" data-column="em-andamento"></div>
+                    <div class="kanban-cards" data-column="andamento"></div>
                 </div>
                 
                 <div class="kanban-column">
@@ -159,7 +160,7 @@
 
                 <div class="modalBody">
                     <div class="linhaDoTempo">
-                        <div class="itemLinhaDoTempo">
+                        <!-- <div class="itemLinhaDoTempo">
                             <div class="conteudoLinhaDoTempo">
                                 <p>10/08 - 14:00<br>Aberto por GUSTAVO-TI</p>
                             </div>
@@ -178,7 +179,7 @@
                             <div class="conteudoLinhaDoTempo">
                                 <p>Aguardando atualizações</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <hr />
                     <div class="detalhesRncDoModal">
@@ -214,12 +215,12 @@
                                     <label for="setor-atuar">Setor p/ Atuar:</label>
                                     <select name="setor-atuar" id="setor-atuar">
                                         <option value="null">--Selecione--</option>
-                                        <option value="ti">Tecnologia da Informação</option>
-                                        <option value="enf">Enfermaria</option>
-                                        <option value="cons">Consultório</option>
-                                        <option value="amb">Ambulatório</option>
-                                        <option value="recp">Recepção</option>
-                                        <option value="lab">Laboratório</option>
+                                        <option value="TI">Tecnologia da Informação</option>
+                                        <option value="ENF">Enfermaria</option>
+                                        <option value="CONS">Consultório</option>
+                                        <option value="AMB">Ambulatório</option>
+                                        <option value="RECP">Recepção</option>
+                                        <option value="LAB">Laboratório</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -239,7 +240,7 @@
                                         <option value="analise">Em Análise</option>
                                         <option value="deferido">Deferido</option>
                                         <option value="indeferido">Indeferido</option>
-                                        <option value="emAndamento">Em Andamento</option>
+                                        <option value="andamento">Em Andamento</option>
                                         <option value="concluido">Concluído</option>
                                     </select>
                                 </div>
@@ -258,8 +259,8 @@
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="bodyTabelaRNC">
+                                        <!-- <tr>
                                             <td>foto.jpg</td>
                                             <td>27/09/2024</td>
                                             <td>
@@ -285,7 +286,7 @@
                                                 <button class="aceitarBtn">Aceitar</button>
                                                 <button class="recusarBtn">Recusar</button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -299,7 +300,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="quem">Quem?</label>
-                                    <input type="text" name="quem" id="quem" placeholder="Quem irá fazer ?" readonly>
+                                    <select name="quem" id="quem">
+                                        <option value="null">--Selecione--</option>
+                                    </select>
+                                    <!-- <input type="options" name="quem" id="quem" placeholder="Quem irá fazer ?" readonly> -->
                                 </div>
                             </div>
                             <div class="form-row">
