@@ -80,22 +80,18 @@
                     <div class="progressoBarra">
                         <div class="etapa">
                             <div class="bolinha"></div>
-                            <spam class="nomeEtapa">Origem e Descrição</spam>
+                            <spam class="nomeEtapa">Origem, Descrição e Enquadramento</spam>
                         </div>
                         <div class="etapa">
                             <div class="bolinha"></div>
-                            <spam class="nomeEtapa">Enquadramento e Evidências</spam>
-                        </div>
-                        <div class="etapa">
-                            <div class="bolinha"></div>
-                            <spam class="nomeEtapa">Ação Imediata e Setor</spam>
+                            <spam class="nomeEtapa">Evidências </spam>
                         </div>
                     </div>
 
                     <!-- Eteapa 1 -->
                     <div class="passos">
 
-                        <h2>Origem e Descrição</h2>
+                        <h2 class="tituloPassos">Origem, Descrição e Enquadramento</h2>
 
                         <div class="aberturaRncGrupo">
                             <label for="origem">Origem</label>
@@ -116,15 +112,6 @@
                             <textarea name="descrever" id="descrever"></textarea>
                         </div>
 
-
-                    </div>
-
-                        
-                    <!-- Eteapa 2 -->
-                    <div class="passos" style="display: none;">
-
-                        <h2>Enquadramento e evidências</h2>
-
                         <div class="aberturaRncGrupo">
                             <label for="enquadramento">Enquadramento (Documento de referência)</label>
                             <div class="custom-select">
@@ -140,32 +127,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="aberturaRncGrupo">
-                            <label for="anexo" class="submitBtnRNC">Anexar a evidência da não conformidade
-                                <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
-                            </label>
-                        </div>
-                        
-                    </div>
-                    
-                    
-                    <table id="anexoTable" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th>Arquivo</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Tabela Dinâmica para Anexos -->
-                        </tbody>
-                    </table>
-
-                    <!-- Etapa 3-->
-                    <div class="passos" style="display: none;">
-
-                        <h2>Ação Imediata e Setor</h2>
 
                         <div class="aberturaRncGrupo">
                             <label for="acaoImediata">Ação Imediata (Ação de contenção)</label>
@@ -187,12 +148,40 @@
                             </select>
                         </div>
 
+                    </div>
+
+                        
+                    <!-- Eteapa 2 -->
+                    <div class="passos" style="display: none;">
+
+                        <h2 class="tituloPassos">Evidências</h2>
+
+                        
+                        
+                        <div class="aberturaRncGrupo">
+                            <label for="anexo" class="submitBtnRNC">Anexar a evidência da não conformidade
+                                <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
+                            </label>
+                        </div>
+
+                        <table id="anexoTable" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Arquivo</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Tabela Dinâmica para Anexos -->
+                            </tbody>
+                        </table>
+                        
                         <div class="aberturaRncGrupo">
                             <input type="text" name="Assinatura" id="assinaturaDigital">
                         </div>
-                        
-                        
+
                     </div>
+
                     <button type="button" id="proxPasso">Próximo</button>
                     <button type="button" id="voltarPasso">Voltar</button>
 
