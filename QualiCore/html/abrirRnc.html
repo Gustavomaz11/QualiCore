@@ -50,9 +50,10 @@
             </div>
             <hr/>
             <div class="infoUsuario">
-                <span>Olá, <span id="nome">Gustavo</span></span>
+                <span>Olá, <span id="nomeUsuario">Olá, Gustavo</span></span>
                 <div class="avatarUsuario" id="botaoPerfil">
-                    <i class="bi bi-person"></i>
+                    <img src="/api/placeholder/150/150" id="avatarImage">
+                        <i class="bi bi-person" id="avatarIcon"></i>
                 </div>
                 <div class="dropdownPerfil" id="menuPerfil">
                     <a class="itemDropdown" id="meuPerfilBtn">
@@ -76,44 +77,78 @@
                 <fieldset>
                     <legend>REGISTRO DE NÃO CONFORMIDADE</legend>
 
-                    <div class="aberturaRncGrupo"></div>
-                        <label for="origem">Origem</label>
-                        <input type="radio" name="origem" value="Processos / Insumos" id="origem"> Processos / Insumos
-                        <input type="radio" name="origem" value="Auditoria Interna" id="origem"> Auditoria Interna
-                        <input type="radio" name="origem"  value="Auditoria Externa" id="origem"> Auditoria Externa
-                        <input type="radio" name="origem" value="Análise Crítica do Sistema" id="origem"> Análise Crítica do Sistema
-                        <input type="radio" name="origem" value="Reclamação de Cliente" id="origem"> Reclamação de Cliente
-                        <input type="radio" name="origem" value="Produto não Conforme" id="origem"> Produto não Conforme
-                        <input type="radio" name="origem" value="Acidente / Incidente" id="origem"> Acidente / Incidente
-                        <input type="radio" name="origem" value="Oportunidade de Melhoria" id="origem"> Oportunidade de Melhoria
-                    </div>
-                    
-                    
-                    <div class="aberturaRncGrupo">
-                        <label for="descrever">Descreva a não conformidade (Detalhar a ocorrência)</label>
-                        <textarea name="descrever" id="descrever"></textarea>
-                    </div>
-
-                    <div class="aberturaRncGrupo">
-                        <label for="enquadramento">Enquadramento (Documento de referência)</label>
-                        <div class="custom-select">
-                            <input type="text" id="search" class="campoBuscaRNC" placeholder="Procurar..." onkeyup="filterOptions()">
-                            <div id="selectedOptions" class="selected-container"></div>
-                            <div id="dropdown" class="options-container">
-                                <label><input type="checkbox" value="ABNT NBR ISO 15189:2015. Laboratórios Clínicos" onchange="updateSelected(this)"> ABNT NBR ISO 15189:2015. Laboratórios Clínicos - Requisitos de qualidade e competência.</label>
-                                <label><input type="checkbox" value="ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade" onchange="updateSelected(this)"> ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade - Requisitos.</label>
-                                <label><input type="checkbox" value="ABNT NBR ISO/IEC 17025:2017" onchange="updateSelected(this)"> ABNT NBR ISO/IEC 17025:2017. Requisitos gerais para a capacitação de laboratórios de calibração e ensaio.</label>
-                                <label><input type="checkbox" value="PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017" onchange="updateSelected(this)"> PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017. Anexo IV - Do Sangue, Componentes e Derivados.</label>
-                                <label><input type="checkbox" value="RDC Nº 34:2014" onchange="updateSelected(this)"> RDC Nº 34:2014. Dispõe sobre as Boas Práticas no Ciclo do Sangue.</label>
-                                <label><input type="checkbox" value="RDC Nº 399:2020" onchange="updateSelected(this)"> RDC Nº 399:2020. Revoga a alínea "d" do inciso XXX do art. 25 da Resolução de Diretoria Colegiada.</label>
-                            </div>
+                    <div class="progressoBarra">
+                        <div class="etapa">
+                            <div class="bolinha"></div>
+                            <spam class="nomeEtapa">Origem e Descrição</spam>
+                        </div>
+                        <div class="etapa">
+                            <div class="bolinha"></div>
+                            <spam class="nomeEtapa">Enquadramento e Evidências</spam>
+                        </div>
+                        <div class="etapa">
+                            <div class="bolinha"></div>
+                            <spam class="nomeEtapa">Ação Imediata e Setor</spam>
                         </div>
                     </div>
-                    <div class="aberturaRncGrupo">
-                        <label for="anexo" class="submitBtnRNC">Anexar a evidência da não conformidade
-                            <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
-                        </label>
+
+                    <!-- Eteapa 1 -->
+                    <div class="passos">
+
+                        <h2>Origem e Descrição</h2>
+
+                        <div class="aberturaRncGrupo">
+                            <label for="origem">Origem</label>
+                            <input type="radio" name="origem" value="Processos / Insumos" id="origem"> Processos / Insumos
+                            <input type="radio" name="origem" value="Auditoria Interna" id="origem"> Auditoria Interna
+                            <input type="radio" name="origem"  value="Auditoria Externa" id="origem"> Auditoria Externa
+                            <input type="radio" name="origem" value="Análise Crítica do Sistema" id="origem"> Análise Crítica do Sistema
+                            <input type="radio" name="origem" value="Reclamação de Cliente" id="origem"> Reclamação de Cliente
+                            <input type="radio" name="origem" value="Produto não Conforme" id="origem"> Produto não Conforme
+                            <input type="radio" name="origem" value="Acidente / Incidente" id="origem"> Acidente / Incidente
+                            <input type="radio" name="origem" value="Oportunidade de Melhoria" id="origem"> Oportunidade de Melhoria
+                        </div>
+
+
+
+                        <div class="aberturaRncGrupo">
+                            <label for="descrever">Descreva a não conformidade (Detalhar a ocorrência)</label>
+                            <textarea name="descrever" id="descrever"></textarea>
+                        </div>
+
+
                     </div>
+
+                        
+                    <!-- Eteapa 2 -->
+                    <div class="passos" style="display: none;">
+
+                        <h2>Enquadramento e evidências</h2>
+
+                        <div class="aberturaRncGrupo">
+                            <label for="enquadramento">Enquadramento (Documento de referência)</label>
+                            <div class="custom-select">
+                                <input type="text" id="search" class="campoBuscaRNC" placeholder="Procurar..." onkeyup="filterOptions()">
+                                <div id="selectedOptions" class="selected-container"></div>
+                                <div id="dropdown" class="options-container">
+                                    <label><input type="checkbox" value="ABNT NBR ISO 15189:2015. Laboratórios Clínicos" onchange="updateSelected(this)"> ABNT NBR ISO 15189:2015. Laboratórios Clínicos - Requisitos de qualidade e competência.</label>
+                                    <label><input type="checkbox" value="ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade" onchange="updateSelected(this)"> ABNT NBR ISO 9001:2015. Sistemas de gestão de qualidade - Requisitos.</label>
+                                    <label><input type="checkbox" value="ABNT NBR ISO/IEC 17025:2017" onchange="updateSelected(this)"> ABNT NBR ISO/IEC 17025:2017. Requisitos gerais para a capacitação de laboratórios de calibração e ensaio.</label>
+                                    <label><input type="checkbox" value="PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017" onchange="updateSelected(this)"> PORTARIA DE CONSOLIDAÇÃO Nº 5 de 28 de setembro de 2017. Anexo IV - Do Sangue, Componentes e Derivados.</label>
+                                    <label><input type="checkbox" value="RDC Nº 34:2014" onchange="updateSelected(this)"> RDC Nº 34:2014. Dispõe sobre as Boas Práticas no Ciclo do Sangue.</label>
+                                    <label><input type="checkbox" value="RDC Nº 399:2020" onchange="updateSelected(this)"> RDC Nº 399:2020. Revoga a alínea "d" do inciso XXX do art. 25 da Resolução de Diretoria Colegiada.</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="aberturaRncGrupo">
+                            <label for="anexo" class="submitBtnRNC">Anexar a evidência da não conformidade
+                                <input type="file" name="anexo" id="anexo" class="inputPadrao" multiple>
+                            </label>
+                        </div>
+                        
+                    </div>
+                    
                     
                     <table id="anexoTable" style="display: none;">
                         <thead>
@@ -126,28 +161,43 @@
                             <!-- Tabela Dinâmica para Anexos -->
                         </tbody>
                     </table>
-                    <div class="aberturaRncGrupo"></div>
-                        <label for="acaoImediata">Ação Imediata (Ação de contenção)</label>
-                        <textarea name="acaoImediata" id="acaoImediata"></textarea>
-                    </div>
-                    <div class="aberturaRncGrupo">
-                        <label for="investigacao">Investigação e Identificação de Causas</label>
-                        <textarea name="investigacao" id="investigacao"></textarea>
-                    </div>
 
-                    <div class="aberturaRncGrupo"></div>
-                        <label for="setorAutuado">Área onde Ocorreu a Não Conformidade e Responsável</label>
-                        <select name="setorAutuado" id="setorAutuado" class="selecionarElementos">
-                            <option value="Enfermaria">Enfermaria - Responsável Enfª Juliana</option>
-                            <option value="Consultório">Consultório - Responsável Silvia</option>
-                            <option value="Laboratório">Laboratorio - Responsável Amanda</option>
-                            <option value="Recepção">Recepção - Responsável Carine</option>
-                            <option value="Tecnologia">TI - Responsável Ovidio</option>
-                        </select>
+                    <!-- Etapa 3-->
+                    <div class="passos" style="display: none;">
+
+                        <h2>Ação Imediata e Setor</h2>
+
+                        <div class="aberturaRncGrupo">
+                            <label for="acaoImediata">Ação Imediata (Ação de contenção)</label>
+                            <textarea name="acaoImediata" id="acaoImediata"></textarea>
+                        </div>
+                        <div class="aberturaRncGrupo">
+                            <label for="investigacao">Investigação e Identificação de Causas</label>
+                            <textarea name="investigacao" id="investigacao"></textarea>
+                        </div>
+    
+                        <div class="aberturaRncGrupo">
+                            <label for="setorAutuado">Área onde Ocorreu a Não Conformidade e Responsável</label>
+                            <select name="setorAutuado" id="setorAutuado" class="selecionarElementos">
+                                <option value="Enfermaria">Enfermaria - Responsável Enfª Juliana</option>
+                                <option value="Consultório">Consultório - Responsável Silvia</option>
+                                <option value="Laboratório">Laboratorio - Responsável Amanda</option>
+                                <option value="Recepção">Recepção - Responsável Carine</option>
+                                <option value="Tecnologia">TI - Responsável Ovidio</option>
+                            </select>
+                        </div>
+
+                        <div class="aberturaRncGrupo">
+                            <input type="text" name="Assinatura" id="assinaturaDigital">
+                        </div>
+                        
+                        
                     </div>
-                    
-                    
+                    <button type="button" id="proxPasso">Próximo</button>
+                    <button type="button" id="voltarPasso">Voltar</button>
+
                     <button type="submit" class="submitBtn">Solicitar Autuação</button>
+
                 </fieldset>
             </form>
     
