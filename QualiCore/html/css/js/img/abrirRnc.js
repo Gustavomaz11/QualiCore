@@ -307,21 +307,18 @@ function passoAnterior(){
     }
 }
 
-function mostrarBotao(indicePasso){
-    if(indicePasso === 0){
-        voltarBotao.style.display = 'none';
-        proxBotao.style.display = 'inline';
-        botaoEnviar.style.display = 'none';
-    }else if (indicePasso === passos.length -1 ){
-        proxBotao.style.display = 'none';   // Ocultar "Próximo" na última etapa
-        voltarBotao.style.display = 'inline';  // Mostrar "Voltar"
+function mostrarBotao(indicePasso) {
+    if (indicePasso === 0) {
+        voltarBotao.style.display = 'none';  
+        proxBotao.style.display = 'inline';  
+        botaoEnviar.style.display = 'none';  
+    } else if (indicePasso === 1) {
+        proxBotao.style.display = 'none';    
+        voltarBotao.style.display = 'inline';  
         botaoEnviar.style.display = 'inline'; 
-    }else{
-        proxBotao.style.display = 'inline';  // Mostrar "Próximo"
-        voltarBotao.style.display = 'inline';  // Mostrar "Voltar"
-        botaoEnviar.style.display = 'none';
     }
 }
+
 mostrarPassos(carregamentoBarra)
 
 
