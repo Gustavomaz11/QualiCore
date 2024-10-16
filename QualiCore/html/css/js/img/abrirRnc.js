@@ -29,7 +29,7 @@ if(user != null)
     user = JSON.parse(user)
 
 const nome = document.querySelector('#nome')
-nome.innerText = user.nome?user.nome:'xxxx'
+/*nome.innerText = user.nome?user.nome:'xxxx'*/
 
 // pegando funcionarios
 let funcionarios = localStorage.getItem('funcionarios')
@@ -246,5 +246,82 @@ rncForm.addEventListener('submit',(evt)=>{
 // localStorage.removeItem('rnc')
 // localStorage.removeItem('lengthRnc')
 
+window.addEventListener('load',function(){
+    var dadosSalvos = localStorage.getItem('dadosUsuario')
+    if (dadosSalvos){
+        var dados = JSON.parse(dadosSalvos)
+        document.getElementById('nomeUsuario').innerText = dados.nomeUsuario;
+    }
+    var imagemSalvo = localStorage.getItem('perfilImagem')
+    if(imagemSalvo) {
+        const avatarImage = document.getElementById('avatarImage')
+        const profilePicture = document.getElementById('profilePicture')
+        avatarImage.src = imagemSalvo
+        avatarImage.style.display = 'block'
+        document.getElementById('avatarIcon').style.display = 'none'
+    }
+})
+
+let carregamentoBarra = 0
+const passos = document.querySelectorAll('.passos')
+const progressoBarra = document.querySelectorAll('.bolinha')
+const proxBotao = document.getElementById('proxPasso')
+const voltarBotao = document.getElementById('voltarPasso')
+const botaoEnviar = document.querySelector('.submitBtn')
+
+voltarBotao.style.display = 'none';
+botaoEnviar.style.display = 'none';
+
+proxBotao.addEventListener('click', proximoPasso)
+voltarBotao.addEventListener('click', passoAnterior)
+
+function mostrarPassos(numeroPasso){
+    passos.forEach((passo,indice) => {
+        passo.style.display = (indice === numeroPasso)? 'block':'none'
+    })
+    atualizarProgresso(numeroPasso)
+    mostrarBotao(numeroPasso)
+}
+
+function atualizarProgresso(numeroPasso){
+    progressoBarra.forEach((passo,indice) => {
+        if(indice <= numeroPasso){
+            passo.classList.add('active')
+        } else {
+            passo.classList.remove('active')
+        }
+    })
+}
+
+function proximoPasso(){
+    if(carregamentoBarra < passos.length - 1){
+        carregamentoBarra++
+        mostrarPassos(carregamentoBarra)
+    }
+}
+
+function passoAnterior(){
+    if(carregamentoBarra>0){
+        carregamentoBarra--
+        mostrarPassos(carregamentoBarra)
+    }
+}
+
+function mostrarBotao(indicePasso){
+    if(indicePasso === 0){
+        voltarBotao.style.display = 'none';
+        proxBotao.style.display = 'inline';
+        botaoEnviar.style.display = 'none';
+    }else if (indicePasso === passos.length -1 ){
+        proxBotao.style.display = 'none';   // Ocultar "Próximo" na última etapa
+        voltarBotao.style.display = 'inline';  // Mostrar "Voltar"
+        botaoEnviar.style.display = 'inline'; 
+    }else{
+        proxBotao.style.display = 'inline';  // Mostrar "Próximo"
+        voltarBotao.style.display = 'inline';  // Mostrar "Voltar"
+        botaoEnviar.style.display = 'none';
+    }
+}
+mostrarPassos(carregamentoBarra)
 
 
