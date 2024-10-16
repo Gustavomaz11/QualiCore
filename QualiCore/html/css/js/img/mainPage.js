@@ -10,7 +10,7 @@ if(user != null)
     user = JSON.parse(user)
 
 const nome = document.querySelector('#nome')
-nome.innerText = user.nome?user.nome:'xxxx'
+/*nome.innerText = user.nome?user.nome:'xxxx'*/
 
 // pegando funcionarios
 let funcionarios = localStorage.getItem('funcionarios')
