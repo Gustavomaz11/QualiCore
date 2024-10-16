@@ -27,6 +27,15 @@ legend {
     width: 100%;
 }
 
+.tituloPassos {
+    font-size: 1,5rem;
+    color: var(--cor-principal);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
+}
+
 .aberturaRncGrupo {
     margin-bottom: 1.5rem;
 }
@@ -91,7 +100,7 @@ textarea {
     background-color: rgb(255, 89, 0);
 }
 
-.submitBtn {
+.submitBtn, #proxPasso , #voltarPasso {
     background-color: var(--cor-principal);
     color: white;
     border: none;
@@ -101,7 +110,8 @@ textarea {
     border-radius: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
+    width: 20%;
+    font-weight: bold;
 }
 
 .submitBtn:hover {
