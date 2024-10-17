@@ -68,7 +68,7 @@ input[type="radio"] {
     margin-right: 0.5rem;
 }
 
-select, .campoBuscaRNC {
+select {
     width: 100%;
     padding: 0.50rem;
     border: 1px solid var(--cor-principal);
@@ -77,7 +77,7 @@ select, .campoBuscaRNC {
     transition: all 0.3s ease;
 }
 
-textarea {
+textarea, .campoBuscaRNC {
     width: 100%;
     resize: none;
     border: 1px solid var(--cor-principal);
