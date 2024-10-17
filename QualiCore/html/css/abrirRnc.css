@@ -289,11 +289,11 @@ textarea {
 }
 
 .bolinha.active {
-    background-color: #4caf50; 
+    background-color: var(--cor-principal); 
 }
 
 .bolinha.active ~ .nomeEtapa {
-    color: #4caf50; 
+    color: var(--cor-principal); 
 }
 
 
