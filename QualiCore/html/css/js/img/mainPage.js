@@ -581,3 +581,28 @@ window.addEventListener('load',function(){
         document.getElementById('avatarIcon').style.display = 'none'
     }
 })
+
+document.getElementById('filtroTipo').addEventListener('click', function(){
+
+    const dataInicio = document.querySelector('.dataInicio').value
+    const dataFinal = document.querySelector('.dataFim').value
+
+    if(dataInicio && dataFinal){
+        const inicio = new Date(dataInicio)
+        const final = new Date(dataFinal)
+        
+        const diferenca = final-inicio
+        const dias = Math.ceil(diferenca / (1000*60*60*24))
+
+        if(dias>=0){
+            const resultado = document.getElementById('resultado')
+            resultado.textContent= `Aqui está o Dashbord do terminado tempo`
+            console.log(dias)
+        }else{
+            alert('A data final tem que ser maior que a inicial.')
+        }
+    }else{
+        alert('Por favor, selecione ambas as datas.')
+    }
+
+})
