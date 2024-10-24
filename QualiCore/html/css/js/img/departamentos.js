@@ -86,11 +86,11 @@ let departments = [
     
 ];
 
-function renderDepartments() {
+function renderDepartments(filteredDepartments = departments) {
     const grid = document.getElementById('departmentsGrid');
     grid.innerHTML = '';
 
-    departments.forEach(dept => {
+    filteredDepartments.forEach(dept => {
         const card = document.createElement('div');
         card.className = 'department-card';
         const managerInitials = dept.manager.split(' ').map(n => n[0]).join('');
@@ -173,8 +173,21 @@ window.onclick = function (event) {
 }
 
 // Inicializa a renderização dos departamentos
-renderDepartments();
+document.addEventListener('DOMContentLoaded', function(){
+
+    renderDepartments();
+})
 
 
+function filtrodoStatus() {
+    const statusSelecionado = document.getElementById('filtroStatus').value;
+    
+    const filteredDepartments = departments.filter(dept => 
+        statusSelecionado === 'all' || dept.status === statusSelecionado
+    );
+
+    // Agora renderize os departamentos filtrados
+    renderDepartments(filteredDepartments);
+}
 
 
