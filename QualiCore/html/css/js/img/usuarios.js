@@ -125,11 +125,11 @@ function addProfile(event) {
     document.getElementById('userManager').value = ''; // Limpa o campo do gestor
 }
 
-function renderProfiles() {
+function renderProfiles(filteredProfiles = profiles) {
     const grid = document.getElementById('profilesGrid');
     grid.innerHTML = '';
 
-    profiles.forEach(profile => {
+    filteredProfiles.forEach(profile => {
         const card = document.createElement('div');
         card.className = 'profile-card';
         const userInitials = profile.name.split(' ').map(n => n[0]).join('');
@@ -221,3 +221,14 @@ window.onclick = function(event) {
 
 // Inicializa a renderização dos perfis
 renderProfiles();
+
+function filtroDoPerfil(){
+    const statusSelecionado = document.getElementById('filtroPerfil').value;
+    
+    const filteredProfiles = profiles.filter(dept => 
+        statusSelecionado === 'all' || dept.status === statusSelecionado
+    );
+
+    // Agora renderize os departamentos filtrados
+    renderProfiles(filteredProfiles);
+}
