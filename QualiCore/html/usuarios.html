@@ -71,6 +71,13 @@
         </section>
         <nav class="navPrincipal">
             <div class="logo">Perfis</div>
+            <div>
+                <select id="filtroPerfil" onchange="filtroDoPerfil()">
+                  <option value="all">Todos</option>
+                  <option value="active">Ativos</option>
+                  <option value="blocked">Inativos</option>
+                </select>
+              </div>
             <button class="add-btn" onclick="openModal()">
                 <i class="fas fa-user-plus"></i> Novo Perfil
             </button>
